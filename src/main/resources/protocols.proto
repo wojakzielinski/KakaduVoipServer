@@ -16,12 +16,19 @@ message Room {
 
 message LoginToServerRequest {
     required string nick = 1;
-    required string password = 2;
 }
 
 message LoginToServerResponse {
     required StatusCode status = 1;
     repeated Room roomList = 2;
+}
+
+message LeaveServerRequest{
+    required string nick = 1;
+}
+
+message LeaveServerResponse {
+    required StatusCode status = 1;
 }
 
 enum ManageRoomEnum {
@@ -30,14 +37,17 @@ enum ManageRoomEnum {
     JOIN_ROOM = 3;
     LEAVE_ROOM = 4;
     MUTE_USER = 5;
+    UNMUTE_USER = 6;
+    KICK_USER = 7;
 }
 
 message ManageRoomRequest {
     required ManageRoomEnum manageRoomEnum = 1;
     required string nick = 2;
-    optional string password = 3;
-    optional string roomName = 4;
-    optional string otherUserNick = 5;
+    required string roomName = 3;
+    optional string password = 4;
+    optional string adminPassword = 5;
+    optional string otherUserNick = 6;
 }
 
 message ManageRoomResponse {

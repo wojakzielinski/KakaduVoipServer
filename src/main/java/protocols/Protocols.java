@@ -138,6 +138,14 @@ public final class Protocols {
      * <code>MUTE_USER = 5;</code>
      */
     MUTE_USER(5),
+    /**
+     * <code>UNMUTE_USER = 6;</code>
+     */
+    UNMUTE_USER(6),
+    /**
+     * <code>KICK_USER = 7;</code>
+     */
+    KICK_USER(7),
     ;
 
     /**
@@ -160,6 +168,14 @@ public final class Protocols {
      * <code>MUTE_USER = 5;</code>
      */
     public static final int MUTE_USER_VALUE = 5;
+    /**
+     * <code>UNMUTE_USER = 6;</code>
+     */
+    public static final int UNMUTE_USER_VALUE = 6;
+    /**
+     * <code>KICK_USER = 7;</code>
+     */
+    public static final int KICK_USER_VALUE = 7;
 
 
     public final int getNumber() {
@@ -181,6 +197,8 @@ public final class Protocols {
         case 3: return JOIN_ROOM;
         case 4: return LEAVE_ROOM;
         case 5: return MUTE_USER;
+        case 6: return UNMUTE_USER;
+        case 7: return KICK_USER;
         default: return null;
       }
     }
@@ -970,20 +988,6 @@ public final class Protocols {
      */
     com.google.protobuf.ByteString
         getNickBytes();
-
-    /**
-     * <code>required string password = 2;</code>
-     */
-    boolean hasPassword();
-    /**
-     * <code>required string password = 2;</code>
-     */
-    java.lang.String getPassword();
-    /**
-     * <code>required string password = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getPasswordBytes();
   }
   /**
    * Protobuf type {@code LoginToServerRequest}
@@ -998,7 +1002,6 @@ public final class Protocols {
     }
     private LoginToServerRequest() {
       nick_ = "";
-      password_ = "";
     }
 
     @java.lang.Override
@@ -1033,12 +1036,6 @@ public final class Protocols {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
               nick_ = bs;
-              break;
-            }
-            case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000002;
-              password_ = bs;
               break;
             }
           }
@@ -1108,48 +1105,6 @@ public final class Protocols {
       }
     }
 
-    public static final int PASSWORD_FIELD_NUMBER = 2;
-    private volatile java.lang.Object password_;
-    /**
-     * <code>required string password = 2;</code>
-     */
-    public boolean hasPassword() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required string password = 2;</code>
-     */
-    public java.lang.String getPassword() {
-      java.lang.Object ref = password_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          password_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>required string password = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getPasswordBytes() {
-      java.lang.Object ref = password_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        password_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -1157,10 +1112,6 @@ public final class Protocols {
       if (isInitialized == 0) return false;
 
       if (!hasNick()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasPassword()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -1173,9 +1124,6 @@ public final class Protocols {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, nick_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, password_);
-      }
       unknownFields.writeTo(output);
     }
 
@@ -1186,9 +1134,6 @@ public final class Protocols {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, nick_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, password_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1212,11 +1157,6 @@ public final class Protocols {
         result = result && getNick()
             .equals(other.getNick());
       }
-      result = result && (hasPassword() == other.hasPassword());
-      if (hasPassword()) {
-        result = result && getPassword()
-            .equals(other.getPassword());
-      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -1231,10 +1171,6 @@ public final class Protocols {
       if (hasNick()) {
         hash = (37 * hash) + NICK_FIELD_NUMBER;
         hash = (53 * hash) + getNick().hashCode();
-      }
-      if (hasPassword()) {
-        hash = (37 * hash) + PASSWORD_FIELD_NUMBER;
-        hash = (53 * hash) + getPassword().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -1356,8 +1292,6 @@ public final class Protocols {
         super.clear();
         nick_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        password_ = "";
-        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -1386,10 +1320,6 @@ public final class Protocols {
           to_bitField0_ |= 0x00000001;
         }
         result.nick_ = nick_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.password_ = password_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1437,11 +1367,6 @@ public final class Protocols {
           nick_ = other.nick_;
           onChanged();
         }
-        if (other.hasPassword()) {
-          bitField0_ |= 0x00000002;
-          password_ = other.password_;
-          onChanged();
-        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -1449,9 +1374,6 @@ public final class Protocols {
 
       public final boolean isInitialized() {
         if (!hasNick()) {
-          return false;
-        }
-        if (!hasPassword()) {
           return false;
         }
         return true;
@@ -1548,82 +1470,6 @@ public final class Protocols {
   }
   bitField0_ |= 0x00000001;
         nick_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object password_ = "";
-      /**
-       * <code>required string password = 2;</code>
-       */
-      public boolean hasPassword() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required string password = 2;</code>
-       */
-      public java.lang.String getPassword() {
-        java.lang.Object ref = password_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            password_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>required string password = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getPasswordBytes() {
-        java.lang.Object ref = password_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          password_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>required string password = 2;</code>
-       */
-      public Builder setPassword(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        password_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required string password = 2;</code>
-       */
-      public Builder clearPassword() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        password_ = getDefaultInstance().getPassword();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required string password = 2;</code>
-       */
-      public Builder setPasswordBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        password_ = value;
         onChanged();
         return this;
       }
@@ -2537,6 +2383,1040 @@ public final class Protocols {
 
   }
 
+  public interface LeaveServerRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:LeaveServerRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required string nick = 1;</code>
+     */
+    boolean hasNick();
+    /**
+     * <code>required string nick = 1;</code>
+     */
+    java.lang.String getNick();
+    /**
+     * <code>required string nick = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getNickBytes();
+  }
+  /**
+   * Protobuf type {@code LeaveServerRequest}
+   */
+  public  static final class LeaveServerRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:LeaveServerRequest)
+      LeaveServerRequestOrBuilder {
+    // Use LeaveServerRequest.newBuilder() to construct.
+    private LeaveServerRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private LeaveServerRequest() {
+      nick_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private LeaveServerRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              nick_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return protocols.Protocols.internal_static_LeaveServerRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return protocols.Protocols.internal_static_LeaveServerRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              protocols.Protocols.LeaveServerRequest.class, protocols.Protocols.LeaveServerRequest.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int NICK_FIELD_NUMBER = 1;
+    private volatile java.lang.Object nick_;
+    /**
+     * <code>required string nick = 1;</code>
+     */
+    public boolean hasNick() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string nick = 1;</code>
+     */
+    public java.lang.String getNick() {
+      java.lang.Object ref = nick_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          nick_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string nick = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNickBytes() {
+      java.lang.Object ref = nick_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        nick_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasNick()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, nick_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, nick_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof protocols.Protocols.LeaveServerRequest)) {
+        return super.equals(obj);
+      }
+      protocols.Protocols.LeaveServerRequest other = (protocols.Protocols.LeaveServerRequest) obj;
+
+      boolean result = true;
+      result = result && (hasNick() == other.hasNick());
+      if (hasNick()) {
+        result = result && getNick()
+            .equals(other.getNick());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasNick()) {
+        hash = (37 * hash) + NICK_FIELD_NUMBER;
+        hash = (53 * hash) + getNick().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static protocols.Protocols.LeaveServerRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.LeaveServerRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.LeaveServerRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.LeaveServerRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.LeaveServerRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static protocols.Protocols.LeaveServerRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static protocols.Protocols.LeaveServerRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static protocols.Protocols.LeaveServerRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static protocols.Protocols.LeaveServerRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static protocols.Protocols.LeaveServerRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(protocols.Protocols.LeaveServerRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code LeaveServerRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:LeaveServerRequest)
+        protocols.Protocols.LeaveServerRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return protocols.Protocols.internal_static_LeaveServerRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return protocols.Protocols.internal_static_LeaveServerRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                protocols.Protocols.LeaveServerRequest.class, protocols.Protocols.LeaveServerRequest.Builder.class);
+      }
+
+      // Construct using protocols.Protocols.LeaveServerRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        nick_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return protocols.Protocols.internal_static_LeaveServerRequest_descriptor;
+      }
+
+      public protocols.Protocols.LeaveServerRequest getDefaultInstanceForType() {
+        return protocols.Protocols.LeaveServerRequest.getDefaultInstance();
+      }
+
+      public protocols.Protocols.LeaveServerRequest build() {
+        protocols.Protocols.LeaveServerRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public protocols.Protocols.LeaveServerRequest buildPartial() {
+        protocols.Protocols.LeaveServerRequest result = new protocols.Protocols.LeaveServerRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.nick_ = nick_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof protocols.Protocols.LeaveServerRequest) {
+          return mergeFrom((protocols.Protocols.LeaveServerRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(protocols.Protocols.LeaveServerRequest other) {
+        if (other == protocols.Protocols.LeaveServerRequest.getDefaultInstance()) return this;
+        if (other.hasNick()) {
+          bitField0_ |= 0x00000001;
+          nick_ = other.nick_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasNick()) {
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        protocols.Protocols.LeaveServerRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (protocols.Protocols.LeaveServerRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object nick_ = "";
+      /**
+       * <code>required string nick = 1;</code>
+       */
+      public boolean hasNick() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string nick = 1;</code>
+       */
+      public java.lang.String getNick() {
+        java.lang.Object ref = nick_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            nick_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string nick = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNickBytes() {
+        java.lang.Object ref = nick_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          nick_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string nick = 1;</code>
+       */
+      public Builder setNick(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        nick_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string nick = 1;</code>
+       */
+      public Builder clearNick() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        nick_ = getDefaultInstance().getNick();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string nick = 1;</code>
+       */
+      public Builder setNickBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        nick_ = value;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:LeaveServerRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:LeaveServerRequest)
+    private static final protocols.Protocols.LeaveServerRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new protocols.Protocols.LeaveServerRequest();
+    }
+
+    public static protocols.Protocols.LeaveServerRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<LeaveServerRequest>
+        PARSER = new com.google.protobuf.AbstractParser<LeaveServerRequest>() {
+      public LeaveServerRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new LeaveServerRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<LeaveServerRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<LeaveServerRequest> getParserForType() {
+      return PARSER;
+    }
+
+    public protocols.Protocols.LeaveServerRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface LeaveServerResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:LeaveServerResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .StatusCode status = 1;</code>
+     */
+    boolean hasStatus();
+    /**
+     * <code>required .StatusCode status = 1;</code>
+     */
+    protocols.Protocols.StatusCode getStatus();
+  }
+  /**
+   * Protobuf type {@code LeaveServerResponse}
+   */
+  public  static final class LeaveServerResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:LeaveServerResponse)
+      LeaveServerResponseOrBuilder {
+    // Use LeaveServerResponse.newBuilder() to construct.
+    private LeaveServerResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private LeaveServerResponse() {
+      status_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private LeaveServerResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              int rawValue = input.readEnum();
+              protocols.Protocols.StatusCode value = protocols.Protocols.StatusCode.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(1, rawValue);
+              } else {
+                bitField0_ |= 0x00000001;
+                status_ = rawValue;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return protocols.Protocols.internal_static_LeaveServerResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return protocols.Protocols.internal_static_LeaveServerResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              protocols.Protocols.LeaveServerResponse.class, protocols.Protocols.LeaveServerResponse.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int STATUS_FIELD_NUMBER = 1;
+    private int status_;
+    /**
+     * <code>required .StatusCode status = 1;</code>
+     */
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .StatusCode status = 1;</code>
+     */
+    public protocols.Protocols.StatusCode getStatus() {
+      protocols.Protocols.StatusCode result = protocols.Protocols.StatusCode.valueOf(status_);
+      return result == null ? protocols.Protocols.StatusCode.OK : result;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasStatus()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeEnum(1, status_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, status_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof protocols.Protocols.LeaveServerResponse)) {
+        return super.equals(obj);
+      }
+      protocols.Protocols.LeaveServerResponse other = (protocols.Protocols.LeaveServerResponse) obj;
+
+      boolean result = true;
+      result = result && (hasStatus() == other.hasStatus());
+      if (hasStatus()) {
+        result = result && status_ == other.status_;
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasStatus()) {
+        hash = (37 * hash) + STATUS_FIELD_NUMBER;
+        hash = (53 * hash) + status_;
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static protocols.Protocols.LeaveServerResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.LeaveServerResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.LeaveServerResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.LeaveServerResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.LeaveServerResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static protocols.Protocols.LeaveServerResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static protocols.Protocols.LeaveServerResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static protocols.Protocols.LeaveServerResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static protocols.Protocols.LeaveServerResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static protocols.Protocols.LeaveServerResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(protocols.Protocols.LeaveServerResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code LeaveServerResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:LeaveServerResponse)
+        protocols.Protocols.LeaveServerResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return protocols.Protocols.internal_static_LeaveServerResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return protocols.Protocols.internal_static_LeaveServerResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                protocols.Protocols.LeaveServerResponse.class, protocols.Protocols.LeaveServerResponse.Builder.class);
+      }
+
+      // Construct using protocols.Protocols.LeaveServerResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        status_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return protocols.Protocols.internal_static_LeaveServerResponse_descriptor;
+      }
+
+      public protocols.Protocols.LeaveServerResponse getDefaultInstanceForType() {
+        return protocols.Protocols.LeaveServerResponse.getDefaultInstance();
+      }
+
+      public protocols.Protocols.LeaveServerResponse build() {
+        protocols.Protocols.LeaveServerResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public protocols.Protocols.LeaveServerResponse buildPartial() {
+        protocols.Protocols.LeaveServerResponse result = new protocols.Protocols.LeaveServerResponse(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.status_ = status_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof protocols.Protocols.LeaveServerResponse) {
+          return mergeFrom((protocols.Protocols.LeaveServerResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(protocols.Protocols.LeaveServerResponse other) {
+        if (other == protocols.Protocols.LeaveServerResponse.getDefaultInstance()) return this;
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasStatus()) {
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        protocols.Protocols.LeaveServerResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (protocols.Protocols.LeaveServerResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int status_ = 0;
+      /**
+       * <code>required .StatusCode status = 1;</code>
+       */
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .StatusCode status = 1;</code>
+       */
+      public protocols.Protocols.StatusCode getStatus() {
+        protocols.Protocols.StatusCode result = protocols.Protocols.StatusCode.valueOf(status_);
+        return result == null ? protocols.Protocols.StatusCode.OK : result;
+      }
+      /**
+       * <code>required .StatusCode status = 1;</code>
+       */
+      public Builder setStatus(protocols.Protocols.StatusCode value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        status_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required .StatusCode status = 1;</code>
+       */
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        status_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:LeaveServerResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:LeaveServerResponse)
+    private static final protocols.Protocols.LeaveServerResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new protocols.Protocols.LeaveServerResponse();
+    }
+
+    public static protocols.Protocols.LeaveServerResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<LeaveServerResponse>
+        PARSER = new com.google.protobuf.AbstractParser<LeaveServerResponse>() {
+      public LeaveServerResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new LeaveServerResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<LeaveServerResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<LeaveServerResponse> getParserForType() {
+      return PARSER;
+    }
+
+    public protocols.Protocols.LeaveServerResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface ManageRoomRequestOrBuilder extends
       // @@protoc_insertion_point(interface_extends:ManageRoomRequest)
       com.google.protobuf.MessageOrBuilder {
@@ -2565,43 +3445,57 @@ public final class Protocols {
         getNickBytes();
 
     /**
-     * <code>optional string password = 3;</code>
-     */
-    boolean hasPassword();
-    /**
-     * <code>optional string password = 3;</code>
-     */
-    java.lang.String getPassword();
-    /**
-     * <code>optional string password = 3;</code>
-     */
-    com.google.protobuf.ByteString
-        getPasswordBytes();
-
-    /**
-     * <code>optional string roomName = 4;</code>
+     * <code>required string roomName = 3;</code>
      */
     boolean hasRoomName();
     /**
-     * <code>optional string roomName = 4;</code>
+     * <code>required string roomName = 3;</code>
      */
     java.lang.String getRoomName();
     /**
-     * <code>optional string roomName = 4;</code>
+     * <code>required string roomName = 3;</code>
      */
     com.google.protobuf.ByteString
         getRoomNameBytes();
 
     /**
-     * <code>optional string otherUserNick = 5;</code>
+     * <code>optional string password = 4;</code>
+     */
+    boolean hasPassword();
+    /**
+     * <code>optional string password = 4;</code>
+     */
+    java.lang.String getPassword();
+    /**
+     * <code>optional string password = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getPasswordBytes();
+
+    /**
+     * <code>optional string adminPassword = 5;</code>
+     */
+    boolean hasAdminPassword();
+    /**
+     * <code>optional string adminPassword = 5;</code>
+     */
+    java.lang.String getAdminPassword();
+    /**
+     * <code>optional string adminPassword = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getAdminPasswordBytes();
+
+    /**
+     * <code>optional string otherUserNick = 6;</code>
      */
     boolean hasOtherUserNick();
     /**
-     * <code>optional string otherUserNick = 5;</code>
+     * <code>optional string otherUserNick = 6;</code>
      */
     java.lang.String getOtherUserNick();
     /**
-     * <code>optional string otherUserNick = 5;</code>
+     * <code>optional string otherUserNick = 6;</code>
      */
     com.google.protobuf.ByteString
         getOtherUserNickBytes();
@@ -2620,8 +3514,9 @@ public final class Protocols {
     private ManageRoomRequest() {
       manageRoomEnum_ = 1;
       nick_ = "";
-      password_ = "";
       roomName_ = "";
+      password_ = "";
+      adminPassword_ = "";
       otherUserNick_ = "";
     }
 
@@ -2673,18 +3568,24 @@ public final class Protocols {
             case 26: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
-              password_ = bs;
+              roomName_ = bs;
               break;
             }
             case 34: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000008;
-              roomName_ = bs;
+              password_ = bs;
               break;
             }
             case 42: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
+              adminPassword_ = bs;
+              break;
+            }
+            case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000020;
               otherUserNick_ = bs;
               break;
             }
@@ -2771,58 +3672,16 @@ public final class Protocols {
       }
     }
 
-    public static final int PASSWORD_FIELD_NUMBER = 3;
-    private volatile java.lang.Object password_;
+    public static final int ROOMNAME_FIELD_NUMBER = 3;
+    private volatile java.lang.Object roomName_;
     /**
-     * <code>optional string password = 3;</code>
+     * <code>required string roomName = 3;</code>
      */
-    public boolean hasPassword() {
+    public boolean hasRoomName() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional string password = 3;</code>
-     */
-    public java.lang.String getPassword() {
-      java.lang.Object ref = password_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          password_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string password = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getPasswordBytes() {
-      java.lang.Object ref = password_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        password_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int ROOMNAME_FIELD_NUMBER = 4;
-    private volatile java.lang.Object roomName_;
-    /**
-     * <code>optional string roomName = 4;</code>
-     */
-    public boolean hasRoomName() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional string roomName = 4;</code>
+     * <code>required string roomName = 3;</code>
      */
     public java.lang.String getRoomName() {
       java.lang.Object ref = roomName_;
@@ -2839,7 +3698,7 @@ public final class Protocols {
       }
     }
     /**
-     * <code>optional string roomName = 4;</code>
+     * <code>required string roomName = 3;</code>
      */
     public com.google.protobuf.ByteString
         getRoomNameBytes() {
@@ -2855,16 +3714,100 @@ public final class Protocols {
       }
     }
 
-    public static final int OTHERUSERNICK_FIELD_NUMBER = 5;
-    private volatile java.lang.Object otherUserNick_;
+    public static final int PASSWORD_FIELD_NUMBER = 4;
+    private volatile java.lang.Object password_;
     /**
-     * <code>optional string otherUserNick = 5;</code>
+     * <code>optional string password = 4;</code>
      */
-    public boolean hasOtherUserNick() {
+    public boolean hasPassword() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string password = 4;</code>
+     */
+    public java.lang.String getPassword() {
+      java.lang.Object ref = password_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          password_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string password = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getPasswordBytes() {
+      java.lang.Object ref = password_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        password_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ADMINPASSWORD_FIELD_NUMBER = 5;
+    private volatile java.lang.Object adminPassword_;
+    /**
+     * <code>optional string adminPassword = 5;</code>
+     */
+    public boolean hasAdminPassword() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional string otherUserNick = 5;</code>
+     * <code>optional string adminPassword = 5;</code>
+     */
+    public java.lang.String getAdminPassword() {
+      java.lang.Object ref = adminPassword_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          adminPassword_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string adminPassword = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAdminPasswordBytes() {
+      java.lang.Object ref = adminPassword_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        adminPassword_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int OTHERUSERNICK_FIELD_NUMBER = 6;
+    private volatile java.lang.Object otherUserNick_;
+    /**
+     * <code>optional string otherUserNick = 6;</code>
+     */
+    public boolean hasOtherUserNick() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional string otherUserNick = 6;</code>
      */
     public java.lang.String getOtherUserNick() {
       java.lang.Object ref = otherUserNick_;
@@ -2881,7 +3824,7 @@ public final class Protocols {
       }
     }
     /**
-     * <code>optional string otherUserNick = 5;</code>
+     * <code>optional string otherUserNick = 6;</code>
      */
     public com.google.protobuf.ByteString
         getOtherUserNickBytes() {
@@ -2911,6 +3854,10 @@ public final class Protocols {
         memoizedIsInitialized = 0;
         return false;
       }
+      if (!hasRoomName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -2924,13 +3871,16 @@ public final class Protocols {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, nick_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, password_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, roomName_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, roomName_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, password_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, otherUserNick_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, adminPassword_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, otherUserNick_);
       }
       unknownFields.writeTo(output);
     }
@@ -2948,13 +3898,16 @@ public final class Protocols {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, nick_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, password_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, roomName_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, roomName_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, password_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, otherUserNick_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, adminPassword_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, otherUserNick_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2982,15 +3935,20 @@ public final class Protocols {
         result = result && getNick()
             .equals(other.getNick());
       }
+      result = result && (hasRoomName() == other.hasRoomName());
+      if (hasRoomName()) {
+        result = result && getRoomName()
+            .equals(other.getRoomName());
+      }
       result = result && (hasPassword() == other.hasPassword());
       if (hasPassword()) {
         result = result && getPassword()
             .equals(other.getPassword());
       }
-      result = result && (hasRoomName() == other.hasRoomName());
-      if (hasRoomName()) {
-        result = result && getRoomName()
-            .equals(other.getRoomName());
+      result = result && (hasAdminPassword() == other.hasAdminPassword());
+      if (hasAdminPassword()) {
+        result = result && getAdminPassword()
+            .equals(other.getAdminPassword());
       }
       result = result && (hasOtherUserNick() == other.hasOtherUserNick());
       if (hasOtherUserNick()) {
@@ -3016,13 +3974,17 @@ public final class Protocols {
         hash = (37 * hash) + NICK_FIELD_NUMBER;
         hash = (53 * hash) + getNick().hashCode();
       }
+      if (hasRoomName()) {
+        hash = (37 * hash) + ROOMNAME_FIELD_NUMBER;
+        hash = (53 * hash) + getRoomName().hashCode();
+      }
       if (hasPassword()) {
         hash = (37 * hash) + PASSWORD_FIELD_NUMBER;
         hash = (53 * hash) + getPassword().hashCode();
       }
-      if (hasRoomName()) {
-        hash = (37 * hash) + ROOMNAME_FIELD_NUMBER;
-        hash = (53 * hash) + getRoomName().hashCode();
+      if (hasAdminPassword()) {
+        hash = (37 * hash) + ADMINPASSWORD_FIELD_NUMBER;
+        hash = (53 * hash) + getAdminPassword().hashCode();
       }
       if (hasOtherUserNick()) {
         hash = (37 * hash) + OTHERUSERNICK_FIELD_NUMBER;
@@ -3150,12 +4112,14 @@ public final class Protocols {
         bitField0_ = (bitField0_ & ~0x00000001);
         nick_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        password_ = "";
-        bitField0_ = (bitField0_ & ~0x00000004);
         roomName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        password_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
-        otherUserNick_ = "";
+        adminPassword_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
+        otherUserNick_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -3191,13 +4155,17 @@ public final class Protocols {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.password_ = password_;
+        result.roomName_ = roomName_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.roomName_ = roomName_;
+        result.password_ = password_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
+        }
+        result.adminPassword_ = adminPassword_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
         }
         result.otherUserNick_ = otherUserNick_;
         result.bitField0_ = to_bitField0_;
@@ -3250,18 +4218,23 @@ public final class Protocols {
           nick_ = other.nick_;
           onChanged();
         }
-        if (other.hasPassword()) {
-          bitField0_ |= 0x00000004;
-          password_ = other.password_;
-          onChanged();
-        }
         if (other.hasRoomName()) {
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000004;
           roomName_ = other.roomName_;
           onChanged();
         }
-        if (other.hasOtherUserNick()) {
+        if (other.hasPassword()) {
+          bitField0_ |= 0x00000008;
+          password_ = other.password_;
+          onChanged();
+        }
+        if (other.hasAdminPassword()) {
           bitField0_ |= 0x00000010;
+          adminPassword_ = other.adminPassword_;
+          onChanged();
+        }
+        if (other.hasOtherUserNick()) {
+          bitField0_ |= 0x00000020;
           otherUserNick_ = other.otherUserNick_;
           onChanged();
         }
@@ -3275,6 +4248,9 @@ public final class Protocols {
           return false;
         }
         if (!hasNick()) {
+          return false;
+        }
+        if (!hasRoomName()) {
           return false;
         }
         return true;
@@ -3411,91 +4387,15 @@ public final class Protocols {
         return this;
       }
 
-      private java.lang.Object password_ = "";
+      private java.lang.Object roomName_ = "";
       /**
-       * <code>optional string password = 3;</code>
+       * <code>required string roomName = 3;</code>
        */
-      public boolean hasPassword() {
+      public boolean hasRoomName() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional string password = 3;</code>
-       */
-      public java.lang.String getPassword() {
-        java.lang.Object ref = password_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            password_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string password = 3;</code>
-       */
-      public com.google.protobuf.ByteString
-          getPasswordBytes() {
-        java.lang.Object ref = password_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          password_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string password = 3;</code>
-       */
-      public Builder setPassword(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        password_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string password = 3;</code>
-       */
-      public Builder clearPassword() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        password_ = getDefaultInstance().getPassword();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string password = 3;</code>
-       */
-      public Builder setPasswordBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        password_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object roomName_ = "";
-      /**
-       * <code>optional string roomName = 4;</code>
-       */
-      public boolean hasRoomName() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>optional string roomName = 4;</code>
+       * <code>required string roomName = 3;</code>
        */
       public java.lang.String getRoomName() {
         java.lang.Object ref = roomName_;
@@ -3512,7 +4412,7 @@ public final class Protocols {
         }
       }
       /**
-       * <code>optional string roomName = 4;</code>
+       * <code>required string roomName = 3;</code>
        */
       public com.google.protobuf.ByteString
           getRoomNameBytes() {
@@ -3528,50 +4428,202 @@ public final class Protocols {
         }
       }
       /**
-       * <code>optional string roomName = 4;</code>
+       * <code>required string roomName = 3;</code>
        */
       public Builder setRoomName(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000004;
         roomName_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string roomName = 4;</code>
+       * <code>required string roomName = 3;</code>
        */
       public Builder clearRoomName() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         roomName_ = getDefaultInstance().getRoomName();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string roomName = 4;</code>
+       * <code>required string roomName = 3;</code>
        */
       public Builder setRoomNameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000004;
         roomName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object password_ = "";
+      /**
+       * <code>optional string password = 4;</code>
+       */
+      public boolean hasPassword() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional string password = 4;</code>
+       */
+      public java.lang.String getPassword() {
+        java.lang.Object ref = password_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            password_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string password = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getPasswordBytes() {
+        java.lang.Object ref = password_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          password_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string password = 4;</code>
+       */
+      public Builder setPassword(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        password_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string password = 4;</code>
+       */
+      public Builder clearPassword() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        password_ = getDefaultInstance().getPassword();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string password = 4;</code>
+       */
+      public Builder setPasswordBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        password_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object adminPassword_ = "";
+      /**
+       * <code>optional string adminPassword = 5;</code>
+       */
+      public boolean hasAdminPassword() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string adminPassword = 5;</code>
+       */
+      public java.lang.String getAdminPassword() {
+        java.lang.Object ref = adminPassword_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            adminPassword_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string adminPassword = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAdminPasswordBytes() {
+        java.lang.Object ref = adminPassword_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          adminPassword_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string adminPassword = 5;</code>
+       */
+      public Builder setAdminPassword(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        adminPassword_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string adminPassword = 5;</code>
+       */
+      public Builder clearAdminPassword() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        adminPassword_ = getDefaultInstance().getAdminPassword();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string adminPassword = 5;</code>
+       */
+      public Builder setAdminPasswordBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        adminPassword_ = value;
         onChanged();
         return this;
       }
 
       private java.lang.Object otherUserNick_ = "";
       /**
-       * <code>optional string otherUserNick = 5;</code>
+       * <code>optional string otherUserNick = 6;</code>
        */
       public boolean hasOtherUserNick() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>optional string otherUserNick = 5;</code>
+       * <code>optional string otherUserNick = 6;</code>
        */
       public java.lang.String getOtherUserNick() {
         java.lang.Object ref = otherUserNick_;
@@ -3588,7 +4640,7 @@ public final class Protocols {
         }
       }
       /**
-       * <code>optional string otherUserNick = 5;</code>
+       * <code>optional string otherUserNick = 6;</code>
        */
       public com.google.protobuf.ByteString
           getOtherUserNickBytes() {
@@ -3604,36 +4656,36 @@ public final class Protocols {
         }
       }
       /**
-       * <code>optional string otherUserNick = 5;</code>
+       * <code>optional string otherUserNick = 6;</code>
        */
       public Builder setOtherUserNick(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000020;
         otherUserNick_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string otherUserNick = 5;</code>
+       * <code>optional string otherUserNick = 6;</code>
        */
       public Builder clearOtherUserNick() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         otherUserNick_ = getDefaultInstance().getOtherUserNick();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string otherUserNick = 5;</code>
+       * <code>optional string otherUserNick = 6;</code>
        */
       public Builder setOtherUserNickBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000020;
         otherUserNick_ = value;
         onChanged();
         return this;
@@ -4351,6 +5403,16 @@ public final class Protocols {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_LoginToServerResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_LeaveServerRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_LeaveServerRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_LeaveServerResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_LeaveServerResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_ManageRoomRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -4370,20 +5432,23 @@ public final class Protocols {
   static {
     java.lang.String[] descriptorData = {
       "\n\017protocols.proto\"(\n\004Room\022\021\n\troom_name\030\001" +
-      " \002(\t\022\r\n\005owner\030\002 \002(\t\"6\n\024LoginToServerRequ" +
-      "est\022\014\n\004nick\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\"M\n\025L" +
-      "oginToServerResponse\022\033\n\006status\030\001 \002(\0162\013.S" +
-      "tatusCode\022\027\n\010roomList\030\002 \003(\0132\005.Room\"\205\001\n\021M" +
-      "anageRoomRequest\022\'\n\016manageRoomEnum\030\001 \002(\016" +
-      "2\017.ManageRoomEnum\022\014\n\004nick\030\002 \002(\t\022\020\n\010passw" +
-      "ord\030\003 \001(\t\022\020\n\010roomName\030\004 \001(\t\022\025\n\rotherUser" +
-      "Nick\030\005 \001(\t\"D\n\022ManageRoomResponse\022\033\n\006stat" +
-      "us\030\001 \002(\0162\013.StatusCode\022\021\n\tkeyToRoom\030\002 \001(\t",
-      "*;\n\nStatusCode\022\006\n\002OK\020\000\022\023\n\017BAD_CREDENTIAL" +
-      "S\020\001\022\020\n\014SERVER_ERROR\020\002*`\n\016ManageRoomEnum\022" +
-      "\017\n\013CREATE_ROOM\020\001\022\017\n\013DELETE_ROOM\020\002\022\r\n\tJOI" +
-      "N_ROOM\020\003\022\016\n\nLEAVE_ROOM\020\004\022\r\n\tMUTE_USER\020\005B" +
-      "\026\n\tprotocolsB\tProtocols"
+      " \002(\t\022\r\n\005owner\030\002 \002(\t\"$\n\024LoginToServerRequ" +
+      "est\022\014\n\004nick\030\001 \002(\t\"M\n\025LoginToServerRespon" +
+      "se\022\033\n\006status\030\001 \002(\0162\013.StatusCode\022\027\n\010roomL" +
+      "ist\030\002 \003(\0132\005.Room\"\"\n\022LeaveServerRequest\022\014" +
+      "\n\004nick\030\001 \002(\t\"2\n\023LeaveServerResponse\022\033\n\006s" +
+      "tatus\030\001 \002(\0162\013.StatusCode\"\234\001\n\021ManageRoomR" +
+      "equest\022\'\n\016manageRoomEnum\030\001 \002(\0162\017.ManageR" +
+      "oomEnum\022\014\n\004nick\030\002 \002(\t\022\020\n\010roomName\030\003 \002(\t\022" +
+      "\020\n\010password\030\004 \001(\t\022\025\n\radminPassword\030\005 \001(\t",
+      "\022\025\n\rotherUserNick\030\006 \001(\t\"D\n\022ManageRoomRes" +
+      "ponse\022\033\n\006status\030\001 \002(\0162\013.StatusCode\022\021\n\tke" +
+      "yToRoom\030\002 \001(\t*;\n\nStatusCode\022\006\n\002OK\020\000\022\023\n\017B" +
+      "AD_CREDENTIALS\020\001\022\020\n\014SERVER_ERROR\020\002*\200\001\n\016M" +
+      "anageRoomEnum\022\017\n\013CREATE_ROOM\020\001\022\017\n\013DELETE" +
+      "_ROOM\020\002\022\r\n\tJOIN_ROOM\020\003\022\016\n\nLEAVE_ROOM\020\004\022\r" +
+      "\n\tMUTE_USER\020\005\022\017\n\013UNMUTE_USER\020\006\022\r\n\tKICK_U" +
+      "SER\020\007B\026\n\tprotocolsB\tProtocols"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4408,21 +5473,33 @@ public final class Protocols {
     internal_static_LoginToServerRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_LoginToServerRequest_descriptor,
-        new java.lang.String[] { "Nick", "Password", });
+        new java.lang.String[] { "Nick", });
     internal_static_LoginToServerResponse_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_LoginToServerResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_LoginToServerResponse_descriptor,
         new java.lang.String[] { "Status", "RoomList", });
-    internal_static_ManageRoomRequest_descriptor =
+    internal_static_LeaveServerRequest_descriptor =
       getDescriptor().getMessageTypes().get(3);
+    internal_static_LeaveServerRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_LeaveServerRequest_descriptor,
+        new java.lang.String[] { "Nick", });
+    internal_static_LeaveServerResponse_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_LeaveServerResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_LeaveServerResponse_descriptor,
+        new java.lang.String[] { "Status", });
+    internal_static_ManageRoomRequest_descriptor =
+      getDescriptor().getMessageTypes().get(5);
     internal_static_ManageRoomRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ManageRoomRequest_descriptor,
-        new java.lang.String[] { "ManageRoomEnum", "Nick", "Password", "RoomName", "OtherUserNick", });
+        new java.lang.String[] { "ManageRoomEnum", "Nick", "RoomName", "Password", "AdminPassword", "OtherUserNick", });
     internal_static_ManageRoomResponse_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_ManageRoomResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ManageRoomResponse_descriptor,

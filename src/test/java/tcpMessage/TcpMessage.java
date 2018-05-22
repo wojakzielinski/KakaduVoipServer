@@ -1,43 +1,100 @@
 package tcpMessage;
 
-import org.apache.mina.core.future.ConnectFuture;
-import org.apache.mina.core.service.IoConnector;
-import org.apache.mina.core.session.IoSession;
-import org.apache.mina.filter.codec.ProtocolCodecFilter;
-import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
-import org.apache.mina.filter.logging.LoggingFilter;
-import org.apache.mina.transport.socket.nio.*;
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.nio.charset.Charset;
+import protocols.Protocols;
+
+import java.util.List;
 
 public class TcpMessage {
     private static String HOSTNAME = "localhost";
     private static int PORT = 9123;
 
-    public static void main(String[] args) throws IOException, InterruptedException
+    public static void main(String[] args) throws InterruptedException
     {
-        IoConnector connector = new NioSocketConnector();
-        connector.getSessionConfig().setReadBufferSize(2048);
-
-        connector.getFilterChain().addLast("logger", new LoggingFilter());
-        connector.getFilterChain().addLast("codec", new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("UTF-8"))));
-
-        connector.setHandler(new MinaClientHandler("Hello Server"));
-        ConnectFuture future = connector.connect(new InetSocketAddress(HOSTNAME, PORT));
-        future.awaitUninterruptibly();
-
-        if (!future.isConnected())
-        {
-            return;
+        String nick = "wojakzielinski";
+        List<Protocols.Room> serverRooms = loginToServer(nick);
+        String roomName = "Pokój1";
+        if(serverRooms.size() == 0){
+            createRoom(nick, roomName);
         }
-        IoSession session = future.getSession();
-        session.getConfig().setUseReadOperation(true);
-        session.write("Message to server");
-        System.out.println(session.read().getMessage());
-
-        System.out.println("After Writing");
-        connector.dispose();
+        joinRoom(nick, roomName);
+        joinRoom("niechcianyGość", roomName);
+        kickUser(nick, roomName, "niechcianyGość");
+        leaveRoom(nick, roomName);
+        deleteRoom(nick, roomName);
 
     }
+
+    private static List<Protocols.Room> loginToServer(String nick)throws InterruptedException{
+        Protocols.LoginToServerRequest.Builder request = Protocols.LoginToServerRequest.newBuilder();
+        request.setNick(nick);
+        Object message = new TcpClient(HOSTNAME,PORT).send(request.build());
+        Protocols.LoginToServerResponse response = (Protocols.LoginToServerResponse) message;
+
+        System.out.println("LoginToServerResponse = "+response.toString());
+        return response.getRoomListList();
+    }
+
+    private static void createRoom(String nick, String roomName) throws InterruptedException{
+        Protocols.ManageRoomRequest.Builder request = Protocols.ManageRoomRequest.newBuilder();
+        request.setNick(nick);
+        request.setManageRoomEnum(Protocols.ManageRoomEnum.CREATE_ROOM);
+        request.setPassword("passwordToServer");
+        request.setAdminPassword("adminPassword");
+        request.setRoomName(roomName);
+
+        Object message = new TcpClient(HOSTNAME,PORT).send(request.build());
+        Protocols.ManageRoomResponse response = (Protocols.ManageRoomResponse) message;
+        System.out.println(response.toString());
+    }
+
+    private static void joinRoom(String nick,String roomName) throws InterruptedException{
+        Protocols.ManageRoomRequest.Builder request = Protocols.ManageRoomRequest.newBuilder();
+        request.setNick(nick);
+        request.setManageRoomEnum(Protocols.ManageRoomEnum.JOIN_ROOM);
+        request.setPassword("passwordToServer");
+        request.setRoomName(roomName);
+
+        Object message = new TcpClient(HOSTNAME,PORT).send(request.build());
+        Protocols.ManageRoomResponse response = (Protocols.ManageRoomResponse) message;
+        System.out.println(response.toString());
+    }
+
+    private static void leaveRoom(String nick, String roomName)throws InterruptedException{
+        Protocols.ManageRoomRequest.Builder request = Protocols.ManageRoomRequest.newBuilder();
+        request.setNick(nick);
+        request.setManageRoomEnum(Protocols.ManageRoomEnum.LEAVE_ROOM);
+        request.setRoomName(roomName);
+
+        Object message = new TcpClient(HOSTNAME,PORT).send(request.build());
+        Protocols.ManageRoomResponse response = (Protocols.ManageRoomResponse) message;
+        System.out.println(response.toString());
+    }
+
+    private static void deleteRoom(String nick, String roomName) throws InterruptedException{
+        Protocols.ManageRoomRequest.Builder request = Protocols.ManageRoomRequest.newBuilder();
+        request.setNick(nick);
+        request.setManageRoomEnum(Protocols.ManageRoomEnum.DELETE_ROOM);
+        request.setPassword("passwordToServer");
+        request.setAdminPassword("adminPassword");
+        request.setRoomName(roomName);
+
+        Object message = new TcpClient(HOSTNAME,PORT).send(request.build());
+        Protocols.ManageRoomResponse response = (Protocols.ManageRoomResponse) message;
+        System.out.println(response.toString());
+    }
+
+    private static void kickUser(String nick, String roomName, String unwantedUserNick) throws InterruptedException{
+        Protocols.ManageRoomRequest.Builder request = Protocols.ManageRoomRequest.newBuilder();
+        request.setNick(nick);
+        request.setManageRoomEnum(Protocols.ManageRoomEnum.CREATE_ROOM);
+        request.setPassword("passwordToServer");
+        request.setAdminPassword("adminPassword");
+        request.setRoomName(roomName);
+        request.setOtherUserNick(unwantedUserNick);
+
+        Object message = new TcpClient(HOSTNAME,PORT).send(request.build());
+        Protocols.ManageRoomResponse response = (Protocols.ManageRoomResponse) message;
+        System.out.println(response.toString());
+    }
+
 }

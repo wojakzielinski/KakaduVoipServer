@@ -5,9 +5,9 @@ import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
 import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
+import protocols.KakaduCodecFactory;
 
 import java.net.InetSocketAddress;
-import java.nio.charset.Charset;
 import java.util.ResourceBundle;
 
 public class Server {
@@ -20,7 +20,7 @@ public class Server {
         ResourceBundle serverProperties = ResourceBundle.getBundle("server");
 
         acceptor.getFilterChain().addLast( "logger", new LoggingFilter() );
-        acceptor.getFilterChain().addLast( "codec", new ProtocolCodecFilter( new TextLineCodecFactory( Charset.forName( "UTF-8" ))));
+        acceptor.getFilterChain().addLast( "codec", new ProtocolCodecFilter( new KakaduCodecFactory()));
 
         acceptor.setHandler(new TcpServerHandler());
 

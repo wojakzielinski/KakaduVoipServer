@@ -14,19 +14,23 @@ message Room {
     required string owner = 2;
 }
 
+//messageCode: 1
 message LoginToServerRequest {
     required string nick = 1;
 }
 
+//messageCode: 2
 message LoginToServerResponse {
     required StatusCode status = 1;
     repeated Room roomList = 2;
 }
 
+//messageCode: 3
 message LeaveServerRequest{
     required string nick = 1;
 }
 
+//messageCode: 4
 message LeaveServerResponse {
     required StatusCode status = 1;
 }
@@ -41,6 +45,7 @@ enum ManageRoomEnum {
     KICK_USER = 7;
 }
 
+//messageCode: 5
 message ManageRoomRequest {
     required ManageRoomEnum manageRoomEnum = 1;
     required string nick = 2;
@@ -50,6 +55,7 @@ message ManageRoomRequest {
     optional string otherUserNick = 6;
 }
 
+//messageCode: 6
 message ManageRoomResponse {
     required StatusCode status = 1;
     optional string keyToRoom = 2;

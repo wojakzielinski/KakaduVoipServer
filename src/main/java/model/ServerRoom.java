@@ -58,4 +58,15 @@ public class ServerRoom {
         roomBuilder.setOwner(this.owner.getNick());
         return  roomBuilder.build();
     }
+
+    @Override
+    public String toString() {
+        return "ServerRoom{" +
+                "name='" + name + '\'' +
+                ", usersInRoom.size=" + usersInRoom.size() +
+                ", owner=" + owner +
+                ", password='" + password + '\'' +
+                ", adminPassword='" + adminPassword + '\'' +
+                '}';
+    }
 }

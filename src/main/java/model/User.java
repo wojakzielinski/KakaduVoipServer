@@ -5,7 +5,7 @@ import java.util.List;
 
 public class User {
     private String nick;
-    private List<String> mutedUserNicks = new ArrayList<String>();
+    private List<String> mutedUserNicks = new ArrayList<>();
 
     public String getNick() {
         return nick;
@@ -21,5 +21,18 @@ public class User {
 
     public void setMutedUserNicks(List<String> mutedUserNicks) {
         this.mutedUserNicks = mutedUserNicks;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "nick='" + nick + '\'' +
+                ", mutedUserNicks.size=" + mutedUserNicks.size() +
+                '}';
+    }
+
+    public void printMutedUsers(){
+        for(String mutedUsersNick: mutedUserNicks)
+            System.out.println(mutedUsersNick);
     }
 }

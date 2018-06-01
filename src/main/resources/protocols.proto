@@ -14,6 +14,16 @@ message Room {
     required string owner = 2;
 }
 
+enum ManageRoomEnum {
+    CREATE_ROOM = 1;
+    DELETE_ROOM = 2;
+    JOIN_ROOM = 3;
+    LEAVE_ROOM = 4;
+    MUTE_USER = 5;
+    UNMUTE_USER = 6;
+    KICK_USER = 7;
+}
+
 //messageCode: 1
 message LoginToServerRequest {
     required string nick = 1;
@@ -22,7 +32,6 @@ message LoginToServerRequest {
 //messageCode: 2
 message LoginToServerResponse {
     required StatusCode status = 1;
-    repeated Room roomList = 2;
 }
 
 //messageCode: 3
@@ -35,15 +44,6 @@ message LeaveServerResponse {
     required StatusCode status = 1;
 }
 
-enum ManageRoomEnum {
-    CREATE_ROOM = 1;
-    DELETE_ROOM = 2;
-    JOIN_ROOM = 3;
-    LEAVE_ROOM = 4;
-    MUTE_USER = 5;
-    UNMUTE_USER = 6;
-    KICK_USER = 7;
-}
 
 //messageCode: 5
 message ManageRoomRequest {
@@ -59,4 +59,27 @@ message ManageRoomRequest {
 message ManageRoomResponse {
     required StatusCode status = 1;
     optional string keyToRoom = 2;
+}
+
+//massageCode: 7
+message GetRoomsRequest {
+    required string nick = 1;
+}
+
+//messageCode: 8
+message GetRoomsResponse {
+    required StatusCode status = 1;
+    repeated Room rooms = 2;
+}
+
+//messageCode: 9
+message GetUsersInRoomRequest {
+    required string nick = 1;
+    required string roomName = 2;
+}
+
+//messageCode: 10
+message GetUsersInRoomResponse{
+    required StatusCode status = 1;
+    repeated string users = 2;
 }

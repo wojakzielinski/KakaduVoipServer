@@ -9,46 +9,58 @@ public class TcpMessage {
     private static int PORT = 9123;
 
     public static void main(String[] args) throws InterruptedException {
+        TcpClient tcpClient = new TcpClient(HOSTNAME, PORT);
         String nick = "wojakzielinski";
         String otherUser = "niechcianyGość";
         String roomName = "Pokój1";
 
-        List<Protocols.Room> serverRooms = loginToServer(nick);
+        loginToServer(tcpClient,nick);
+        List<Protocols.Room> serverRooms = getServerRooms(tcpClient,nick);
+        System.out.println("Server rooms size="+serverRooms.size());
         if (serverRooms.size() == 0) {
-            createRoom(nick, roomName);
+            createRoom(tcpClient,nick, roomName);
         }
-        joinRoom(nick, roomName);
+        joinRoom(tcpClient,nick, roomName);
 
         //other users log to room
-        serverRooms = loginToServer(otherUser);
-        joinRoom(otherUser, serverRooms.get(0).getRoomName());
+        TcpClient tcpClient2 = new TcpClient(HOSTNAME, PORT);
+        loginToServer(tcpClient2,otherUser);
+        serverRooms = getServerRooms(tcpClient2,otherUser);
+        joinRoom(tcpClient2,otherUser, serverRooms.get(0).getRoomName());
 
         //mute user
-        muteUser(nick, roomName, otherUser);
+        muteUser(tcpClient,nick, roomName, otherUser);
         //unmute user
-        unmuteUser(nick, roomName, otherUser);
+        unmuteUser(tcpClient,nick, roomName, otherUser);
         //kick user from room
-        kickUser(nick, roomName, otherUser);
+        kickUser(tcpClient,nick, roomName, otherUser);
         //leaveroom
-        leaveRoom(nick, roomName);
+        leaveRoom(tcpClient,nick, roomName);
         //deleteRoom
-        deleteRoom(nick, roomName);
+        deleteRoom(tcpClient,nick, roomName);
         //leave server
-        leaveServer(nick);
-        leaveServer(otherUser);
+        leaveServer(tcpClient,nick);
+        leaveServer(tcpClient2,otherUser);
     }
 
-    private static List<Protocols.Room> loginToServer(String nick) throws InterruptedException {
+    private static void loginToServer(TcpClient tcpClient, String nick) throws InterruptedException {
         Protocols.LoginToServerRequest.Builder request = Protocols.LoginToServerRequest.newBuilder();
         request.setNick(nick);
-        Object message = new TcpClient(HOSTNAME, PORT).send(request.build());
+        Object message = tcpClient.send(request.build());
         Protocols.LoginToServerResponse response = (Protocols.LoginToServerResponse) message;
 
         System.out.println("LoginToServerResponse = " + response.toString());
-        return response.getRoomListList();
     }
 
-    private static void createRoom(String nick, String roomName) throws InterruptedException {
+    private static List<Protocols.Room> getServerRooms(TcpClient tcpClient, String nick) throws InterruptedException {
+        Protocols.GetRoomsRequest.Builder request = Protocols.GetRoomsRequest.newBuilder();
+        request.setNick(nick);
+        Protocols.GetRoomsResponse response = (Protocols.GetRoomsResponse) tcpClient.send(request.build());
+        //if(response )
+        return response.getRoomsList();
+    }
+
+    private static void createRoom(TcpClient tcpClient, String nick, String roomName) throws InterruptedException {
         Protocols.ManageRoomRequest.Builder request = Protocols.ManageRoomRequest.newBuilder();
         request.setNick(nick);
         request.setManageRoomEnum(Protocols.ManageRoomEnum.CREATE_ROOM);
@@ -56,35 +68,35 @@ public class TcpMessage {
         request.setAdminPassword("adminPassword");
         request.setRoomName(roomName);
 
-        Object message = new TcpClient(HOSTNAME, PORT).send(request.build());
+        Object message = tcpClient.send(request.build());
         Protocols.ManageRoomResponse response = (Protocols.ManageRoomResponse) message;
         System.out.println(response.toString());
     }
 
-    private static void joinRoom(String nick, String roomName) throws InterruptedException {
+    private static void joinRoom(TcpClient tcpClient, String nick, String roomName) throws InterruptedException {
         Protocols.ManageRoomRequest.Builder request = Protocols.ManageRoomRequest.newBuilder();
         request.setNick(nick);
         request.setManageRoomEnum(Protocols.ManageRoomEnum.JOIN_ROOM);
         request.setPassword("passwordToServer");
         request.setRoomName(roomName);
 
-        Object message = new TcpClient(HOSTNAME, PORT).send(request.build());
+        Object message = tcpClient.send(request.build());
         Protocols.ManageRoomResponse response = (Protocols.ManageRoomResponse) message;
         System.out.println(response.toString());
     }
 
-    private static void leaveRoom(String nick, String roomName) throws InterruptedException {
+    private static void leaveRoom(TcpClient tcpClient, String nick, String roomName) throws InterruptedException {
         Protocols.ManageRoomRequest.Builder request = Protocols.ManageRoomRequest.newBuilder();
         request.setNick(nick);
         request.setManageRoomEnum(Protocols.ManageRoomEnum.LEAVE_ROOM);
         request.setRoomName(roomName);
 
-        Object message = new TcpClient(HOSTNAME, PORT).send(request.build());
+        Object message = tcpClient.send(request.build());
         Protocols.ManageRoomResponse response = (Protocols.ManageRoomResponse) message;
         System.out.println(response.toString());
     }
 
-    private static void deleteRoom(String nick, String roomName) throws InterruptedException {
+    private static void deleteRoom(TcpClient tcpClient, String nick, String roomName) throws InterruptedException {
         Protocols.ManageRoomRequest.Builder request = Protocols.ManageRoomRequest.newBuilder();
         request.setNick(nick);
         request.setManageRoomEnum(Protocols.ManageRoomEnum.DELETE_ROOM);
@@ -92,12 +104,12 @@ public class TcpMessage {
         request.setAdminPassword("adminPassword");
         request.setRoomName(roomName);
 
-        Object message = new TcpClient(HOSTNAME, PORT).send(request.build());
+        Object message = tcpClient.send(request.build());
         Protocols.ManageRoomResponse response = (Protocols.ManageRoomResponse) message;
         System.out.println(response.toString());
     }
 
-    private static void muteUser(String nick, String roomName, String userToMute) throws InterruptedException {
+    private static void muteUser(TcpClient tcpClient, String nick, String roomName, String userToMute) throws InterruptedException {
         Protocols.ManageRoomRequest.Builder request = Protocols.ManageRoomRequest.newBuilder();
         request.setNick(nick);
         request.setManageRoomEnum(Protocols.ManageRoomEnum.MUTE_USER);
@@ -105,12 +117,12 @@ public class TcpMessage {
         request.setRoomName(roomName);
         request.setOtherUserNick(userToMute);
 
-        Object message = new TcpClient(HOSTNAME, PORT).send(request.build());
+        Object message = tcpClient.send(request.build());
         Protocols.ManageRoomResponse response = (Protocols.ManageRoomResponse) message;
         System.out.println(response.toString());
     }
 
-    private static void unmuteUser(String nick, String roomName, String userToUnmute) throws InterruptedException {
+    private static void unmuteUser(TcpClient tcpClient, String nick, String roomName, String userToUnmute) throws InterruptedException {
         Protocols.ManageRoomRequest.Builder request = Protocols.ManageRoomRequest.newBuilder();
         request.setNick(nick);
         request.setManageRoomEnum(Protocols.ManageRoomEnum.UNMUTE_USER);
@@ -118,12 +130,12 @@ public class TcpMessage {
         request.setRoomName(roomName);
         request.setOtherUserNick(userToUnmute);
 
-        Object message = new TcpClient(HOSTNAME, PORT).send(request.build());
+        Object message = tcpClient.send(request.build());
         Protocols.ManageRoomResponse response = (Protocols.ManageRoomResponse) message;
         System.out.println(response.toString());
     }
 
-    private static void kickUser(String nick, String roomName, String unwantedUserNick) throws InterruptedException {
+    private static void kickUser(TcpClient tcpClient, String nick, String roomName, String unwantedUserNick) throws InterruptedException {
         Protocols.ManageRoomRequest.Builder request = Protocols.ManageRoomRequest.newBuilder();
         request.setNick(nick);
         request.setManageRoomEnum(Protocols.ManageRoomEnum.KICK_USER);
@@ -132,17 +144,19 @@ public class TcpMessage {
         request.setRoomName(roomName);
         request.setOtherUserNick(unwantedUserNick);
 
-        Object message = new TcpClient(HOSTNAME, PORT).send(request.build());
+        Object message = tcpClient.send(request.build());
         Protocols.ManageRoomResponse response = (Protocols.ManageRoomResponse) message;
         System.out.println(response.toString());
     }
 
-    private static void leaveServer(String nick) throws InterruptedException {
+    private static void leaveServer(TcpClient tcpClient, String nick) throws InterruptedException {
         Protocols.LeaveServerRequest.Builder requestBuilder = Protocols.LeaveServerRequest.newBuilder();
         requestBuilder.setNick(nick);
 
-        Object message = new TcpClient(HOSTNAME, PORT).send(requestBuilder.build());
+        Object message = tcpClient.send(requestBuilder.build());
         Protocols.LeaveServerResponse response = (Protocols.LeaveServerResponse) message;
+        if(response.getStatus().equals(Protocols.StatusCode.OK))
+            tcpClient.closeConnection();
         System.out.println(response.toString());
     }
 

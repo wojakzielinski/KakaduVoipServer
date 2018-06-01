@@ -22,7 +22,14 @@ public class MinaClientHandler extends IoHandlerAdapter
     @Override
     public void messageReceived(IoSession session, Object message)
     {
-        System.out.println("MinaClientHandler.messageReceived");
+        System.out.println("MinaClientHandler.messageReceived, class=" + message.getClass());
+        if(message instanceof Protocols.GetUsersInRoomResponse){
+            Protocols.GetUsersInRoomResponse newListOfUsersInRoom = (Protocols.GetUsersInRoomResponse)message;
+            System.out.println("New users list!!! size="+newListOfUsersInRoom.getUsersList().size());
+            for(String userNick: newListOfUsersInRoom.getUsersList()){
+                System.out.println(userNick);
+            }
+        }
     }
 
     @Override

@@ -16,11 +16,11 @@ public class TcpClient {
     private static int port;
 
     private static IoSession session;
-    IoConnector connector;
+    private IoConnector connector;
 
-    public TcpClient(String ip, int port){
-        this.ip=ip;
-        this.port=port;
+    public TcpClient(String ip, int port) {
+        this.ip = ip;
+        this.port = port;
         connector = new NioSocketConnector();
         connector.getSessionConfig().setReadBufferSize(2048);
 
@@ -31,16 +31,11 @@ public class TcpClient {
         ConnectFuture future = connector.connect(new InetSocketAddress(ip, port));
         future.awaitUninterruptibly();
 
-        if (!future.isConnected())
-        {
+        if (!future.isConnected()) {
             return;
         }
         session = future.getSession();
         session.getConfig().setUseReadOperation(true);
-
-
-//        System.out.println("After Writing");
-//        connector.dispose();
     }
 
     public Object send(Object message) throws InterruptedException {
@@ -48,8 +43,12 @@ public class TcpClient {
         final ReadFuture readFuture = session.read();
         readFuture.awaitUninterruptibly();
         Object response = readFuture.getMessage();
-        connector.dispose();
+        //connector.dispose();
         return response;
+    }
+
+    public void closeConnection() {
+        connector.dispose();
     }
 
 }

@@ -52,6 +52,25 @@ public class ServerRoom {
         this.adminPassword = adminPassword;
     }
 
+    public void joinUserToRoom(User newUser){
+        System.out.println("Joining to room method");
+        //create protocols with user nicks
+        Protocols.GetUsersInRoomResponse.Builder responseBuilder = Protocols.GetUsersInRoomResponse.newBuilder();
+        for(User userInRoom: usersInRoom) {
+            responseBuilder.addUsers(userInRoom.getNick());
+        }
+        responseBuilder.addUsers(newUser.getNick());
+        responseBuilder.setStatus(Protocols.StatusCode.OK);
+        Protocols.GetUsersInRoomResponse response = responseBuilder.build();
+        System.out.println("Response users.size()="+response.getUsersList().size());
+        //send to users actual list of users in room
+        for(User userInRoom: usersInRoom) {
+            System.out.println("Sending to: "+userInRoom.getNick()+", iosession="+userInRoom.getSession().toString());
+            userInRoom.getSession().write(response);
+        }
+        //add new user to room
+        usersInRoom.add(newUser);
+    }
     public Protocols.Room toProtocol(){
         Protocols.Room.Builder roomBuilder = Protocols.Room.newBuilder();
         roomBuilder.setRoomName(this.name);

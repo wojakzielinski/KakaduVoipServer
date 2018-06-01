@@ -28,13 +28,19 @@ public class TcpServerHandler extends IoHandlerAdapter {
 
         if (message instanceof Protocols.LoginToServerRequest) {
             System.out.println("arrived LoginToServerRequest");
-            response = handleLoginRequestMessage((Protocols.LoginToServerRequest) message);
+            response = handleLoginRequestMessage((Protocols.LoginToServerRequest) message, session);
         } else if (message instanceof Protocols.LeaveServerRequest) {
             System.out.println("arrived LeaveServerRequest");
             response = handleLeaveServerRequest((Protocols.LeaveServerRequest) message);
         } else if (message instanceof Protocols.ManageRoomRequest) {
             System.out.println("arrived ManageRoomRequest");
             response = handleManageRoomRequest((Protocols.ManageRoomRequest) message);
+        } else if (message instanceof Protocols.GetRoomsRequest) {
+            System.out.println("arrived GetRoomsRequest");
+            response = handleGetRoomsRequest((Protocols.GetRoomsRequest) message);
+        } else if (message instanceof Protocols.GetUsersInRoomRequest) {
+            System.out.println("arrived GetUsersInRoomRequest");
+            response = handleGetUsersInRoomRequest((Protocols.GetUsersInRoomRequest) message);
         } else {
             System.out.println("Unknown message: " + message.getClass());
             System.out.println(message.toString());
@@ -61,15 +67,14 @@ public class TcpServerHandler extends IoHandlerAdapter {
         System.out.println("IDLE " + session.getIdleCount(status));
     }
 
-    private Protocols.LoginToServerResponse handleLoginRequestMessage(Protocols.LoginToServerRequest request) {
+    private Protocols.LoginToServerResponse handleLoginRequestMessage(Protocols.LoginToServerRequest request,IoSession ioSession) {
         System.out.println(request.toString());
         User user = new User();
         user.setNick(request.getNick());
+        user.setSession(ioSession);
         loggedUsers.add(user);
 
         Protocols.LoginToServerResponse.Builder responseBuilder = Protocols.LoginToServerResponse.newBuilder();
-        for (Map.Entry<String, ServerRoom> serverRoomEntry : serverRoomMap.entrySet())
-            responseBuilder.addRoomList(serverRoomEntry.getValue().toProtocol());
         responseBuilder.setStatus(Protocols.StatusCode.OK);
         System.out.println("LoginToServerResponse end, loggedUsers.size = "+loggedUsers.size());
 
@@ -141,7 +146,7 @@ public class TcpServerHandler extends IoHandlerAdapter {
         ServerRoom serverRoom = serverRoomMap.get(request.getRoomName());
         User user = findUserFromNick(request.getNick());
         if (serverRoom != null && user != null && serverRoom.getPassword().equals(request.getPassword())) {
-            serverRoom.getUsersInRoom().add(user);
+            serverRoom.joinUserToRoom(user);
             responseBuilder.setStatus(Protocols.StatusCode.OK);
         } else {
             responseBuilder.setStatus(Protocols.StatusCode.BAD_CREDENTIALS);
@@ -207,7 +212,36 @@ public class TcpServerHandler extends IoHandlerAdapter {
         } else
             response.setStatus(Protocols.StatusCode.BAD_CREDENTIALS);
         return response.build();
+    }
 
+    private Protocols.GetRoomsResponse handleGetRoomsRequest(Protocols.GetRoomsRequest request){
+        Protocols.GetRoomsResponse.Builder response = Protocols.GetRoomsResponse.newBuilder();
+        if(findUserFromNick(request.getNick()) != null) {
+            for (Map.Entry<String, ServerRoom> serverRoomEntry : serverRoomMap.entrySet()) {
+                Protocols.Room.Builder roomBuilder = Protocols.Room.newBuilder();
+                roomBuilder.setOwner(serverRoomEntry.getValue().getOwner().getNick());
+                roomBuilder.setRoomName(serverRoomEntry.getKey());
+                response.addRooms(roomBuilder);
+            }
+            response.setStatus(Protocols.StatusCode.OK);
+        } else
+            response.setStatus(Protocols.StatusCode.BAD_CREDENTIALS);
+        return response.build();
+    }
+
+    private Protocols.GetUsersInRoomResponse handleGetUsersInRoomRequest(Protocols.GetUsersInRoomRequest request){
+        Protocols.GetUsersInRoomResponse.Builder response = Protocols.GetUsersInRoomResponse.newBuilder();
+        ServerRoom serverRoom = serverRoomMap.get(request.getRoomName());
+        User user = findUserFromNick(request.getNick());
+        if(serverRoom != null && user != null && serverRoom.getUsersInRoom().contains(user)){
+            for(User userInRoom: serverRoom.getUsersInRoom()){
+                response.addUsers(userInRoom.getNick());
+            }
+            response.setStatus(Protocols.StatusCode.OK);
+        } else {
+            response.setStatus(Protocols.StatusCode.BAD_CREDENTIALS);
+        }
+        return response.build();
     }
 
     private User findUserFromNick(String nick) {

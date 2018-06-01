@@ -990,6 +990,10 @@ public final class Protocols {
         getNickBytes();
   }
   /**
+   * <pre>
+   *messageCode: 1
+   * </pre>
+   *
    * Protobuf type {@code LoginToServerRequest}
    */
   public  static final class LoginToServerRequest extends
@@ -1255,6 +1259,10 @@ public final class Protocols {
       return builder;
     }
     /**
+     * <pre>
+     *messageCode: 1
+     * </pre>
+     *
      * Protobuf type {@code LoginToServerRequest}
      */
     public static final class Builder extends
@@ -1534,32 +1542,12 @@ public final class Protocols {
      * <code>required .StatusCode status = 1;</code>
      */
     protocols.Protocols.StatusCode getStatus();
-
-    /**
-     * <code>repeated .Room roomList = 2;</code>
-     */
-    java.util.List<protocols.Protocols.Room> 
-        getRoomListList();
-    /**
-     * <code>repeated .Room roomList = 2;</code>
-     */
-    protocols.Protocols.Room getRoomList(int index);
-    /**
-     * <code>repeated .Room roomList = 2;</code>
-     */
-    int getRoomListCount();
-    /**
-     * <code>repeated .Room roomList = 2;</code>
-     */
-    java.util.List<? extends protocols.Protocols.RoomOrBuilder> 
-        getRoomListOrBuilderList();
-    /**
-     * <code>repeated .Room roomList = 2;</code>
-     */
-    protocols.Protocols.RoomOrBuilder getRoomListOrBuilder(
-        int index);
   }
   /**
+   * <pre>
+   *messageCode: 2
+   * </pre>
+   *
    * Protobuf type {@code LoginToServerResponse}
    */
   public  static final class LoginToServerResponse extends
@@ -1572,7 +1560,6 @@ public final class Protocols {
     }
     private LoginToServerResponse() {
       status_ = 0;
-      roomList_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -1614,15 +1601,6 @@ public final class Protocols {
               }
               break;
             }
-            case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                roomList_ = new java.util.ArrayList<protocols.Protocols.Room>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              roomList_.add(
-                  input.readMessage(protocols.Protocols.Room.PARSER, extensionRegistry));
-              break;
-            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1631,9 +1609,6 @@ public final class Protocols {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          roomList_ = java.util.Collections.unmodifiableList(roomList_);
-        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -1667,41 +1642,6 @@ public final class Protocols {
       return result == null ? protocols.Protocols.StatusCode.OK : result;
     }
 
-    public static final int ROOMLIST_FIELD_NUMBER = 2;
-    private java.util.List<protocols.Protocols.Room> roomList_;
-    /**
-     * <code>repeated .Room roomList = 2;</code>
-     */
-    public java.util.List<protocols.Protocols.Room> getRoomListList() {
-      return roomList_;
-    }
-    /**
-     * <code>repeated .Room roomList = 2;</code>
-     */
-    public java.util.List<? extends protocols.Protocols.RoomOrBuilder> 
-        getRoomListOrBuilderList() {
-      return roomList_;
-    }
-    /**
-     * <code>repeated .Room roomList = 2;</code>
-     */
-    public int getRoomListCount() {
-      return roomList_.size();
-    }
-    /**
-     * <code>repeated .Room roomList = 2;</code>
-     */
-    public protocols.Protocols.Room getRoomList(int index) {
-      return roomList_.get(index);
-    }
-    /**
-     * <code>repeated .Room roomList = 2;</code>
-     */
-    public protocols.Protocols.RoomOrBuilder getRoomListOrBuilder(
-        int index) {
-      return roomList_.get(index);
-    }
-
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -1712,12 +1652,6 @@ public final class Protocols {
         memoizedIsInitialized = 0;
         return false;
       }
-      for (int i = 0; i < getRoomListCount(); i++) {
-        if (!getRoomList(i).isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -1726,9 +1660,6 @@ public final class Protocols {
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeEnum(1, status_);
-      }
-      for (int i = 0; i < roomList_.size(); i++) {
-        output.writeMessage(2, roomList_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -1741,10 +1672,6 @@ public final class Protocols {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, status_);
-      }
-      for (int i = 0; i < roomList_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, roomList_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1767,8 +1694,6 @@ public final class Protocols {
       if (hasStatus()) {
         result = result && status_ == other.status_;
       }
-      result = result && getRoomListList()
-          .equals(other.getRoomListList());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -1783,10 +1708,6 @@ public final class Protocols {
       if (hasStatus()) {
         hash = (37 * hash) + STATUS_FIELD_NUMBER;
         hash = (53 * hash) + status_;
-      }
-      if (getRoomListCount() > 0) {
-        hash = (37 * hash) + ROOMLIST_FIELD_NUMBER;
-        hash = (53 * hash) + getRoomListList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -1871,6 +1792,10 @@ public final class Protocols {
       return builder;
     }
     /**
+     * <pre>
+     *messageCode: 2
+     * </pre>
+     *
      * Protobuf type {@code LoginToServerResponse}
      */
     public static final class Builder extends
@@ -1902,19 +1827,12 @@ public final class Protocols {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getRoomListFieldBuilder();
         }
       }
       public Builder clear() {
         super.clear();
         status_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        if (roomListBuilder_ == null) {
-          roomList_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-        } else {
-          roomListBuilder_.clear();
-        }
         return this;
       }
 
@@ -1943,15 +1861,6 @@ public final class Protocols {
           to_bitField0_ |= 0x00000001;
         }
         result.status_ = status_;
-        if (roomListBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            roomList_ = java.util.Collections.unmodifiableList(roomList_);
-            bitField0_ = (bitField0_ & ~0x00000002);
-          }
-          result.roomList_ = roomList_;
-        } else {
-          result.roomList_ = roomListBuilder_.build();
-        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1997,32 +1906,6 @@ public final class Protocols {
         if (other.hasStatus()) {
           setStatus(other.getStatus());
         }
-        if (roomListBuilder_ == null) {
-          if (!other.roomList_.isEmpty()) {
-            if (roomList_.isEmpty()) {
-              roomList_ = other.roomList_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-            } else {
-              ensureRoomListIsMutable();
-              roomList_.addAll(other.roomList_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.roomList_.isEmpty()) {
-            if (roomListBuilder_.isEmpty()) {
-              roomListBuilder_.dispose();
-              roomListBuilder_ = null;
-              roomList_ = other.roomList_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-              roomListBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getRoomListFieldBuilder() : null;
-            } else {
-              roomListBuilder_.addAllMessages(other.roomList_);
-            }
-          }
-        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -2031,11 +1914,6 @@ public final class Protocols {
       public final boolean isInitialized() {
         if (!hasStatus()) {
           return false;
-        }
-        for (int i = 0; i < getRoomListCount(); i++) {
-          if (!getRoomList(i).isInitialized()) {
-            return false;
-          }
         }
         return true;
       }
@@ -2093,246 +1971,6 @@ public final class Protocols {
         status_ = 0;
         onChanged();
         return this;
-      }
-
-      private java.util.List<protocols.Protocols.Room> roomList_ =
-        java.util.Collections.emptyList();
-      private void ensureRoomListIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          roomList_ = new java.util.ArrayList<protocols.Protocols.Room>(roomList_);
-          bitField0_ |= 0x00000002;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          protocols.Protocols.Room, protocols.Protocols.Room.Builder, protocols.Protocols.RoomOrBuilder> roomListBuilder_;
-
-      /**
-       * <code>repeated .Room roomList = 2;</code>
-       */
-      public java.util.List<protocols.Protocols.Room> getRoomListList() {
-        if (roomListBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(roomList_);
-        } else {
-          return roomListBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .Room roomList = 2;</code>
-       */
-      public int getRoomListCount() {
-        if (roomListBuilder_ == null) {
-          return roomList_.size();
-        } else {
-          return roomListBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .Room roomList = 2;</code>
-       */
-      public protocols.Protocols.Room getRoomList(int index) {
-        if (roomListBuilder_ == null) {
-          return roomList_.get(index);
-        } else {
-          return roomListBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .Room roomList = 2;</code>
-       */
-      public Builder setRoomList(
-          int index, protocols.Protocols.Room value) {
-        if (roomListBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRoomListIsMutable();
-          roomList_.set(index, value);
-          onChanged();
-        } else {
-          roomListBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Room roomList = 2;</code>
-       */
-      public Builder setRoomList(
-          int index, protocols.Protocols.Room.Builder builderForValue) {
-        if (roomListBuilder_ == null) {
-          ensureRoomListIsMutable();
-          roomList_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          roomListBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Room roomList = 2;</code>
-       */
-      public Builder addRoomList(protocols.Protocols.Room value) {
-        if (roomListBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRoomListIsMutable();
-          roomList_.add(value);
-          onChanged();
-        } else {
-          roomListBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Room roomList = 2;</code>
-       */
-      public Builder addRoomList(
-          int index, protocols.Protocols.Room value) {
-        if (roomListBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRoomListIsMutable();
-          roomList_.add(index, value);
-          onChanged();
-        } else {
-          roomListBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Room roomList = 2;</code>
-       */
-      public Builder addRoomList(
-          protocols.Protocols.Room.Builder builderForValue) {
-        if (roomListBuilder_ == null) {
-          ensureRoomListIsMutable();
-          roomList_.add(builderForValue.build());
-          onChanged();
-        } else {
-          roomListBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Room roomList = 2;</code>
-       */
-      public Builder addRoomList(
-          int index, protocols.Protocols.Room.Builder builderForValue) {
-        if (roomListBuilder_ == null) {
-          ensureRoomListIsMutable();
-          roomList_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          roomListBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Room roomList = 2;</code>
-       */
-      public Builder addAllRoomList(
-          java.lang.Iterable<? extends protocols.Protocols.Room> values) {
-        if (roomListBuilder_ == null) {
-          ensureRoomListIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, roomList_);
-          onChanged();
-        } else {
-          roomListBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Room roomList = 2;</code>
-       */
-      public Builder clearRoomList() {
-        if (roomListBuilder_ == null) {
-          roomList_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-          onChanged();
-        } else {
-          roomListBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Room roomList = 2;</code>
-       */
-      public Builder removeRoomList(int index) {
-        if (roomListBuilder_ == null) {
-          ensureRoomListIsMutable();
-          roomList_.remove(index);
-          onChanged();
-        } else {
-          roomListBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Room roomList = 2;</code>
-       */
-      public protocols.Protocols.Room.Builder getRoomListBuilder(
-          int index) {
-        return getRoomListFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .Room roomList = 2;</code>
-       */
-      public protocols.Protocols.RoomOrBuilder getRoomListOrBuilder(
-          int index) {
-        if (roomListBuilder_ == null) {
-          return roomList_.get(index);  } else {
-          return roomListBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .Room roomList = 2;</code>
-       */
-      public java.util.List<? extends protocols.Protocols.RoomOrBuilder> 
-           getRoomListOrBuilderList() {
-        if (roomListBuilder_ != null) {
-          return roomListBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(roomList_);
-        }
-      }
-      /**
-       * <code>repeated .Room roomList = 2;</code>
-       */
-      public protocols.Protocols.Room.Builder addRoomListBuilder() {
-        return getRoomListFieldBuilder().addBuilder(
-            protocols.Protocols.Room.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .Room roomList = 2;</code>
-       */
-      public protocols.Protocols.Room.Builder addRoomListBuilder(
-          int index) {
-        return getRoomListFieldBuilder().addBuilder(
-            index, protocols.Protocols.Room.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .Room roomList = 2;</code>
-       */
-      public java.util.List<protocols.Protocols.Room.Builder> 
-           getRoomListBuilderList() {
-        return getRoomListFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          protocols.Protocols.Room, protocols.Protocols.Room.Builder, protocols.Protocols.RoomOrBuilder> 
-          getRoomListFieldBuilder() {
-        if (roomListBuilder_ == null) {
-          roomListBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              protocols.Protocols.Room, protocols.Protocols.Room.Builder, protocols.Protocols.RoomOrBuilder>(
-                  roomList_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
-                  getParentForChildren(),
-                  isClean());
-          roomList_ = null;
-        }
-        return roomListBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -2402,6 +2040,10 @@ public final class Protocols {
         getNickBytes();
   }
   /**
+   * <pre>
+   *messageCode: 3
+   * </pre>
+   *
    * Protobuf type {@code LeaveServerRequest}
    */
   public  static final class LeaveServerRequest extends
@@ -2667,6 +2309,10 @@ public final class Protocols {
       return builder;
     }
     /**
+     * <pre>
+     *messageCode: 3
+     * </pre>
+     *
      * Protobuf type {@code LeaveServerRequest}
      */
     public static final class Builder extends
@@ -2948,6 +2594,10 @@ public final class Protocols {
     protocols.Protocols.StatusCode getStatus();
   }
   /**
+   * <pre>
+   *messageCode: 4
+   * </pre>
+   *
    * Protobuf type {@code LeaveServerResponse}
    */
   public  static final class LeaveServerResponse extends
@@ -3192,6 +2842,10 @@ public final class Protocols {
       return builder;
     }
     /**
+     * <pre>
+     *messageCode: 4
+     * </pre>
+     *
      * Protobuf type {@code LeaveServerResponse}
      */
     public static final class Builder extends
@@ -3501,6 +3155,10 @@ public final class Protocols {
         getOtherUserNickBytes();
   }
   /**
+   * <pre>
+   *messageCode: 5
+   * </pre>
+   *
    * Protobuf type {@code ManageRoomRequest}
    */
   public  static final class ManageRoomRequest extends
@@ -4073,6 +3731,10 @@ public final class Protocols {
       return builder;
     }
     /**
+     * <pre>
+     *messageCode: 5
+     * </pre>
+     *
      * Protobuf type {@code ManageRoomRequest}
      */
     public static final class Builder extends
@@ -4767,6 +4429,10 @@ public final class Protocols {
         getKeyToRoomBytes();
   }
   /**
+   * <pre>
+   *messageCode: 6
+   * </pre>
+   *
    * Protobuf type {@code ManageRoomResponse}
    */
   public  static final class ManageRoomResponse extends
@@ -5075,6 +4741,10 @@ public final class Protocols {
       return builder;
     }
     /**
+     * <pre>
+     *messageCode: 6
+     * </pre>
+     *
      * Protobuf type {@code ManageRoomResponse}
      */
     public static final class Builder extends
@@ -5387,6 +5057,2844 @@ public final class Protocols {
 
   }
 
+  public interface GetRoomsRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:GetRoomsRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required string nick = 1;</code>
+     */
+    boolean hasNick();
+    /**
+     * <code>required string nick = 1;</code>
+     */
+    java.lang.String getNick();
+    /**
+     * <code>required string nick = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getNickBytes();
+  }
+  /**
+   * <pre>
+   *massageCode: 7
+   * </pre>
+   *
+   * Protobuf type {@code GetRoomsRequest}
+   */
+  public  static final class GetRoomsRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:GetRoomsRequest)
+      GetRoomsRequestOrBuilder {
+    // Use GetRoomsRequest.newBuilder() to construct.
+    private GetRoomsRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private GetRoomsRequest() {
+      nick_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private GetRoomsRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              nick_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return protocols.Protocols.internal_static_GetRoomsRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return protocols.Protocols.internal_static_GetRoomsRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              protocols.Protocols.GetRoomsRequest.class, protocols.Protocols.GetRoomsRequest.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int NICK_FIELD_NUMBER = 1;
+    private volatile java.lang.Object nick_;
+    /**
+     * <code>required string nick = 1;</code>
+     */
+    public boolean hasNick() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string nick = 1;</code>
+     */
+    public java.lang.String getNick() {
+      java.lang.Object ref = nick_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          nick_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string nick = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNickBytes() {
+      java.lang.Object ref = nick_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        nick_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasNick()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, nick_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, nick_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof protocols.Protocols.GetRoomsRequest)) {
+        return super.equals(obj);
+      }
+      protocols.Protocols.GetRoomsRequest other = (protocols.Protocols.GetRoomsRequest) obj;
+
+      boolean result = true;
+      result = result && (hasNick() == other.hasNick());
+      if (hasNick()) {
+        result = result && getNick()
+            .equals(other.getNick());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasNick()) {
+        hash = (37 * hash) + NICK_FIELD_NUMBER;
+        hash = (53 * hash) + getNick().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static protocols.Protocols.GetRoomsRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.GetRoomsRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.GetRoomsRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.GetRoomsRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.GetRoomsRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static protocols.Protocols.GetRoomsRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static protocols.Protocols.GetRoomsRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static protocols.Protocols.GetRoomsRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static protocols.Protocols.GetRoomsRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static protocols.Protocols.GetRoomsRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(protocols.Protocols.GetRoomsRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *massageCode: 7
+     * </pre>
+     *
+     * Protobuf type {@code GetRoomsRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:GetRoomsRequest)
+        protocols.Protocols.GetRoomsRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return protocols.Protocols.internal_static_GetRoomsRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return protocols.Protocols.internal_static_GetRoomsRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                protocols.Protocols.GetRoomsRequest.class, protocols.Protocols.GetRoomsRequest.Builder.class);
+      }
+
+      // Construct using protocols.Protocols.GetRoomsRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        nick_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return protocols.Protocols.internal_static_GetRoomsRequest_descriptor;
+      }
+
+      public protocols.Protocols.GetRoomsRequest getDefaultInstanceForType() {
+        return protocols.Protocols.GetRoomsRequest.getDefaultInstance();
+      }
+
+      public protocols.Protocols.GetRoomsRequest build() {
+        protocols.Protocols.GetRoomsRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public protocols.Protocols.GetRoomsRequest buildPartial() {
+        protocols.Protocols.GetRoomsRequest result = new protocols.Protocols.GetRoomsRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.nick_ = nick_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof protocols.Protocols.GetRoomsRequest) {
+          return mergeFrom((protocols.Protocols.GetRoomsRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(protocols.Protocols.GetRoomsRequest other) {
+        if (other == protocols.Protocols.GetRoomsRequest.getDefaultInstance()) return this;
+        if (other.hasNick()) {
+          bitField0_ |= 0x00000001;
+          nick_ = other.nick_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasNick()) {
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        protocols.Protocols.GetRoomsRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (protocols.Protocols.GetRoomsRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object nick_ = "";
+      /**
+       * <code>required string nick = 1;</code>
+       */
+      public boolean hasNick() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string nick = 1;</code>
+       */
+      public java.lang.String getNick() {
+        java.lang.Object ref = nick_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            nick_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string nick = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNickBytes() {
+        java.lang.Object ref = nick_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          nick_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string nick = 1;</code>
+       */
+      public Builder setNick(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        nick_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string nick = 1;</code>
+       */
+      public Builder clearNick() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        nick_ = getDefaultInstance().getNick();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string nick = 1;</code>
+       */
+      public Builder setNickBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        nick_ = value;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:GetRoomsRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:GetRoomsRequest)
+    private static final protocols.Protocols.GetRoomsRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new protocols.Protocols.GetRoomsRequest();
+    }
+
+    public static protocols.Protocols.GetRoomsRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<GetRoomsRequest>
+        PARSER = new com.google.protobuf.AbstractParser<GetRoomsRequest>() {
+      public GetRoomsRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new GetRoomsRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<GetRoomsRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<GetRoomsRequest> getParserForType() {
+      return PARSER;
+    }
+
+    public protocols.Protocols.GetRoomsRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface GetRoomsResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:GetRoomsResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .StatusCode status = 1;</code>
+     */
+    boolean hasStatus();
+    /**
+     * <code>required .StatusCode status = 1;</code>
+     */
+    protocols.Protocols.StatusCode getStatus();
+
+    /**
+     * <code>repeated .Room rooms = 2;</code>
+     */
+    java.util.List<protocols.Protocols.Room> 
+        getRoomsList();
+    /**
+     * <code>repeated .Room rooms = 2;</code>
+     */
+    protocols.Protocols.Room getRooms(int index);
+    /**
+     * <code>repeated .Room rooms = 2;</code>
+     */
+    int getRoomsCount();
+    /**
+     * <code>repeated .Room rooms = 2;</code>
+     */
+    java.util.List<? extends protocols.Protocols.RoomOrBuilder> 
+        getRoomsOrBuilderList();
+    /**
+     * <code>repeated .Room rooms = 2;</code>
+     */
+    protocols.Protocols.RoomOrBuilder getRoomsOrBuilder(
+        int index);
+  }
+  /**
+   * <pre>
+   *messageCode: 8
+   * </pre>
+   *
+   * Protobuf type {@code GetRoomsResponse}
+   */
+  public  static final class GetRoomsResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:GetRoomsResponse)
+      GetRoomsResponseOrBuilder {
+    // Use GetRoomsResponse.newBuilder() to construct.
+    private GetRoomsResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private GetRoomsResponse() {
+      status_ = 0;
+      rooms_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private GetRoomsResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              int rawValue = input.readEnum();
+              protocols.Protocols.StatusCode value = protocols.Protocols.StatusCode.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(1, rawValue);
+              } else {
+                bitField0_ |= 0x00000001;
+                status_ = rawValue;
+              }
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                rooms_ = new java.util.ArrayList<protocols.Protocols.Room>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              rooms_.add(
+                  input.readMessage(protocols.Protocols.Room.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          rooms_ = java.util.Collections.unmodifiableList(rooms_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return protocols.Protocols.internal_static_GetRoomsResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return protocols.Protocols.internal_static_GetRoomsResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              protocols.Protocols.GetRoomsResponse.class, protocols.Protocols.GetRoomsResponse.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int STATUS_FIELD_NUMBER = 1;
+    private int status_;
+    /**
+     * <code>required .StatusCode status = 1;</code>
+     */
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .StatusCode status = 1;</code>
+     */
+    public protocols.Protocols.StatusCode getStatus() {
+      protocols.Protocols.StatusCode result = protocols.Protocols.StatusCode.valueOf(status_);
+      return result == null ? protocols.Protocols.StatusCode.OK : result;
+    }
+
+    public static final int ROOMS_FIELD_NUMBER = 2;
+    private java.util.List<protocols.Protocols.Room> rooms_;
+    /**
+     * <code>repeated .Room rooms = 2;</code>
+     */
+    public java.util.List<protocols.Protocols.Room> getRoomsList() {
+      return rooms_;
+    }
+    /**
+     * <code>repeated .Room rooms = 2;</code>
+     */
+    public java.util.List<? extends protocols.Protocols.RoomOrBuilder> 
+        getRoomsOrBuilderList() {
+      return rooms_;
+    }
+    /**
+     * <code>repeated .Room rooms = 2;</code>
+     */
+    public int getRoomsCount() {
+      return rooms_.size();
+    }
+    /**
+     * <code>repeated .Room rooms = 2;</code>
+     */
+    public protocols.Protocols.Room getRooms(int index) {
+      return rooms_.get(index);
+    }
+    /**
+     * <code>repeated .Room rooms = 2;</code>
+     */
+    public protocols.Protocols.RoomOrBuilder getRoomsOrBuilder(
+        int index) {
+      return rooms_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasStatus()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      for (int i = 0; i < getRoomsCount(); i++) {
+        if (!getRooms(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeEnum(1, status_);
+      }
+      for (int i = 0; i < rooms_.size(); i++) {
+        output.writeMessage(2, rooms_.get(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, status_);
+      }
+      for (int i = 0; i < rooms_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, rooms_.get(i));
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof protocols.Protocols.GetRoomsResponse)) {
+        return super.equals(obj);
+      }
+      protocols.Protocols.GetRoomsResponse other = (protocols.Protocols.GetRoomsResponse) obj;
+
+      boolean result = true;
+      result = result && (hasStatus() == other.hasStatus());
+      if (hasStatus()) {
+        result = result && status_ == other.status_;
+      }
+      result = result && getRoomsList()
+          .equals(other.getRoomsList());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasStatus()) {
+        hash = (37 * hash) + STATUS_FIELD_NUMBER;
+        hash = (53 * hash) + status_;
+      }
+      if (getRoomsCount() > 0) {
+        hash = (37 * hash) + ROOMS_FIELD_NUMBER;
+        hash = (53 * hash) + getRoomsList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static protocols.Protocols.GetRoomsResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.GetRoomsResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.GetRoomsResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.GetRoomsResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.GetRoomsResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static protocols.Protocols.GetRoomsResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static protocols.Protocols.GetRoomsResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static protocols.Protocols.GetRoomsResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static protocols.Protocols.GetRoomsResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static protocols.Protocols.GetRoomsResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(protocols.Protocols.GetRoomsResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *messageCode: 8
+     * </pre>
+     *
+     * Protobuf type {@code GetRoomsResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:GetRoomsResponse)
+        protocols.Protocols.GetRoomsResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return protocols.Protocols.internal_static_GetRoomsResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return protocols.Protocols.internal_static_GetRoomsResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                protocols.Protocols.GetRoomsResponse.class, protocols.Protocols.GetRoomsResponse.Builder.class);
+      }
+
+      // Construct using protocols.Protocols.GetRoomsResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getRoomsFieldBuilder();
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        status_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (roomsBuilder_ == null) {
+          rooms_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          roomsBuilder_.clear();
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return protocols.Protocols.internal_static_GetRoomsResponse_descriptor;
+      }
+
+      public protocols.Protocols.GetRoomsResponse getDefaultInstanceForType() {
+        return protocols.Protocols.GetRoomsResponse.getDefaultInstance();
+      }
+
+      public protocols.Protocols.GetRoomsResponse build() {
+        protocols.Protocols.GetRoomsResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public protocols.Protocols.GetRoomsResponse buildPartial() {
+        protocols.Protocols.GetRoomsResponse result = new protocols.Protocols.GetRoomsResponse(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.status_ = status_;
+        if (roomsBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            rooms_ = java.util.Collections.unmodifiableList(rooms_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.rooms_ = rooms_;
+        } else {
+          result.rooms_ = roomsBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof protocols.Protocols.GetRoomsResponse) {
+          return mergeFrom((protocols.Protocols.GetRoomsResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(protocols.Protocols.GetRoomsResponse other) {
+        if (other == protocols.Protocols.GetRoomsResponse.getDefaultInstance()) return this;
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        if (roomsBuilder_ == null) {
+          if (!other.rooms_.isEmpty()) {
+            if (rooms_.isEmpty()) {
+              rooms_ = other.rooms_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureRoomsIsMutable();
+              rooms_.addAll(other.rooms_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.rooms_.isEmpty()) {
+            if (roomsBuilder_.isEmpty()) {
+              roomsBuilder_.dispose();
+              roomsBuilder_ = null;
+              rooms_ = other.rooms_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              roomsBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getRoomsFieldBuilder() : null;
+            } else {
+              roomsBuilder_.addAllMessages(other.rooms_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasStatus()) {
+          return false;
+        }
+        for (int i = 0; i < getRoomsCount(); i++) {
+          if (!getRooms(i).isInitialized()) {
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        protocols.Protocols.GetRoomsResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (protocols.Protocols.GetRoomsResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int status_ = 0;
+      /**
+       * <code>required .StatusCode status = 1;</code>
+       */
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .StatusCode status = 1;</code>
+       */
+      public protocols.Protocols.StatusCode getStatus() {
+        protocols.Protocols.StatusCode result = protocols.Protocols.StatusCode.valueOf(status_);
+        return result == null ? protocols.Protocols.StatusCode.OK : result;
+      }
+      /**
+       * <code>required .StatusCode status = 1;</code>
+       */
+      public Builder setStatus(protocols.Protocols.StatusCode value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        status_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required .StatusCode status = 1;</code>
+       */
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        status_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<protocols.Protocols.Room> rooms_ =
+        java.util.Collections.emptyList();
+      private void ensureRoomsIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          rooms_ = new java.util.ArrayList<protocols.Protocols.Room>(rooms_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          protocols.Protocols.Room, protocols.Protocols.Room.Builder, protocols.Protocols.RoomOrBuilder> roomsBuilder_;
+
+      /**
+       * <code>repeated .Room rooms = 2;</code>
+       */
+      public java.util.List<protocols.Protocols.Room> getRoomsList() {
+        if (roomsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(rooms_);
+        } else {
+          return roomsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .Room rooms = 2;</code>
+       */
+      public int getRoomsCount() {
+        if (roomsBuilder_ == null) {
+          return rooms_.size();
+        } else {
+          return roomsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .Room rooms = 2;</code>
+       */
+      public protocols.Protocols.Room getRooms(int index) {
+        if (roomsBuilder_ == null) {
+          return rooms_.get(index);
+        } else {
+          return roomsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .Room rooms = 2;</code>
+       */
+      public Builder setRooms(
+          int index, protocols.Protocols.Room value) {
+        if (roomsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRoomsIsMutable();
+          rooms_.set(index, value);
+          onChanged();
+        } else {
+          roomsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Room rooms = 2;</code>
+       */
+      public Builder setRooms(
+          int index, protocols.Protocols.Room.Builder builderForValue) {
+        if (roomsBuilder_ == null) {
+          ensureRoomsIsMutable();
+          rooms_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          roomsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Room rooms = 2;</code>
+       */
+      public Builder addRooms(protocols.Protocols.Room value) {
+        if (roomsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRoomsIsMutable();
+          rooms_.add(value);
+          onChanged();
+        } else {
+          roomsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Room rooms = 2;</code>
+       */
+      public Builder addRooms(
+          int index, protocols.Protocols.Room value) {
+        if (roomsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRoomsIsMutable();
+          rooms_.add(index, value);
+          onChanged();
+        } else {
+          roomsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Room rooms = 2;</code>
+       */
+      public Builder addRooms(
+          protocols.Protocols.Room.Builder builderForValue) {
+        if (roomsBuilder_ == null) {
+          ensureRoomsIsMutable();
+          rooms_.add(builderForValue.build());
+          onChanged();
+        } else {
+          roomsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Room rooms = 2;</code>
+       */
+      public Builder addRooms(
+          int index, protocols.Protocols.Room.Builder builderForValue) {
+        if (roomsBuilder_ == null) {
+          ensureRoomsIsMutable();
+          rooms_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          roomsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Room rooms = 2;</code>
+       */
+      public Builder addAllRooms(
+          java.lang.Iterable<? extends protocols.Protocols.Room> values) {
+        if (roomsBuilder_ == null) {
+          ensureRoomsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, rooms_);
+          onChanged();
+        } else {
+          roomsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Room rooms = 2;</code>
+       */
+      public Builder clearRooms() {
+        if (roomsBuilder_ == null) {
+          rooms_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          roomsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Room rooms = 2;</code>
+       */
+      public Builder removeRooms(int index) {
+        if (roomsBuilder_ == null) {
+          ensureRoomsIsMutable();
+          rooms_.remove(index);
+          onChanged();
+        } else {
+          roomsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Room rooms = 2;</code>
+       */
+      public protocols.Protocols.Room.Builder getRoomsBuilder(
+          int index) {
+        return getRoomsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .Room rooms = 2;</code>
+       */
+      public protocols.Protocols.RoomOrBuilder getRoomsOrBuilder(
+          int index) {
+        if (roomsBuilder_ == null) {
+          return rooms_.get(index);  } else {
+          return roomsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .Room rooms = 2;</code>
+       */
+      public java.util.List<? extends protocols.Protocols.RoomOrBuilder> 
+           getRoomsOrBuilderList() {
+        if (roomsBuilder_ != null) {
+          return roomsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(rooms_);
+        }
+      }
+      /**
+       * <code>repeated .Room rooms = 2;</code>
+       */
+      public protocols.Protocols.Room.Builder addRoomsBuilder() {
+        return getRoomsFieldBuilder().addBuilder(
+            protocols.Protocols.Room.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Room rooms = 2;</code>
+       */
+      public protocols.Protocols.Room.Builder addRoomsBuilder(
+          int index) {
+        return getRoomsFieldBuilder().addBuilder(
+            index, protocols.Protocols.Room.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Room rooms = 2;</code>
+       */
+      public java.util.List<protocols.Protocols.Room.Builder> 
+           getRoomsBuilderList() {
+        return getRoomsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          protocols.Protocols.Room, protocols.Protocols.Room.Builder, protocols.Protocols.RoomOrBuilder> 
+          getRoomsFieldBuilder() {
+        if (roomsBuilder_ == null) {
+          roomsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              protocols.Protocols.Room, protocols.Protocols.Room.Builder, protocols.Protocols.RoomOrBuilder>(
+                  rooms_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          rooms_ = null;
+        }
+        return roomsBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:GetRoomsResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:GetRoomsResponse)
+    private static final protocols.Protocols.GetRoomsResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new protocols.Protocols.GetRoomsResponse();
+    }
+
+    public static protocols.Protocols.GetRoomsResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<GetRoomsResponse>
+        PARSER = new com.google.protobuf.AbstractParser<GetRoomsResponse>() {
+      public GetRoomsResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new GetRoomsResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<GetRoomsResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<GetRoomsResponse> getParserForType() {
+      return PARSER;
+    }
+
+    public protocols.Protocols.GetRoomsResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface GetUsersInRoomRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:GetUsersInRoomRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required string nick = 1;</code>
+     */
+    boolean hasNick();
+    /**
+     * <code>required string nick = 1;</code>
+     */
+    java.lang.String getNick();
+    /**
+     * <code>required string nick = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getNickBytes();
+
+    /**
+     * <code>required string roomName = 2;</code>
+     */
+    boolean hasRoomName();
+    /**
+     * <code>required string roomName = 2;</code>
+     */
+    java.lang.String getRoomName();
+    /**
+     * <code>required string roomName = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getRoomNameBytes();
+  }
+  /**
+   * <pre>
+   *messageCode: 9
+   * </pre>
+   *
+   * Protobuf type {@code GetUsersInRoomRequest}
+   */
+  public  static final class GetUsersInRoomRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:GetUsersInRoomRequest)
+      GetUsersInRoomRequestOrBuilder {
+    // Use GetUsersInRoomRequest.newBuilder() to construct.
+    private GetUsersInRoomRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private GetUsersInRoomRequest() {
+      nick_ = "";
+      roomName_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private GetUsersInRoomRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              nick_ = bs;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              roomName_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return protocols.Protocols.internal_static_GetUsersInRoomRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return protocols.Protocols.internal_static_GetUsersInRoomRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              protocols.Protocols.GetUsersInRoomRequest.class, protocols.Protocols.GetUsersInRoomRequest.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int NICK_FIELD_NUMBER = 1;
+    private volatile java.lang.Object nick_;
+    /**
+     * <code>required string nick = 1;</code>
+     */
+    public boolean hasNick() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string nick = 1;</code>
+     */
+    public java.lang.String getNick() {
+      java.lang.Object ref = nick_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          nick_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string nick = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNickBytes() {
+      java.lang.Object ref = nick_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        nick_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ROOMNAME_FIELD_NUMBER = 2;
+    private volatile java.lang.Object roomName_;
+    /**
+     * <code>required string roomName = 2;</code>
+     */
+    public boolean hasRoomName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string roomName = 2;</code>
+     */
+    public java.lang.String getRoomName() {
+      java.lang.Object ref = roomName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          roomName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string roomName = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getRoomNameBytes() {
+      java.lang.Object ref = roomName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        roomName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasNick()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasRoomName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, nick_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, roomName_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, nick_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, roomName_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof protocols.Protocols.GetUsersInRoomRequest)) {
+        return super.equals(obj);
+      }
+      protocols.Protocols.GetUsersInRoomRequest other = (protocols.Protocols.GetUsersInRoomRequest) obj;
+
+      boolean result = true;
+      result = result && (hasNick() == other.hasNick());
+      if (hasNick()) {
+        result = result && getNick()
+            .equals(other.getNick());
+      }
+      result = result && (hasRoomName() == other.hasRoomName());
+      if (hasRoomName()) {
+        result = result && getRoomName()
+            .equals(other.getRoomName());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasNick()) {
+        hash = (37 * hash) + NICK_FIELD_NUMBER;
+        hash = (53 * hash) + getNick().hashCode();
+      }
+      if (hasRoomName()) {
+        hash = (37 * hash) + ROOMNAME_FIELD_NUMBER;
+        hash = (53 * hash) + getRoomName().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static protocols.Protocols.GetUsersInRoomRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.GetUsersInRoomRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.GetUsersInRoomRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.GetUsersInRoomRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.GetUsersInRoomRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static protocols.Protocols.GetUsersInRoomRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static protocols.Protocols.GetUsersInRoomRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static protocols.Protocols.GetUsersInRoomRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static protocols.Protocols.GetUsersInRoomRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static protocols.Protocols.GetUsersInRoomRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(protocols.Protocols.GetUsersInRoomRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *messageCode: 9
+     * </pre>
+     *
+     * Protobuf type {@code GetUsersInRoomRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:GetUsersInRoomRequest)
+        protocols.Protocols.GetUsersInRoomRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return protocols.Protocols.internal_static_GetUsersInRoomRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return protocols.Protocols.internal_static_GetUsersInRoomRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                protocols.Protocols.GetUsersInRoomRequest.class, protocols.Protocols.GetUsersInRoomRequest.Builder.class);
+      }
+
+      // Construct using protocols.Protocols.GetUsersInRoomRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        nick_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        roomName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return protocols.Protocols.internal_static_GetUsersInRoomRequest_descriptor;
+      }
+
+      public protocols.Protocols.GetUsersInRoomRequest getDefaultInstanceForType() {
+        return protocols.Protocols.GetUsersInRoomRequest.getDefaultInstance();
+      }
+
+      public protocols.Protocols.GetUsersInRoomRequest build() {
+        protocols.Protocols.GetUsersInRoomRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public protocols.Protocols.GetUsersInRoomRequest buildPartial() {
+        protocols.Protocols.GetUsersInRoomRequest result = new protocols.Protocols.GetUsersInRoomRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.nick_ = nick_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.roomName_ = roomName_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof protocols.Protocols.GetUsersInRoomRequest) {
+          return mergeFrom((protocols.Protocols.GetUsersInRoomRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(protocols.Protocols.GetUsersInRoomRequest other) {
+        if (other == protocols.Protocols.GetUsersInRoomRequest.getDefaultInstance()) return this;
+        if (other.hasNick()) {
+          bitField0_ |= 0x00000001;
+          nick_ = other.nick_;
+          onChanged();
+        }
+        if (other.hasRoomName()) {
+          bitField0_ |= 0x00000002;
+          roomName_ = other.roomName_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasNick()) {
+          return false;
+        }
+        if (!hasRoomName()) {
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        protocols.Protocols.GetUsersInRoomRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (protocols.Protocols.GetUsersInRoomRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object nick_ = "";
+      /**
+       * <code>required string nick = 1;</code>
+       */
+      public boolean hasNick() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string nick = 1;</code>
+       */
+      public java.lang.String getNick() {
+        java.lang.Object ref = nick_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            nick_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string nick = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNickBytes() {
+        java.lang.Object ref = nick_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          nick_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string nick = 1;</code>
+       */
+      public Builder setNick(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        nick_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string nick = 1;</code>
+       */
+      public Builder clearNick() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        nick_ = getDefaultInstance().getNick();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string nick = 1;</code>
+       */
+      public Builder setNickBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        nick_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object roomName_ = "";
+      /**
+       * <code>required string roomName = 2;</code>
+       */
+      public boolean hasRoomName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string roomName = 2;</code>
+       */
+      public java.lang.String getRoomName() {
+        java.lang.Object ref = roomName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            roomName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string roomName = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getRoomNameBytes() {
+        java.lang.Object ref = roomName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          roomName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string roomName = 2;</code>
+       */
+      public Builder setRoomName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        roomName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string roomName = 2;</code>
+       */
+      public Builder clearRoomName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        roomName_ = getDefaultInstance().getRoomName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string roomName = 2;</code>
+       */
+      public Builder setRoomNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        roomName_ = value;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:GetUsersInRoomRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:GetUsersInRoomRequest)
+    private static final protocols.Protocols.GetUsersInRoomRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new protocols.Protocols.GetUsersInRoomRequest();
+    }
+
+    public static protocols.Protocols.GetUsersInRoomRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<GetUsersInRoomRequest>
+        PARSER = new com.google.protobuf.AbstractParser<GetUsersInRoomRequest>() {
+      public GetUsersInRoomRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new GetUsersInRoomRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<GetUsersInRoomRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<GetUsersInRoomRequest> getParserForType() {
+      return PARSER;
+    }
+
+    public protocols.Protocols.GetUsersInRoomRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface GetUsersInRoomResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:GetUsersInRoomResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .StatusCode status = 1;</code>
+     */
+    boolean hasStatus();
+    /**
+     * <code>required .StatusCode status = 1;</code>
+     */
+    protocols.Protocols.StatusCode getStatus();
+
+    /**
+     * <code>repeated string users = 2;</code>
+     */
+    java.util.List<java.lang.String>
+        getUsersList();
+    /**
+     * <code>repeated string users = 2;</code>
+     */
+    int getUsersCount();
+    /**
+     * <code>repeated string users = 2;</code>
+     */
+    java.lang.String getUsers(int index);
+    /**
+     * <code>repeated string users = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUsersBytes(int index);
+  }
+  /**
+   * <pre>
+   *messageCode: 10
+   * </pre>
+   *
+   * Protobuf type {@code GetUsersInRoomResponse}
+   */
+  public  static final class GetUsersInRoomResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:GetUsersInRoomResponse)
+      GetUsersInRoomResponseOrBuilder {
+    // Use GetUsersInRoomResponse.newBuilder() to construct.
+    private GetUsersInRoomResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private GetUsersInRoomResponse() {
+      status_ = 0;
+      users_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private GetUsersInRoomResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              int rawValue = input.readEnum();
+              protocols.Protocols.StatusCode value = protocols.Protocols.StatusCode.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(1, rawValue);
+              } else {
+                bitField0_ |= 0x00000001;
+                status_ = rawValue;
+              }
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                users_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              users_.add(bs);
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          users_ = users_.getUnmodifiableView();
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return protocols.Protocols.internal_static_GetUsersInRoomResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return protocols.Protocols.internal_static_GetUsersInRoomResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              protocols.Protocols.GetUsersInRoomResponse.class, protocols.Protocols.GetUsersInRoomResponse.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int STATUS_FIELD_NUMBER = 1;
+    private int status_;
+    /**
+     * <code>required .StatusCode status = 1;</code>
+     */
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .StatusCode status = 1;</code>
+     */
+    public protocols.Protocols.StatusCode getStatus() {
+      protocols.Protocols.StatusCode result = protocols.Protocols.StatusCode.valueOf(status_);
+      return result == null ? protocols.Protocols.StatusCode.OK : result;
+    }
+
+    public static final int USERS_FIELD_NUMBER = 2;
+    private com.google.protobuf.LazyStringList users_;
+    /**
+     * <code>repeated string users = 2;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getUsersList() {
+      return users_;
+    }
+    /**
+     * <code>repeated string users = 2;</code>
+     */
+    public int getUsersCount() {
+      return users_.size();
+    }
+    /**
+     * <code>repeated string users = 2;</code>
+     */
+    public java.lang.String getUsers(int index) {
+      return users_.get(index);
+    }
+    /**
+     * <code>repeated string users = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUsersBytes(int index) {
+      return users_.getByteString(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasStatus()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeEnum(1, status_);
+      }
+      for (int i = 0; i < users_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, users_.getRaw(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, status_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < users_.size(); i++) {
+          dataSize += computeStringSizeNoTag(users_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getUsersList().size();
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof protocols.Protocols.GetUsersInRoomResponse)) {
+        return super.equals(obj);
+      }
+      protocols.Protocols.GetUsersInRoomResponse other = (protocols.Protocols.GetUsersInRoomResponse) obj;
+
+      boolean result = true;
+      result = result && (hasStatus() == other.hasStatus());
+      if (hasStatus()) {
+        result = result && status_ == other.status_;
+      }
+      result = result && getUsersList()
+          .equals(other.getUsersList());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasStatus()) {
+        hash = (37 * hash) + STATUS_FIELD_NUMBER;
+        hash = (53 * hash) + status_;
+      }
+      if (getUsersCount() > 0) {
+        hash = (37 * hash) + USERS_FIELD_NUMBER;
+        hash = (53 * hash) + getUsersList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static protocols.Protocols.GetUsersInRoomResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.GetUsersInRoomResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.GetUsersInRoomResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.GetUsersInRoomResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.GetUsersInRoomResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static protocols.Protocols.GetUsersInRoomResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static protocols.Protocols.GetUsersInRoomResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static protocols.Protocols.GetUsersInRoomResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static protocols.Protocols.GetUsersInRoomResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static protocols.Protocols.GetUsersInRoomResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(protocols.Protocols.GetUsersInRoomResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *messageCode: 10
+     * </pre>
+     *
+     * Protobuf type {@code GetUsersInRoomResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:GetUsersInRoomResponse)
+        protocols.Protocols.GetUsersInRoomResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return protocols.Protocols.internal_static_GetUsersInRoomResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return protocols.Protocols.internal_static_GetUsersInRoomResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                protocols.Protocols.GetUsersInRoomResponse.class, protocols.Protocols.GetUsersInRoomResponse.Builder.class);
+      }
+
+      // Construct using protocols.Protocols.GetUsersInRoomResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        status_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        users_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return protocols.Protocols.internal_static_GetUsersInRoomResponse_descriptor;
+      }
+
+      public protocols.Protocols.GetUsersInRoomResponse getDefaultInstanceForType() {
+        return protocols.Protocols.GetUsersInRoomResponse.getDefaultInstance();
+      }
+
+      public protocols.Protocols.GetUsersInRoomResponse build() {
+        protocols.Protocols.GetUsersInRoomResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public protocols.Protocols.GetUsersInRoomResponse buildPartial() {
+        protocols.Protocols.GetUsersInRoomResponse result = new protocols.Protocols.GetUsersInRoomResponse(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.status_ = status_;
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          users_ = users_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.users_ = users_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof protocols.Protocols.GetUsersInRoomResponse) {
+          return mergeFrom((protocols.Protocols.GetUsersInRoomResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(protocols.Protocols.GetUsersInRoomResponse other) {
+        if (other == protocols.Protocols.GetUsersInRoomResponse.getDefaultInstance()) return this;
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        if (!other.users_.isEmpty()) {
+          if (users_.isEmpty()) {
+            users_ = other.users_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureUsersIsMutable();
+            users_.addAll(other.users_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasStatus()) {
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        protocols.Protocols.GetUsersInRoomResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (protocols.Protocols.GetUsersInRoomResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int status_ = 0;
+      /**
+       * <code>required .StatusCode status = 1;</code>
+       */
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .StatusCode status = 1;</code>
+       */
+      public protocols.Protocols.StatusCode getStatus() {
+        protocols.Protocols.StatusCode result = protocols.Protocols.StatusCode.valueOf(status_);
+        return result == null ? protocols.Protocols.StatusCode.OK : result;
+      }
+      /**
+       * <code>required .StatusCode status = 1;</code>
+       */
+      public Builder setStatus(protocols.Protocols.StatusCode value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        status_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required .StatusCode status = 1;</code>
+       */
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        status_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList users_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureUsersIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          users_ = new com.google.protobuf.LazyStringArrayList(users_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <code>repeated string users = 2;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getUsersList() {
+        return users_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string users = 2;</code>
+       */
+      public int getUsersCount() {
+        return users_.size();
+      }
+      /**
+       * <code>repeated string users = 2;</code>
+       */
+      public java.lang.String getUsers(int index) {
+        return users_.get(index);
+      }
+      /**
+       * <code>repeated string users = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUsersBytes(int index) {
+        return users_.getByteString(index);
+      }
+      /**
+       * <code>repeated string users = 2;</code>
+       */
+      public Builder setUsers(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUsersIsMutable();
+        users_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string users = 2;</code>
+       */
+      public Builder addUsers(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUsersIsMutable();
+        users_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string users = 2;</code>
+       */
+      public Builder addAllUsers(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureUsersIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, users_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string users = 2;</code>
+       */
+      public Builder clearUsers() {
+        users_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string users = 2;</code>
+       */
+      public Builder addUsersBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureUsersIsMutable();
+        users_.add(value);
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:GetUsersInRoomResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:GetUsersInRoomResponse)
+    private static final protocols.Protocols.GetUsersInRoomResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new protocols.Protocols.GetUsersInRoomResponse();
+    }
+
+    public static protocols.Protocols.GetUsersInRoomResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<GetUsersInRoomResponse>
+        PARSER = new com.google.protobuf.AbstractParser<GetUsersInRoomResponse>() {
+      public GetUsersInRoomResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new GetUsersInRoomResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<GetUsersInRoomResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<GetUsersInRoomResponse> getParserForType() {
+      return PARSER;
+    }
+
+    public protocols.Protocols.GetUsersInRoomResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Room_descriptor;
   private static final 
@@ -5422,6 +7930,26 @@ public final class Protocols {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_ManageRoomResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_GetRoomsRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_GetRoomsRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_GetRoomsResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_GetRoomsResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_GetUsersInRoomRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_GetUsersInRoomRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_GetUsersInRoomResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_GetUsersInRoomResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -5433,22 +7961,27 @@ public final class Protocols {
     java.lang.String[] descriptorData = {
       "\n\017protocols.proto\"(\n\004Room\022\021\n\troom_name\030\001" +
       " \002(\t\022\r\n\005owner\030\002 \002(\t\"$\n\024LoginToServerRequ" +
-      "est\022\014\n\004nick\030\001 \002(\t\"M\n\025LoginToServerRespon" +
-      "se\022\033\n\006status\030\001 \002(\0162\013.StatusCode\022\027\n\010roomL" +
-      "ist\030\002 \003(\0132\005.Room\"\"\n\022LeaveServerRequest\022\014" +
-      "\n\004nick\030\001 \002(\t\"2\n\023LeaveServerResponse\022\033\n\006s" +
-      "tatus\030\001 \002(\0162\013.StatusCode\"\234\001\n\021ManageRoomR" +
-      "equest\022\'\n\016manageRoomEnum\030\001 \002(\0162\017.ManageR" +
-      "oomEnum\022\014\n\004nick\030\002 \002(\t\022\020\n\010roomName\030\003 \002(\t\022" +
-      "\020\n\010password\030\004 \001(\t\022\025\n\radminPassword\030\005 \001(\t",
-      "\022\025\n\rotherUserNick\030\006 \001(\t\"D\n\022ManageRoomRes" +
-      "ponse\022\033\n\006status\030\001 \002(\0162\013.StatusCode\022\021\n\tke" +
-      "yToRoom\030\002 \001(\t*;\n\nStatusCode\022\006\n\002OK\020\000\022\023\n\017B" +
-      "AD_CREDENTIALS\020\001\022\020\n\014SERVER_ERROR\020\002*\200\001\n\016M" +
-      "anageRoomEnum\022\017\n\013CREATE_ROOM\020\001\022\017\n\013DELETE" +
-      "_ROOM\020\002\022\r\n\tJOIN_ROOM\020\003\022\016\n\nLEAVE_ROOM\020\004\022\r" +
-      "\n\tMUTE_USER\020\005\022\017\n\013UNMUTE_USER\020\006\022\r\n\tKICK_U" +
-      "SER\020\007B\026\n\tprotocolsB\tProtocols"
+      "est\022\014\n\004nick\030\001 \002(\t\"4\n\025LoginToServerRespon" +
+      "se\022\033\n\006status\030\001 \002(\0162\013.StatusCode\"\"\n\022Leave" +
+      "ServerRequest\022\014\n\004nick\030\001 \002(\t\"2\n\023LeaveServ" +
+      "erResponse\022\033\n\006status\030\001 \002(\0162\013.StatusCode\"" +
+      "\234\001\n\021ManageRoomRequest\022\'\n\016manageRoomEnum\030" +
+      "\001 \002(\0162\017.ManageRoomEnum\022\014\n\004nick\030\002 \002(\t\022\020\n\010" +
+      "roomName\030\003 \002(\t\022\020\n\010password\030\004 \001(\t\022\025\n\radmi" +
+      "nPassword\030\005 \001(\t\022\025\n\rotherUserNick\030\006 \001(\t\"D",
+      "\n\022ManageRoomResponse\022\033\n\006status\030\001 \002(\0162\013.S" +
+      "tatusCode\022\021\n\tkeyToRoom\030\002 \001(\t\"\037\n\017GetRooms" +
+      "Request\022\014\n\004nick\030\001 \002(\t\"E\n\020GetRoomsRespons" +
+      "e\022\033\n\006status\030\001 \002(\0162\013.StatusCode\022\024\n\005rooms\030" +
+      "\002 \003(\0132\005.Room\"7\n\025GetUsersInRoomRequest\022\014\n" +
+      "\004nick\030\001 \002(\t\022\020\n\010roomName\030\002 \002(\t\"D\n\026GetUser" +
+      "sInRoomResponse\022\033\n\006status\030\001 \002(\0162\013.Status" +
+      "Code\022\r\n\005users\030\002 \003(\t*;\n\nStatusCode\022\006\n\002OK\020" +
+      "\000\022\023\n\017BAD_CREDENTIALS\020\001\022\020\n\014SERVER_ERROR\020\002" +
+      "*\200\001\n\016ManageRoomEnum\022\017\n\013CREATE_ROOM\020\001\022\017\n\013",
+      "DELETE_ROOM\020\002\022\r\n\tJOIN_ROOM\020\003\022\016\n\nLEAVE_RO" +
+      "OM\020\004\022\r\n\tMUTE_USER\020\005\022\017\n\013UNMUTE_USER\020\006\022\r\n\t" +
+      "KICK_USER\020\007B\026\n\tprotocolsB\tProtocols"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5479,7 +8012,7 @@ public final class Protocols {
     internal_static_LoginToServerResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_LoginToServerResponse_descriptor,
-        new java.lang.String[] { "Status", "RoomList", });
+        new java.lang.String[] { "Status", });
     internal_static_LeaveServerRequest_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_LeaveServerRequest_fieldAccessorTable = new
@@ -5504,6 +8037,30 @@ public final class Protocols {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ManageRoomResponse_descriptor,
         new java.lang.String[] { "Status", "KeyToRoom", });
+    internal_static_GetRoomsRequest_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_GetRoomsRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_GetRoomsRequest_descriptor,
+        new java.lang.String[] { "Nick", });
+    internal_static_GetRoomsResponse_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_GetRoomsResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_GetRoomsResponse_descriptor,
+        new java.lang.String[] { "Status", "Rooms", });
+    internal_static_GetUsersInRoomRequest_descriptor =
+      getDescriptor().getMessageTypes().get(9);
+    internal_static_GetUsersInRoomRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_GetUsersInRoomRequest_descriptor,
+        new java.lang.String[] { "Nick", "RoomName", });
+    internal_static_GetUsersInRoomResponse_descriptor =
+      getDescriptor().getMessageTypes().get(10);
+    internal_static_GetUsersInRoomResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_GetUsersInRoomResponse_descriptor,
+        new java.lang.String[] { "Status", "Users", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

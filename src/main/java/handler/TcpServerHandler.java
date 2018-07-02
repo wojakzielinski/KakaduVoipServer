@@ -157,9 +157,11 @@ public class TcpServerHandler extends IoHandlerAdapter {
     private Protocols.ManageRoomResponse handleLeaveRoom(Protocols.ManageRoomRequest request) {
         Protocols.ManageRoomResponse.Builder response = Protocols.ManageRoomResponse.newBuilder();
         User user = findUserFromNick(request.getNick());
-        if (user != null && serverRoomMap.get(request.getRoomName()).getUsersInRoom().remove(user))
+        if (user != null ){
+            //&& serverRoomMap.get(request.getRoomName()).getUsersInRoom().remove(user))
+            serverRoomMap.get(request.getRoomName()).leaveRoom(user);
             response.setStatus(Protocols.StatusCode.OK);
-        else
+        }else
             response.setStatus(Protocols.StatusCode.BAD_CREDENTIALS);
         return response.build();
 

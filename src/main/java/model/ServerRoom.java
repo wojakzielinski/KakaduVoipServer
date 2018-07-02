@@ -53,16 +53,17 @@ public class ServerRoom {
     }
 
     public void joinUserToRoom(User newUser){
-        System.out.println("Joining to room method");
+        System.out.println("Handling joining room");
         //create protocols with user nicks
         Protocols.GetUsersInRoomResponse.Builder responseBuilder = Protocols.GetUsersInRoomResponse.newBuilder();
         for(User userInRoom: usersInRoom) {
             responseBuilder.addUsers(userInRoom.getNick());
         }
+
         responseBuilder.addUsers(newUser.getNick());
         responseBuilder.setStatus(Protocols.StatusCode.OK);
         Protocols.GetUsersInRoomResponse response = responseBuilder.build();
-        System.out.println("Response users.size()="+response.getUsersList().size());
+
         //send to users actual list of users in room
         for(User userInRoom: usersInRoom) {
             System.out.println("Sending to: "+userInRoom.getNick()+", iosession="+userInRoom.getSession().toString());
@@ -71,6 +72,28 @@ public class ServerRoom {
         //add new user to room
         usersInRoom.add(newUser);
     }
+
+    public void leaveRoom(User userToLeave){
+        System.out.println("Handling leaving room, users in room" + usersInRoom.size());
+        usersInRoom.remove(userToLeave);
+        System.out.println("Handling leaving room after remove, users in room" + usersInRoom.size());
+
+        //create protocols with user nicks
+        Protocols.GetUsersInRoomResponse.Builder responseBuilder = Protocols.GetUsersInRoomResponse.newBuilder();
+        for(User userInRoom: usersInRoom) {
+            responseBuilder.addUsers(userInRoom.getNick());
+        }
+
+        responseBuilder.setStatus(Protocols.StatusCode.OK);
+        Protocols.GetUsersInRoomResponse response = responseBuilder.build();
+
+        //send to users actual list of users in room
+        for(User userInRoom: usersInRoom) {
+            System.out.println("Sending to: "+userInRoom.getNick()+", iosession="+userInRoom.getSession().toString());
+            userInRoom.getSession().write(response);
+        }
+    }
+
     public Protocols.Room toProtocol(){
         Protocols.Room.Builder roomBuilder = Protocols.Room.newBuilder();
         roomBuilder.setRoomName(this.name);

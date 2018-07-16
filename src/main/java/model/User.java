@@ -38,7 +38,8 @@ public class User {
     public String toString() {
         return "User{" +
                 "nick='" + nick + '\'' +
-                ", mutedUserNicks.size=" + mutedUserNicks.size() +
+                ", session=" + session +
+                ", mutedUserNicks=" + mutedUserNicks +
                 '}';
     }
 

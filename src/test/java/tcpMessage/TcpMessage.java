@@ -26,6 +26,13 @@ public class TcpMessage {
         TcpClient tcpClient2 = new TcpClient(HOSTNAME, PORT);
         loginToServer(tcpClient2,otherUser);
         serverRooms = getServerRooms(tcpClient2,otherUser);
+        //second user creates new room and delete it
+        String roomName2 = "Pokój2";
+        createRoom(tcpClient2, otherUser, roomName2);
+        joinRoom(tcpClient2, otherUser, roomName2);
+        leaveRoom(tcpClient2, otherUser, roomName2);
+        deleteRoom(tcpClient2, otherUser, roomName2);
+        //second user join to first room
         joinRoom(tcpClient2,otherUser, serverRooms.get(0).getRoomName());
 
         //mute user
@@ -36,7 +43,7 @@ public class TcpMessage {
         kickUser(tcpClient,nick, roomName, otherUser);
         //leaveroom
         leaveRoom(tcpClient,nick, roomName);
-        //deleteRoom
+        //deleteRoom+-
         deleteRoom(tcpClient,nick, roomName);
         //leave server
         leaveServer(tcpClient,nick);
@@ -68,7 +75,9 @@ public class TcpMessage {
         request.setAdminPassword("adminPassword");
         request.setRoomName(roomName);
 
+        System.out.println("AAA");
         Object message = tcpClient.send(request.build());
+        System.out.println("BB");
         Protocols.ManageRoomResponse response = (Protocols.ManageRoomResponse) message;
         System.out.println(response.toString());
     }

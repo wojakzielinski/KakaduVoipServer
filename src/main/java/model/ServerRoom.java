@@ -73,6 +73,28 @@ public class ServerRoom {
         usersInRoom.add(newUser);
     }
 
+    public boolean kickUserFromRoom(User userToKick){
+        if(usersInRoom.remove(userToKick)) {
+
+            Protocols.GetUsersInRoomResponse.Builder responseBuilder = Protocols.GetUsersInRoomResponse.newBuilder();
+            for (User userInRoom : usersInRoom) {
+                responseBuilder.addUsers(userInRoom.getNick());
+            }
+            responseBuilder.setStatus(Protocols.StatusCode.OK);
+            Protocols.GetUsersInRoomResponse response = responseBuilder.build();
+
+            //send to users actual list of users in room
+            for (User userInRoom : usersInRoom) {
+                System.out.println("Sending to: " + userInRoom.getNick() + ", iosession=" + userInRoom.getSession().toString());
+                userInRoom.getSession().write(response);
+            }
+            //add new user to room
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void leaveRoom(User userToLeave){
         System.out.println("Handling leaving room, users in room" + usersInRoom.size());
         usersInRoom.remove(userToLeave);

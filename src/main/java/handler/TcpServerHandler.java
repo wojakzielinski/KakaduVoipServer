@@ -177,14 +177,14 @@ public class TcpServerHandler extends IoHandlerAdapter {
         User userToKick = findUserFromNick(request.getOtherUserNick());
 
         if (userToKick != null && serverRoom.getAdminPassword().equals(request.getAdminPassword())
-                && serverRoom.getUsersInRoom().remove(userToKick)) {
+                && serverRoom.kickUserFromRoom(userToKick)) {
             Protocols.ManageRoomResponse.Builder kickResponse = Protocols.ManageRoomResponse.newBuilder();
             kickResponse.setStatus(Protocols.StatusCode.OK);
             kickResponse.setSendedManageRoomEnum(Protocols.ManageRoomEnum.LEAVE_ROOM);
             userToKick.getSession().write(kickResponse.build());
+
             response.setStatus(Protocols.StatusCode.OK);
-        }
-        else
+        } else
             response.setStatus(Protocols.StatusCode.BAD_CREDENTIALS);
         return response.build();
     }

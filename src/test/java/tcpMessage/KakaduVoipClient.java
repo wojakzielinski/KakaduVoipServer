@@ -16,7 +16,7 @@ public class KakaduVoipClient extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/ClientPanel.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("views/ClientPanel.fxml"));
 
         Scene scene = new Scene(root);
 

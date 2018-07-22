@@ -195,6 +195,7 @@ public class TcpServerHandler extends IoHandlerAdapter {
         ServerRoom serverRoom = serverRoomMap.get(request.getRoomName());
         if (serverRoom.getAdminPassword().equals(request.getAdminPassword())) {
             System.out.println("Romoving room from map");
+            serverRoom.kickAllUsersFromRoom();
             serverRoomMap.remove(request.getRoomName());
             response.setStatus(Protocols.StatusCode.OK);
             this.sendNewRoomListToLoggerUsers(request.getNick());

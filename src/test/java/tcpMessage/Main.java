@@ -7,18 +7,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import protocols.Protocols;
 
-import java.util.List;
-
-public class TcpMessage extends Application {
-    private static String HOSTNAME = "localhost";
-    private static int PORT = 9123;
-    private static TcpClient tcpClient;
-
-    public TcpClient getConnection(){
-        return tcpClient;
-    }
+/**
+ * Created by Szymon on 18.07.2018.
+ */
+public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -43,11 +36,6 @@ public class TcpMessage extends Application {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        tcpClient = new TcpClient(HOSTNAME,PORT);
         launch(args);
-        tcpClient.closeConnection();
     }
-
-
-
 }

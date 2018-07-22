@@ -8,17 +8,18 @@ import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
 import protocols.KakaduCodecFactory;
+import tcpMessage.controllers.ClientPanelController;
 
 import java.net.InetSocketAddress;
 
 public class TcpClient {
-    private static String ip;
-    private static int port;
+    private String ip;
+    private int port;
 
     private static IoSession session;
     private IoConnector connector;
 
-    public TcpClient(String ip, int port) {
+    public TcpClient(String ip, int port, ClientPanelController clientPanelController) {
         this.ip = ip;
         this.port = port;
         connector = new NioSocketConnector();
@@ -26,8 +27,9 @@ public class TcpClient {
 
         connector.getFilterChain().addLast("logger", new LoggingFilter());
         connector.getFilterChain().addLast("codec", new ProtocolCodecFilter(new KakaduCodecFactory()));
-
-        connector.setHandler(new MinaClientHandler());
+        MinaClientHandler handler = new MinaClientHandler();
+        handler.setClientPanelController(clientPanelController);
+        connector.setHandler(handler);
         ConnectFuture future = connector.connect(new InetSocketAddress(ip, port));
         future.awaitUninterruptibly();
 
@@ -38,13 +40,8 @@ public class TcpClient {
         session.getConfig().setUseReadOperation(true);
     }
 
-    public Object send(Object message) throws InterruptedException {
+    public void send(Object message){
         session.write(message);
-        final ReadFuture readFuture = session.read();
-        readFuture.awaitUninterruptibly();
-        Object response = readFuture.getMessage();
-        //connector.dispose();
-        return response;
     }
 
     public void closeConnection() {

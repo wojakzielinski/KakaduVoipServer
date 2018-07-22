@@ -7,10 +7,7 @@ import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 import protocols.Protocols;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class TcpServerHandler extends IoHandlerAdapter {
     //key is room name
@@ -118,6 +115,7 @@ public class TcpServerHandler extends IoHandlerAdapter {
             default:
                 Protocols.ManageRoomResponse.Builder responseBuilder = Protocols.ManageRoomResponse.newBuilder();
                 responseBuilder.setStatus(Protocols.StatusCode.SERVER_ERROR);
+                responseBuilder.setSendedManageRoomEnum(request.getManageRoomEnum());
                 response = responseBuilder.build();
         }
         return response;
@@ -135,13 +133,17 @@ public class TcpServerHandler extends IoHandlerAdapter {
 
         serverRoomMap.put(request.getRoomName(), serverRoom);
 
+        this.sendNewRoomListToLoggerUsers(request.getNick());
+
         Protocols.ManageRoomResponse.Builder responseBuilder = Protocols.ManageRoomResponse.newBuilder();
         responseBuilder.setStatus(Protocols.StatusCode.OK);
+        responseBuilder.setSendedManageRoomEnum(Protocols.ManageRoomEnum.CREATE_ROOM);
         return responseBuilder.build();
     }
 
     private Protocols.ManageRoomResponse addUserToRoom(Protocols.ManageRoomRequest request) {
         Protocols.ManageRoomResponse.Builder responseBuilder = Protocols.ManageRoomResponse.newBuilder();
+        responseBuilder.setSendedManageRoomEnum(Protocols.ManageRoomEnum.JOIN_ROOM);
 
         ServerRoom serverRoom = serverRoomMap.get(request.getRoomName());
         User user = findUserFromNick(request.getNick());
@@ -156,6 +158,7 @@ public class TcpServerHandler extends IoHandlerAdapter {
 
     private Protocols.ManageRoomResponse handleLeaveRoom(Protocols.ManageRoomRequest request) {
         Protocols.ManageRoomResponse.Builder response = Protocols.ManageRoomResponse.newBuilder();
+        response.setSendedManageRoomEnum(Protocols.ManageRoomEnum.LEAVE_ROOM);
         User user = findUserFromNick(request.getNick());
         if (user != null ){
             //&& serverRoomMap.get(request.getRoomName()).getUsersInRoom().remove(user))
@@ -169,11 +172,18 @@ public class TcpServerHandler extends IoHandlerAdapter {
 
     private Protocols.ManageRoomResponse handlekickUserFromRoom(Protocols.ManageRoomRequest request) {
         Protocols.ManageRoomResponse.Builder response = Protocols.ManageRoomResponse.newBuilder();
+        response.setSendedManageRoomEnum(Protocols.ManageRoomEnum.KICK_USER);
         ServerRoom serverRoom = serverRoomMap.get(request.getRoomName());
         User userToKick = findUserFromNick(request.getOtherUserNick());
+
         if (userToKick != null && serverRoom.getAdminPassword().equals(request.getAdminPassword())
-                && serverRoom.getUsersInRoom().remove(userToKick))
+                && serverRoom.getUsersInRoom().remove(userToKick)) {
+            Protocols.ManageRoomResponse.Builder kickResponse = Protocols.ManageRoomResponse.newBuilder();
+            kickResponse.setStatus(Protocols.StatusCode.OK);
+            kickResponse.setSendedManageRoomEnum(Protocols.ManageRoomEnum.LEAVE_ROOM);
+            userToKick.getSession().write(kickResponse.build());
             response.setStatus(Protocols.StatusCode.OK);
+        }
         else
             response.setStatus(Protocols.StatusCode.BAD_CREDENTIALS);
         return response.build();
@@ -181,11 +191,13 @@ public class TcpServerHandler extends IoHandlerAdapter {
 
     private Protocols.ManageRoomResponse handleDeleteRoom(Protocols.ManageRoomRequest request) {
         Protocols.ManageRoomResponse.Builder response = Protocols.ManageRoomResponse.newBuilder();
+        response.setSendedManageRoomEnum(Protocols.ManageRoomEnum.DELETE_ROOM);
         ServerRoom serverRoom = serverRoomMap.get(request.getRoomName());
         if (serverRoom.getAdminPassword().equals(request.getAdminPassword())) {
             System.out.println("Romoving room from map");
             serverRoomMap.remove(request.getRoomName());
             response.setStatus(Protocols.StatusCode.OK);
+            this.sendNewRoomListToLoggerUsers(request.getNick());
         } else
             response.setStatus(Protocols.StatusCode.BAD_CREDENTIALS);
         return response.build();
@@ -194,6 +206,7 @@ public class TcpServerHandler extends IoHandlerAdapter {
 
     private Protocols.ManageRoomResponse  handleMuteUser(Protocols.ManageRoomRequest request){
         Protocols.ManageRoomResponse.Builder response = Protocols.ManageRoomResponse.newBuilder();
+        response.setSendedManageRoomEnum(Protocols.ManageRoomEnum.MUTE_USER);
         User user= findUserFromNick(request.getNick());
         User userToMute = findUserFromNick(request.getOtherUserNick());
         if(user!= null && userToMute != null) {
@@ -206,6 +219,8 @@ public class TcpServerHandler extends IoHandlerAdapter {
 
     private Protocols.ManageRoomResponse  handleUnmuteUser(Protocols.ManageRoomRequest request){
         Protocols.ManageRoomResponse.Builder response = Protocols.ManageRoomResponse.newBuilder();
+        response.setSendedManageRoomEnum(Protocols.ManageRoomEnum.UNMUTE_USER);
+
         User user= findUserFromNick(request.getNick());
         User userToUnmute = findUserFromNick(request.getOtherUserNick());
         if(user != null && userToUnmute != null) {
@@ -244,6 +259,23 @@ public class TcpServerHandler extends IoHandlerAdapter {
             response.setStatus(Protocols.StatusCode.BAD_CREDENTIALS);
         }
         return response.build();
+    }
+
+    private void sendNewRoomListToLoggerUsers(String creatorNick){
+        Protocols.GetRoomsResponse.Builder responseBuilder = Protocols.GetRoomsResponse.newBuilder();
+        for(Map.Entry<String, ServerRoom> serverRoomEntry: this.serverRoomMap.entrySet()){
+            Protocols.Room.Builder room = Protocols.Room.newBuilder();
+            room.setRoomName(serverRoomEntry.getValue().getName());
+            room.setOwner(serverRoomEntry.getValue().getOwner().getNick());
+            responseBuilder.addRooms(room);
+        }
+        responseBuilder.setStatus(Protocols.StatusCode.OK);
+        Protocols.GetRoomsResponse response = responseBuilder.build();
+        for(User user: this.loggedUsers){
+            if(!user.getNick().equals(creatorNick)){
+                user.getSession().write(response);
+            }
+        }
     }
 
     private User findUserFromNick(String nick) {

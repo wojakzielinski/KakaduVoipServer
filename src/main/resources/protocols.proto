@@ -58,7 +58,8 @@ message ManageRoomRequest {
 //messageCode: 6
 message ManageRoomResponse {
     required StatusCode status = 1;
-    optional string keyToRoom = 2;
+    required ManageRoomEnum sendedManageRoomEnum = 2;
+    optional string keyToRoom = 3;
 }
 
 //massageCode: 7

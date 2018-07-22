@@ -6,19 +6,19 @@ package protocols;
 public final class Protocols {
   private Protocols() {}
   public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistryLite registry) {
+          com.google.protobuf.ExtensionRegistryLite registry) {
   }
 
   public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistry registry) {
+          com.google.protobuf.ExtensionRegistry registry) {
     registerAllExtensions(
-        (com.google.protobuf.ExtensionRegistryLite) registry);
+            (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   /**
    * Protobuf enum {@code StatusCode}
    */
   public enum StatusCode
-      implements com.google.protobuf.ProtocolMessageEnum {
+          implements com.google.protobuf.ProtocolMessageEnum {
     /**
      * <code>OK = 0;</code>
      */
@@ -69,37 +69,37 @@ public final class Protocols {
     }
 
     public static com.google.protobuf.Internal.EnumLiteMap<StatusCode>
-        internalGetValueMap() {
+    internalGetValueMap() {
       return internalValueMap;
     }
     private static final com.google.protobuf.Internal.EnumLiteMap<
-        StatusCode> internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<StatusCode>() {
-            public StatusCode findValueByNumber(int number) {
-              return StatusCode.forNumber(number);
-            }
-          };
+            StatusCode> internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<StatusCode>() {
+              public StatusCode findValueByNumber(int number) {
+                return StatusCode.forNumber(number);
+              }
+            };
 
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
+    getValueDescriptor() {
       return getDescriptor().getValues().get(ordinal());
     }
     public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
+    getDescriptorForType() {
       return getDescriptor();
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
+    getDescriptor() {
       return protocols.Protocols.getDescriptor().getEnumTypes().get(0);
     }
 
     private static final StatusCode[] VALUES = values();
 
     public static StatusCode valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+            com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
+                "EnumValueDescriptor is not for this type.");
       }
       return VALUES[desc.getIndex()];
     }
@@ -117,7 +117,7 @@ public final class Protocols {
    * Protobuf enum {@code ManageRoomEnum}
    */
   public enum ManageRoomEnum
-      implements com.google.protobuf.ProtocolMessageEnum {
+          implements com.google.protobuf.ProtocolMessageEnum {
     /**
      * <code>CREATE_ROOM = 1;</code>
      */
@@ -204,37 +204,37 @@ public final class Protocols {
     }
 
     public static com.google.protobuf.Internal.EnumLiteMap<ManageRoomEnum>
-        internalGetValueMap() {
+    internalGetValueMap() {
       return internalValueMap;
     }
     private static final com.google.protobuf.Internal.EnumLiteMap<
-        ManageRoomEnum> internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<ManageRoomEnum>() {
-            public ManageRoomEnum findValueByNumber(int number) {
-              return ManageRoomEnum.forNumber(number);
-            }
-          };
+            ManageRoomEnum> internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<ManageRoomEnum>() {
+              public ManageRoomEnum findValueByNumber(int number) {
+                return ManageRoomEnum.forNumber(number);
+              }
+            };
 
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
+    getValueDescriptor() {
       return getDescriptor().getValues().get(ordinal());
     }
     public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
+    getDescriptorForType() {
       return getDescriptor();
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
+    getDescriptor() {
       return protocols.Protocols.getDescriptor().getEnumTypes().get(1);
     }
 
     private static final ManageRoomEnum[] VALUES = values();
 
     public static ManageRoomEnum valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+            com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
+                "EnumValueDescriptor is not for this type.");
       }
       return VALUES[desc.getIndex()];
     }
@@ -249,8 +249,8 @@ public final class Protocols {
   }
 
   public interface RoomOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:Room)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:Room)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required string room_name = 1;</code>
@@ -264,7 +264,7 @@ public final class Protocols {
      * <code>required string room_name = 1;</code>
      */
     com.google.protobuf.ByteString
-        getRoomNameBytes();
+    getRoomNameBytes();
 
     /**
      * <code>required string owner = 2;</code>
@@ -278,15 +278,15 @@ public final class Protocols {
      * <code>required string owner = 2;</code>
      */
     com.google.protobuf.ByteString
-        getOwnerBytes();
+    getOwnerBytes();
   }
   /**
    * Protobuf type {@code Room}
    */
   public  static final class Room extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:Room)
-      RoomOrBuilder {
+          com.google.protobuf.GeneratedMessageV3 implements
+          // @@protoc_insertion_point(message_implements:Room)
+          RoomOrBuilder {
     // Use Room.newBuilder() to construct.
     private Room(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -302,13 +302,13 @@ public final class Protocols {
       return this.unknownFields;
     }
     private Room(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -319,7 +319,7 @@ public final class Protocols {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -342,22 +342,22 @@ public final class Protocols {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return protocols.Protocols.internal_static_Room_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return protocols.Protocols.internal_static_Room_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              protocols.Protocols.Room.class, protocols.Protocols.Room.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      protocols.Protocols.Room.class, protocols.Protocols.Room.Builder.class);
     }
 
     private int bitField0_;
@@ -377,8 +377,8 @@ public final class Protocols {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           roomName_ = s;
@@ -390,12 +390,12 @@ public final class Protocols {
      * <code>required string room_name = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getRoomNameBytes() {
+    getRoomNameBytes() {
       java.lang.Object ref = roomName_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         roomName_ = b;
         return b;
       } else {
@@ -419,8 +419,8 @@ public final class Protocols {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           owner_ = s;
@@ -432,12 +432,12 @@ public final class Protocols {
      * <code>required string owner = 2;</code>
      */
     public com.google.protobuf.ByteString
-        getOwnerBytes() {
+    getOwnerBytes() {
       java.lang.Object ref = owner_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         owner_ = b;
         return b;
       } else {
@@ -464,7 +464,7 @@ public final class Protocols {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, roomName_);
       }
@@ -494,7 +494,7 @@ public final class Protocols {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof protocols.Protocols.Room)) {
         return super.equals(obj);
@@ -505,12 +505,12 @@ public final class Protocols {
       result = result && (hasRoomName() == other.hasRoomName());
       if (hasRoomName()) {
         result = result && getRoomName()
-            .equals(other.getRoomName());
+                .equals(other.getRoomName());
       }
       result = result && (hasOwner() == other.hasOwner());
       if (hasOwner()) {
         result = result && getOwner()
-            .equals(other.getOwner());
+                .equals(other.getOwner());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -537,62 +537,73 @@ public final class Protocols {
     }
 
     public static protocols.Protocols.Room parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static protocols.Protocols.Room parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.Room parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.Room parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static protocols.Protocols.Room parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static protocols.Protocols.Room parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static protocols.Protocols.Room parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static protocols.Protocols.Room parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static protocols.Protocols.Room parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static protocols.Protocols.Room parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static protocols.Protocols.Room parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static protocols.Protocols.Room parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -604,12 +615,12 @@ public final class Protocols {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -617,19 +628,19 @@ public final class Protocols {
      * Protobuf type {@code Room}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:Room)
-        protocols.Protocols.RoomOrBuilder {
+            com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:Room)
+            protocols.Protocols.RoomOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return protocols.Protocols.internal_static_Room_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return protocols.Protocols.internal_static_Room_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                protocols.Protocols.Room.class, protocols.Protocols.Room.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        protocols.Protocols.Room.class, protocols.Protocols.Room.Builder.class);
       }
 
       // Construct using protocols.Protocols.Room.newBuilder()
@@ -638,7 +649,7 @@ public final class Protocols {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -657,7 +668,7 @@ public final class Protocols {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return protocols.Protocols.internal_static_Room_descriptor;
       }
 
@@ -694,26 +705,26 @@ public final class Protocols {
         return (Builder) super.clone();
       }
       public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
+              com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
       public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+              com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
       public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              int index, Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -753,9 +764,9 @@ public final class Protocols {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         protocols.Protocols.Room parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -785,7 +796,7 @@ public final class Protocols {
         java.lang.Object ref = roomName_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             roomName_ = s;
@@ -799,12 +810,12 @@ public final class Protocols {
        * <code>required string room_name = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getRoomNameBytes() {
+      getRoomNameBytes() {
         java.lang.Object ref = roomName_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           roomName_ = b;
           return b;
         } else {
@@ -815,11 +826,11 @@ public final class Protocols {
        * <code>required string room_name = 1;</code>
        */
       public Builder setRoomName(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
         roomName_ = value;
         onChanged();
         return this;
@@ -837,11 +848,11 @@ public final class Protocols {
        * <code>required string room_name = 1;</code>
        */
       public Builder setRoomNameBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
         roomName_ = value;
         onChanged();
         return this;
@@ -861,7 +872,7 @@ public final class Protocols {
         java.lang.Object ref = owner_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             owner_ = s;
@@ -875,12 +886,12 @@ public final class Protocols {
        * <code>required string owner = 2;</code>
        */
       public com.google.protobuf.ByteString
-          getOwnerBytes() {
+      getOwnerBytes() {
         java.lang.Object ref = owner_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           owner_ = b;
           return b;
         } else {
@@ -891,11 +902,11 @@ public final class Protocols {
        * <code>required string owner = 2;</code>
        */
       public Builder setOwner(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
         owner_ = value;
         onChanged();
         return this;
@@ -913,22 +924,22 @@ public final class Protocols {
        * <code>required string owner = 2;</code>
        */
       public Builder setOwnerBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
         owner_ = value;
         onChanged();
         return this;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
       }
 
@@ -947,12 +958,12 @@ public final class Protocols {
     }
 
     @java.lang.Deprecated public static final com.google.protobuf.Parser<Room>
-        PARSER = new com.google.protobuf.AbstractParser<Room>() {
+            PARSER = new com.google.protobuf.AbstractParser<Room>() {
       public Room parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Room(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Room(input, extensionRegistry);
       }
     };
 
@@ -972,8 +983,8 @@ public final class Protocols {
   }
 
   public interface LoginToServerRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:LoginToServerRequest)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:LoginToServerRequest)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required string nick = 1;</code>
@@ -987,7 +998,7 @@ public final class Protocols {
      * <code>required string nick = 1;</code>
      */
     com.google.protobuf.ByteString
-        getNickBytes();
+    getNickBytes();
   }
   /**
    * <pre>
@@ -997,9 +1008,9 @@ public final class Protocols {
    * Protobuf type {@code LoginToServerRequest}
    */
   public  static final class LoginToServerRequest extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:LoginToServerRequest)
-      LoginToServerRequestOrBuilder {
+          com.google.protobuf.GeneratedMessageV3 implements
+          // @@protoc_insertion_point(message_implements:LoginToServerRequest)
+          LoginToServerRequestOrBuilder {
     // Use LoginToServerRequest.newBuilder() to construct.
     private LoginToServerRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -1014,13 +1025,13 @@ public final class Protocols {
       return this.unknownFields;
     }
     private LoginToServerRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -1031,7 +1042,7 @@ public final class Protocols {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -1048,22 +1059,22 @@ public final class Protocols {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return protocols.Protocols.internal_static_LoginToServerRequest_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return protocols.Protocols.internal_static_LoginToServerRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              protocols.Protocols.LoginToServerRequest.class, protocols.Protocols.LoginToServerRequest.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      protocols.Protocols.LoginToServerRequest.class, protocols.Protocols.LoginToServerRequest.Builder.class);
     }
 
     private int bitField0_;
@@ -1083,8 +1094,8 @@ public final class Protocols {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           nick_ = s;
@@ -1096,12 +1107,12 @@ public final class Protocols {
      * <code>required string nick = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getNickBytes() {
+    getNickBytes() {
       java.lang.Object ref = nick_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         nick_ = b;
         return b;
       } else {
@@ -1124,7 +1135,7 @@ public final class Protocols {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, nick_);
       }
@@ -1148,7 +1159,7 @@ public final class Protocols {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof protocols.Protocols.LoginToServerRequest)) {
         return super.equals(obj);
@@ -1159,7 +1170,7 @@ public final class Protocols {
       result = result && (hasNick() == other.hasNick());
       if (hasNick()) {
         result = result && getNick()
-            .equals(other.getNick());
+                .equals(other.getNick());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -1182,62 +1193,73 @@ public final class Protocols {
     }
 
     public static protocols.Protocols.LoginToServerRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static protocols.Protocols.LoginToServerRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.LoginToServerRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.LoginToServerRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static protocols.Protocols.LoginToServerRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static protocols.Protocols.LoginToServerRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static protocols.Protocols.LoginToServerRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static protocols.Protocols.LoginToServerRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static protocols.Protocols.LoginToServerRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static protocols.Protocols.LoginToServerRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static protocols.Protocols.LoginToServerRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static protocols.Protocols.LoginToServerRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -1249,12 +1271,12 @@ public final class Protocols {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1266,19 +1288,19 @@ public final class Protocols {
      * Protobuf type {@code LoginToServerRequest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:LoginToServerRequest)
-        protocols.Protocols.LoginToServerRequestOrBuilder {
+            com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:LoginToServerRequest)
+            protocols.Protocols.LoginToServerRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return protocols.Protocols.internal_static_LoginToServerRequest_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return protocols.Protocols.internal_static_LoginToServerRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                protocols.Protocols.LoginToServerRequest.class, protocols.Protocols.LoginToServerRequest.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        protocols.Protocols.LoginToServerRequest.class, protocols.Protocols.LoginToServerRequest.Builder.class);
       }
 
       // Construct using protocols.Protocols.LoginToServerRequest.newBuilder()
@@ -1287,7 +1309,7 @@ public final class Protocols {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -1304,7 +1326,7 @@ public final class Protocols {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return protocols.Protocols.internal_static_LoginToServerRequest_descriptor;
       }
 
@@ -1337,26 +1359,26 @@ public final class Protocols {
         return (Builder) super.clone();
       }
       public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
+              com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
       public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+              com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
       public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              int index, Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1388,9 +1410,9 @@ public final class Protocols {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         protocols.Protocols.LoginToServerRequest parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -1420,7 +1442,7 @@ public final class Protocols {
         java.lang.Object ref = nick_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             nick_ = s;
@@ -1434,12 +1456,12 @@ public final class Protocols {
        * <code>required string nick = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getNickBytes() {
+      getNickBytes() {
         java.lang.Object ref = nick_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           nick_ = b;
           return b;
         } else {
@@ -1450,11 +1472,11 @@ public final class Protocols {
        * <code>required string nick = 1;</code>
        */
       public Builder setNick(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
         nick_ = value;
         onChanged();
         return this;
@@ -1472,22 +1494,22 @@ public final class Protocols {
        * <code>required string nick = 1;</code>
        */
       public Builder setNickBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
         nick_ = value;
         onChanged();
         return this;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
       }
 
@@ -1506,12 +1528,12 @@ public final class Protocols {
     }
 
     @java.lang.Deprecated public static final com.google.protobuf.Parser<LoginToServerRequest>
-        PARSER = new com.google.protobuf.AbstractParser<LoginToServerRequest>() {
+            PARSER = new com.google.protobuf.AbstractParser<LoginToServerRequest>() {
       public LoginToServerRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new LoginToServerRequest(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new LoginToServerRequest(input, extensionRegistry);
       }
     };
 
@@ -1531,8 +1553,8 @@ public final class Protocols {
   }
 
   public interface LoginToServerResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:LoginToServerResponse)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:LoginToServerResponse)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .StatusCode status = 1;</code>
@@ -1551,9 +1573,9 @@ public final class Protocols {
    * Protobuf type {@code LoginToServerResponse}
    */
   public  static final class LoginToServerResponse extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:LoginToServerResponse)
-      LoginToServerResponseOrBuilder {
+          com.google.protobuf.GeneratedMessageV3 implements
+          // @@protoc_insertion_point(message_implements:LoginToServerResponse)
+          LoginToServerResponseOrBuilder {
     // Use LoginToServerResponse.newBuilder() to construct.
     private LoginToServerResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -1568,13 +1590,13 @@ public final class Protocols {
       return this.unknownFields;
     }
     private LoginToServerResponse(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -1585,7 +1607,7 @@ public final class Protocols {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -1607,22 +1629,22 @@ public final class Protocols {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return protocols.Protocols.internal_static_LoginToServerResponse_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return protocols.Protocols.internal_static_LoginToServerResponse_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              protocols.Protocols.LoginToServerResponse.class, protocols.Protocols.LoginToServerResponse.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      protocols.Protocols.LoginToServerResponse.class, protocols.Protocols.LoginToServerResponse.Builder.class);
     }
 
     private int bitField0_;
@@ -1657,7 +1679,7 @@ public final class Protocols {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeEnum(1, status_);
       }
@@ -1671,7 +1693,7 @@ public final class Protocols {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, status_);
+                .computeEnumSize(1, status_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1682,7 +1704,7 @@ public final class Protocols {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof protocols.Protocols.LoginToServerResponse)) {
         return super.equals(obj);
@@ -1715,62 +1737,73 @@ public final class Protocols {
     }
 
     public static protocols.Protocols.LoginToServerResponse parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static protocols.Protocols.LoginToServerResponse parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.LoginToServerResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.LoginToServerResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static protocols.Protocols.LoginToServerResponse parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static protocols.Protocols.LoginToServerResponse parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static protocols.Protocols.LoginToServerResponse parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static protocols.Protocols.LoginToServerResponse parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static protocols.Protocols.LoginToServerResponse parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static protocols.Protocols.LoginToServerResponse parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static protocols.Protocols.LoginToServerResponse parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static protocols.Protocols.LoginToServerResponse parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -1782,12 +1815,12 @@ public final class Protocols {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1799,19 +1832,19 @@ public final class Protocols {
      * Protobuf type {@code LoginToServerResponse}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:LoginToServerResponse)
-        protocols.Protocols.LoginToServerResponseOrBuilder {
+            com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:LoginToServerResponse)
+            protocols.Protocols.LoginToServerResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return protocols.Protocols.internal_static_LoginToServerResponse_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return protocols.Protocols.internal_static_LoginToServerResponse_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                protocols.Protocols.LoginToServerResponse.class, protocols.Protocols.LoginToServerResponse.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        protocols.Protocols.LoginToServerResponse.class, protocols.Protocols.LoginToServerResponse.Builder.class);
       }
 
       // Construct using protocols.Protocols.LoginToServerResponse.newBuilder()
@@ -1820,7 +1853,7 @@ public final class Protocols {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -1837,7 +1870,7 @@ public final class Protocols {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return protocols.Protocols.internal_static_LoginToServerResponse_descriptor;
       }
 
@@ -1870,26 +1903,26 @@ public final class Protocols {
         return (Builder) super.clone();
       }
       public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
+              com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
       public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+              com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
       public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              int index, Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -1919,9 +1952,9 @@ public final class Protocols {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         protocols.Protocols.LoginToServerResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -1973,12 +2006,12 @@ public final class Protocols {
         return this;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
       }
 
@@ -1997,12 +2030,12 @@ public final class Protocols {
     }
 
     @java.lang.Deprecated public static final com.google.protobuf.Parser<LoginToServerResponse>
-        PARSER = new com.google.protobuf.AbstractParser<LoginToServerResponse>() {
+            PARSER = new com.google.protobuf.AbstractParser<LoginToServerResponse>() {
       public LoginToServerResponse parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new LoginToServerResponse(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new LoginToServerResponse(input, extensionRegistry);
       }
     };
 
@@ -2022,8 +2055,8 @@ public final class Protocols {
   }
 
   public interface LeaveServerRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:LeaveServerRequest)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:LeaveServerRequest)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required string nick = 1;</code>
@@ -2037,7 +2070,7 @@ public final class Protocols {
      * <code>required string nick = 1;</code>
      */
     com.google.protobuf.ByteString
-        getNickBytes();
+    getNickBytes();
   }
   /**
    * <pre>
@@ -2047,9 +2080,9 @@ public final class Protocols {
    * Protobuf type {@code LeaveServerRequest}
    */
   public  static final class LeaveServerRequest extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:LeaveServerRequest)
-      LeaveServerRequestOrBuilder {
+          com.google.protobuf.GeneratedMessageV3 implements
+          // @@protoc_insertion_point(message_implements:LeaveServerRequest)
+          LeaveServerRequestOrBuilder {
     // Use LeaveServerRequest.newBuilder() to construct.
     private LeaveServerRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -2064,13 +2097,13 @@ public final class Protocols {
       return this.unknownFields;
     }
     private LeaveServerRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -2081,7 +2114,7 @@ public final class Protocols {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -2098,22 +2131,22 @@ public final class Protocols {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return protocols.Protocols.internal_static_LeaveServerRequest_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return protocols.Protocols.internal_static_LeaveServerRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              protocols.Protocols.LeaveServerRequest.class, protocols.Protocols.LeaveServerRequest.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      protocols.Protocols.LeaveServerRequest.class, protocols.Protocols.LeaveServerRequest.Builder.class);
     }
 
     private int bitField0_;
@@ -2133,8 +2166,8 @@ public final class Protocols {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           nick_ = s;
@@ -2146,12 +2179,12 @@ public final class Protocols {
      * <code>required string nick = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getNickBytes() {
+    getNickBytes() {
       java.lang.Object ref = nick_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         nick_ = b;
         return b;
       } else {
@@ -2174,7 +2207,7 @@ public final class Protocols {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, nick_);
       }
@@ -2198,7 +2231,7 @@ public final class Protocols {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof protocols.Protocols.LeaveServerRequest)) {
         return super.equals(obj);
@@ -2209,7 +2242,7 @@ public final class Protocols {
       result = result && (hasNick() == other.hasNick());
       if (hasNick()) {
         result = result && getNick()
-            .equals(other.getNick());
+                .equals(other.getNick());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -2232,62 +2265,73 @@ public final class Protocols {
     }
 
     public static protocols.Protocols.LeaveServerRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static protocols.Protocols.LeaveServerRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.LeaveServerRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.LeaveServerRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static protocols.Protocols.LeaveServerRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static protocols.Protocols.LeaveServerRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static protocols.Protocols.LeaveServerRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static protocols.Protocols.LeaveServerRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static protocols.Protocols.LeaveServerRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static protocols.Protocols.LeaveServerRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static protocols.Protocols.LeaveServerRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static protocols.Protocols.LeaveServerRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -2299,12 +2343,12 @@ public final class Protocols {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -2316,19 +2360,19 @@ public final class Protocols {
      * Protobuf type {@code LeaveServerRequest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:LeaveServerRequest)
-        protocols.Protocols.LeaveServerRequestOrBuilder {
+            com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:LeaveServerRequest)
+            protocols.Protocols.LeaveServerRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return protocols.Protocols.internal_static_LeaveServerRequest_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return protocols.Protocols.internal_static_LeaveServerRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                protocols.Protocols.LeaveServerRequest.class, protocols.Protocols.LeaveServerRequest.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        protocols.Protocols.LeaveServerRequest.class, protocols.Protocols.LeaveServerRequest.Builder.class);
       }
 
       // Construct using protocols.Protocols.LeaveServerRequest.newBuilder()
@@ -2337,7 +2381,7 @@ public final class Protocols {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -2354,7 +2398,7 @@ public final class Protocols {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return protocols.Protocols.internal_static_LeaveServerRequest_descriptor;
       }
 
@@ -2387,26 +2431,26 @@ public final class Protocols {
         return (Builder) super.clone();
       }
       public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
+              com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
       public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+              com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
       public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              int index, Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2438,9 +2482,9 @@ public final class Protocols {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         protocols.Protocols.LeaveServerRequest parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -2470,7 +2514,7 @@ public final class Protocols {
         java.lang.Object ref = nick_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             nick_ = s;
@@ -2484,12 +2528,12 @@ public final class Protocols {
        * <code>required string nick = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getNickBytes() {
+      getNickBytes() {
         java.lang.Object ref = nick_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           nick_ = b;
           return b;
         } else {
@@ -2500,11 +2544,11 @@ public final class Protocols {
        * <code>required string nick = 1;</code>
        */
       public Builder setNick(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
         nick_ = value;
         onChanged();
         return this;
@@ -2522,22 +2566,22 @@ public final class Protocols {
        * <code>required string nick = 1;</code>
        */
       public Builder setNickBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
         nick_ = value;
         onChanged();
         return this;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
       }
 
@@ -2556,12 +2600,12 @@ public final class Protocols {
     }
 
     @java.lang.Deprecated public static final com.google.protobuf.Parser<LeaveServerRequest>
-        PARSER = new com.google.protobuf.AbstractParser<LeaveServerRequest>() {
+            PARSER = new com.google.protobuf.AbstractParser<LeaveServerRequest>() {
       public LeaveServerRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new LeaveServerRequest(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new LeaveServerRequest(input, extensionRegistry);
       }
     };
 
@@ -2581,8 +2625,8 @@ public final class Protocols {
   }
 
   public interface LeaveServerResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:LeaveServerResponse)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:LeaveServerResponse)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .StatusCode status = 1;</code>
@@ -2601,9 +2645,9 @@ public final class Protocols {
    * Protobuf type {@code LeaveServerResponse}
    */
   public  static final class LeaveServerResponse extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:LeaveServerResponse)
-      LeaveServerResponseOrBuilder {
+          com.google.protobuf.GeneratedMessageV3 implements
+          // @@protoc_insertion_point(message_implements:LeaveServerResponse)
+          LeaveServerResponseOrBuilder {
     // Use LeaveServerResponse.newBuilder() to construct.
     private LeaveServerResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -2618,13 +2662,13 @@ public final class Protocols {
       return this.unknownFields;
     }
     private LeaveServerResponse(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -2635,7 +2679,7 @@ public final class Protocols {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -2657,22 +2701,22 @@ public final class Protocols {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return protocols.Protocols.internal_static_LeaveServerResponse_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return protocols.Protocols.internal_static_LeaveServerResponse_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              protocols.Protocols.LeaveServerResponse.class, protocols.Protocols.LeaveServerResponse.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      protocols.Protocols.LeaveServerResponse.class, protocols.Protocols.LeaveServerResponse.Builder.class);
     }
 
     private int bitField0_;
@@ -2707,7 +2751,7 @@ public final class Protocols {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeEnum(1, status_);
       }
@@ -2721,7 +2765,7 @@ public final class Protocols {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, status_);
+                .computeEnumSize(1, status_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2732,7 +2776,7 @@ public final class Protocols {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof protocols.Protocols.LeaveServerResponse)) {
         return super.equals(obj);
@@ -2765,62 +2809,73 @@ public final class Protocols {
     }
 
     public static protocols.Protocols.LeaveServerResponse parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static protocols.Protocols.LeaveServerResponse parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.LeaveServerResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.LeaveServerResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static protocols.Protocols.LeaveServerResponse parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static protocols.Protocols.LeaveServerResponse parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static protocols.Protocols.LeaveServerResponse parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static protocols.Protocols.LeaveServerResponse parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static protocols.Protocols.LeaveServerResponse parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static protocols.Protocols.LeaveServerResponse parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static protocols.Protocols.LeaveServerResponse parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static protocols.Protocols.LeaveServerResponse parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -2832,12 +2887,12 @@ public final class Protocols {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -2849,19 +2904,19 @@ public final class Protocols {
      * Protobuf type {@code LeaveServerResponse}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:LeaveServerResponse)
-        protocols.Protocols.LeaveServerResponseOrBuilder {
+            com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:LeaveServerResponse)
+            protocols.Protocols.LeaveServerResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return protocols.Protocols.internal_static_LeaveServerResponse_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return protocols.Protocols.internal_static_LeaveServerResponse_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                protocols.Protocols.LeaveServerResponse.class, protocols.Protocols.LeaveServerResponse.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        protocols.Protocols.LeaveServerResponse.class, protocols.Protocols.LeaveServerResponse.Builder.class);
       }
 
       // Construct using protocols.Protocols.LeaveServerResponse.newBuilder()
@@ -2870,7 +2925,7 @@ public final class Protocols {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -2887,7 +2942,7 @@ public final class Protocols {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return protocols.Protocols.internal_static_LeaveServerResponse_descriptor;
       }
 
@@ -2920,26 +2975,26 @@ public final class Protocols {
         return (Builder) super.clone();
       }
       public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
+              com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
       public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+              com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
       public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              int index, Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -2969,9 +3024,9 @@ public final class Protocols {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         protocols.Protocols.LeaveServerResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -3023,12 +3078,12 @@ public final class Protocols {
         return this;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
       }
 
@@ -3047,12 +3102,12 @@ public final class Protocols {
     }
 
     @java.lang.Deprecated public static final com.google.protobuf.Parser<LeaveServerResponse>
-        PARSER = new com.google.protobuf.AbstractParser<LeaveServerResponse>() {
+            PARSER = new com.google.protobuf.AbstractParser<LeaveServerResponse>() {
       public LeaveServerResponse parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new LeaveServerResponse(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new LeaveServerResponse(input, extensionRegistry);
       }
     };
 
@@ -3072,8 +3127,8 @@ public final class Protocols {
   }
 
   public interface ManageRoomRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:ManageRoomRequest)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:ManageRoomRequest)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .ManageRoomEnum manageRoomEnum = 1;</code>
@@ -3096,7 +3151,7 @@ public final class Protocols {
      * <code>required string nick = 2;</code>
      */
     com.google.protobuf.ByteString
-        getNickBytes();
+    getNickBytes();
 
     /**
      * <code>required string roomName = 3;</code>
@@ -3110,7 +3165,7 @@ public final class Protocols {
      * <code>required string roomName = 3;</code>
      */
     com.google.protobuf.ByteString
-        getRoomNameBytes();
+    getRoomNameBytes();
 
     /**
      * <code>optional string password = 4;</code>
@@ -3124,7 +3179,7 @@ public final class Protocols {
      * <code>optional string password = 4;</code>
      */
     com.google.protobuf.ByteString
-        getPasswordBytes();
+    getPasswordBytes();
 
     /**
      * <code>optional string adminPassword = 5;</code>
@@ -3138,7 +3193,7 @@ public final class Protocols {
      * <code>optional string adminPassword = 5;</code>
      */
     com.google.protobuf.ByteString
-        getAdminPasswordBytes();
+    getAdminPasswordBytes();
 
     /**
      * <code>optional string otherUserNick = 6;</code>
@@ -3152,7 +3207,7 @@ public final class Protocols {
      * <code>optional string otherUserNick = 6;</code>
      */
     com.google.protobuf.ByteString
-        getOtherUserNickBytes();
+    getOtherUserNickBytes();
   }
   /**
    * <pre>
@@ -3162,9 +3217,9 @@ public final class Protocols {
    * Protobuf type {@code ManageRoomRequest}
    */
   public  static final class ManageRoomRequest extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:ManageRoomRequest)
-      ManageRoomRequestOrBuilder {
+          com.google.protobuf.GeneratedMessageV3 implements
+          // @@protoc_insertion_point(message_implements:ManageRoomRequest)
+          ManageRoomRequestOrBuilder {
     // Use ManageRoomRequest.newBuilder() to construct.
     private ManageRoomRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -3184,13 +3239,13 @@ public final class Protocols {
       return this.unknownFields;
     }
     private ManageRoomRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -3201,7 +3256,7 @@ public final class Protocols {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -3253,22 +3308,22 @@ public final class Protocols {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return protocols.Protocols.internal_static_ManageRoomRequest_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return protocols.Protocols.internal_static_ManageRoomRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              protocols.Protocols.ManageRoomRequest.class, protocols.Protocols.ManageRoomRequest.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      protocols.Protocols.ManageRoomRequest.class, protocols.Protocols.ManageRoomRequest.Builder.class);
     }
 
     private int bitField0_;
@@ -3304,8 +3359,8 @@ public final class Protocols {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           nick_ = s;
@@ -3317,12 +3372,12 @@ public final class Protocols {
      * <code>required string nick = 2;</code>
      */
     public com.google.protobuf.ByteString
-        getNickBytes() {
+    getNickBytes() {
       java.lang.Object ref = nick_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         nick_ = b;
         return b;
       } else {
@@ -3346,8 +3401,8 @@ public final class Protocols {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           roomName_ = s;
@@ -3359,12 +3414,12 @@ public final class Protocols {
      * <code>required string roomName = 3;</code>
      */
     public com.google.protobuf.ByteString
-        getRoomNameBytes() {
+    getRoomNameBytes() {
       java.lang.Object ref = roomName_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         roomName_ = b;
         return b;
       } else {
@@ -3388,8 +3443,8 @@ public final class Protocols {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           password_ = s;
@@ -3401,12 +3456,12 @@ public final class Protocols {
      * <code>optional string password = 4;</code>
      */
     public com.google.protobuf.ByteString
-        getPasswordBytes() {
+    getPasswordBytes() {
       java.lang.Object ref = password_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         password_ = b;
         return b;
       } else {
@@ -3430,8 +3485,8 @@ public final class Protocols {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           adminPassword_ = s;
@@ -3443,12 +3498,12 @@ public final class Protocols {
      * <code>optional string adminPassword = 5;</code>
      */
     public com.google.protobuf.ByteString
-        getAdminPasswordBytes() {
+    getAdminPasswordBytes() {
       java.lang.Object ref = adminPassword_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         adminPassword_ = b;
         return b;
       } else {
@@ -3472,8 +3527,8 @@ public final class Protocols {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           otherUserNick_ = s;
@@ -3485,12 +3540,12 @@ public final class Protocols {
      * <code>optional string otherUserNick = 6;</code>
      */
     public com.google.protobuf.ByteString
-        getOtherUserNickBytes() {
+    getOtherUserNickBytes() {
       java.lang.Object ref = otherUserNick_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         otherUserNick_ = b;
         return b;
       } else {
@@ -3521,7 +3576,7 @@ public final class Protocols {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeEnum(1, manageRoomEnum_);
       }
@@ -3550,7 +3605,7 @@ public final class Protocols {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, manageRoomEnum_);
+                .computeEnumSize(1, manageRoomEnum_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, nick_);
@@ -3576,7 +3631,7 @@ public final class Protocols {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof protocols.Protocols.ManageRoomRequest)) {
         return super.equals(obj);
@@ -3591,27 +3646,27 @@ public final class Protocols {
       result = result && (hasNick() == other.hasNick());
       if (hasNick()) {
         result = result && getNick()
-            .equals(other.getNick());
+                .equals(other.getNick());
       }
       result = result && (hasRoomName() == other.hasRoomName());
       if (hasRoomName()) {
         result = result && getRoomName()
-            .equals(other.getRoomName());
+                .equals(other.getRoomName());
       }
       result = result && (hasPassword() == other.hasPassword());
       if (hasPassword()) {
         result = result && getPassword()
-            .equals(other.getPassword());
+                .equals(other.getPassword());
       }
       result = result && (hasAdminPassword() == other.hasAdminPassword());
       if (hasAdminPassword()) {
         result = result && getAdminPassword()
-            .equals(other.getAdminPassword());
+                .equals(other.getAdminPassword());
       }
       result = result && (hasOtherUserNick() == other.hasOtherUserNick());
       if (hasOtherUserNick()) {
         result = result && getOtherUserNick()
-            .equals(other.getOtherUserNick());
+                .equals(other.getOtherUserNick());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -3654,62 +3709,73 @@ public final class Protocols {
     }
 
     public static protocols.Protocols.ManageRoomRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static protocols.Protocols.ManageRoomRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.ManageRoomRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.ManageRoomRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static protocols.Protocols.ManageRoomRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static protocols.Protocols.ManageRoomRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static protocols.Protocols.ManageRoomRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static protocols.Protocols.ManageRoomRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static protocols.Protocols.ManageRoomRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static protocols.Protocols.ManageRoomRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static protocols.Protocols.ManageRoomRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static protocols.Protocols.ManageRoomRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -3721,12 +3787,12 @@ public final class Protocols {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -3738,19 +3804,19 @@ public final class Protocols {
      * Protobuf type {@code ManageRoomRequest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:ManageRoomRequest)
-        protocols.Protocols.ManageRoomRequestOrBuilder {
+            com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:ManageRoomRequest)
+            protocols.Protocols.ManageRoomRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return protocols.Protocols.internal_static_ManageRoomRequest_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return protocols.Protocols.internal_static_ManageRoomRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                protocols.Protocols.ManageRoomRequest.class, protocols.Protocols.ManageRoomRequest.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        protocols.Protocols.ManageRoomRequest.class, protocols.Protocols.ManageRoomRequest.Builder.class);
       }
 
       // Construct using protocols.Protocols.ManageRoomRequest.newBuilder()
@@ -3759,7 +3825,7 @@ public final class Protocols {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -3786,7 +3852,7 @@ public final class Protocols {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return protocols.Protocols.internal_static_ManageRoomRequest_descriptor;
       }
 
@@ -3839,26 +3905,26 @@ public final class Protocols {
         return (Builder) super.clone();
       }
       public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
+              com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
       public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+              com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
       public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              int index, Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -3919,9 +3985,9 @@ public final class Protocols {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         protocols.Protocols.ManageRoomRequest parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -3987,7 +4053,7 @@ public final class Protocols {
         java.lang.Object ref = nick_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             nick_ = s;
@@ -4001,12 +4067,12 @@ public final class Protocols {
        * <code>required string nick = 2;</code>
        */
       public com.google.protobuf.ByteString
-          getNickBytes() {
+      getNickBytes() {
         java.lang.Object ref = nick_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           nick_ = b;
           return b;
         } else {
@@ -4017,11 +4083,11 @@ public final class Protocols {
        * <code>required string nick = 2;</code>
        */
       public Builder setNick(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
         nick_ = value;
         onChanged();
         return this;
@@ -4039,11 +4105,11 @@ public final class Protocols {
        * <code>required string nick = 2;</code>
        */
       public Builder setNickBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
         nick_ = value;
         onChanged();
         return this;
@@ -4063,7 +4129,7 @@ public final class Protocols {
         java.lang.Object ref = roomName_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             roomName_ = s;
@@ -4077,12 +4143,12 @@ public final class Protocols {
        * <code>required string roomName = 3;</code>
        */
       public com.google.protobuf.ByteString
-          getRoomNameBytes() {
+      getRoomNameBytes() {
         java.lang.Object ref = roomName_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           roomName_ = b;
           return b;
         } else {
@@ -4093,11 +4159,11 @@ public final class Protocols {
        * <code>required string roomName = 3;</code>
        */
       public Builder setRoomName(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
         roomName_ = value;
         onChanged();
         return this;
@@ -4115,11 +4181,11 @@ public final class Protocols {
        * <code>required string roomName = 3;</code>
        */
       public Builder setRoomNameBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
         roomName_ = value;
         onChanged();
         return this;
@@ -4139,7 +4205,7 @@ public final class Protocols {
         java.lang.Object ref = password_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             password_ = s;
@@ -4153,12 +4219,12 @@ public final class Protocols {
        * <code>optional string password = 4;</code>
        */
       public com.google.protobuf.ByteString
-          getPasswordBytes() {
+      getPasswordBytes() {
         java.lang.Object ref = password_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           password_ = b;
           return b;
         } else {
@@ -4169,11 +4235,11 @@ public final class Protocols {
        * <code>optional string password = 4;</code>
        */
       public Builder setPassword(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
         password_ = value;
         onChanged();
         return this;
@@ -4191,11 +4257,11 @@ public final class Protocols {
        * <code>optional string password = 4;</code>
        */
       public Builder setPasswordBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
         password_ = value;
         onChanged();
         return this;
@@ -4215,7 +4281,7 @@ public final class Protocols {
         java.lang.Object ref = adminPassword_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             adminPassword_ = s;
@@ -4229,12 +4295,12 @@ public final class Protocols {
        * <code>optional string adminPassword = 5;</code>
        */
       public com.google.protobuf.ByteString
-          getAdminPasswordBytes() {
+      getAdminPasswordBytes() {
         java.lang.Object ref = adminPassword_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           adminPassword_ = b;
           return b;
         } else {
@@ -4245,11 +4311,11 @@ public final class Protocols {
        * <code>optional string adminPassword = 5;</code>
        */
       public Builder setAdminPassword(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
         adminPassword_ = value;
         onChanged();
         return this;
@@ -4267,11 +4333,11 @@ public final class Protocols {
        * <code>optional string adminPassword = 5;</code>
        */
       public Builder setAdminPasswordBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000010;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000010;
         adminPassword_ = value;
         onChanged();
         return this;
@@ -4291,7 +4357,7 @@ public final class Protocols {
         java.lang.Object ref = otherUserNick_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             otherUserNick_ = s;
@@ -4305,12 +4371,12 @@ public final class Protocols {
        * <code>optional string otherUserNick = 6;</code>
        */
       public com.google.protobuf.ByteString
-          getOtherUserNickBytes() {
+      getOtherUserNickBytes() {
         java.lang.Object ref = otherUserNick_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           otherUserNick_ = b;
           return b;
         } else {
@@ -4321,11 +4387,11 @@ public final class Protocols {
        * <code>optional string otherUserNick = 6;</code>
        */
       public Builder setOtherUserNick(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000020;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
         otherUserNick_ = value;
         onChanged();
         return this;
@@ -4343,22 +4409,22 @@ public final class Protocols {
        * <code>optional string otherUserNick = 6;</code>
        */
       public Builder setOtherUserNickBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000020;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
         otherUserNick_ = value;
         onChanged();
         return this;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
       }
 
@@ -4377,12 +4443,12 @@ public final class Protocols {
     }
 
     @java.lang.Deprecated public static final com.google.protobuf.Parser<ManageRoomRequest>
-        PARSER = new com.google.protobuf.AbstractParser<ManageRoomRequest>() {
+            PARSER = new com.google.protobuf.AbstractParser<ManageRoomRequest>() {
       public ManageRoomRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ManageRoomRequest(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ManageRoomRequest(input, extensionRegistry);
       }
     };
 
@@ -4402,8 +4468,8 @@ public final class Protocols {
   }
 
   public interface ManageRoomResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:ManageRoomResponse)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:ManageRoomResponse)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .StatusCode status = 1;</code>
@@ -4415,18 +4481,27 @@ public final class Protocols {
     protocols.Protocols.StatusCode getStatus();
 
     /**
-     * <code>optional string keyToRoom = 2;</code>
+     * <code>required .ManageRoomEnum sendedManageRoomEnum = 2;</code>
+     */
+    boolean hasSendedManageRoomEnum();
+    /**
+     * <code>required .ManageRoomEnum sendedManageRoomEnum = 2;</code>
+     */
+    protocols.Protocols.ManageRoomEnum getSendedManageRoomEnum();
+
+    /**
+     * <code>optional string keyToRoom = 3;</code>
      */
     boolean hasKeyToRoom();
     /**
-     * <code>optional string keyToRoom = 2;</code>
+     * <code>optional string keyToRoom = 3;</code>
      */
     java.lang.String getKeyToRoom();
     /**
-     * <code>optional string keyToRoom = 2;</code>
+     * <code>optional string keyToRoom = 3;</code>
      */
     com.google.protobuf.ByteString
-        getKeyToRoomBytes();
+    getKeyToRoomBytes();
   }
   /**
    * <pre>
@@ -4436,15 +4511,16 @@ public final class Protocols {
    * Protobuf type {@code ManageRoomResponse}
    */
   public  static final class ManageRoomResponse extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:ManageRoomResponse)
-      ManageRoomResponseOrBuilder {
+          com.google.protobuf.GeneratedMessageV3 implements
+          // @@protoc_insertion_point(message_implements:ManageRoomResponse)
+          ManageRoomResponseOrBuilder {
     // Use ManageRoomResponse.newBuilder() to construct.
     private ManageRoomResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private ManageRoomResponse() {
       status_ = 0;
+      sendedManageRoomEnum_ = 1;
       keyToRoom_ = "";
     }
 
@@ -4454,13 +4530,13 @@ public final class Protocols {
       return this.unknownFields;
     }
     private ManageRoomResponse(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -4471,7 +4547,7 @@ public final class Protocols {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -4487,9 +4563,20 @@ public final class Protocols {
               }
               break;
             }
-            case 18: {
+            case 16: {
+              int rawValue = input.readEnum();
+              protocols.Protocols.ManageRoomEnum value = protocols.Protocols.ManageRoomEnum.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                sendedManageRoomEnum_ = rawValue;
+              }
+              break;
+            }
+            case 26: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000002;
+              bitField0_ |= 0x00000004;
               keyToRoom_ = bs;
               break;
             }
@@ -4499,22 +4586,22 @@ public final class Protocols {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return protocols.Protocols.internal_static_ManageRoomResponse_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return protocols.Protocols.internal_static_ManageRoomResponse_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              protocols.Protocols.ManageRoomResponse.class, protocols.Protocols.ManageRoomResponse.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      protocols.Protocols.ManageRoomResponse.class, protocols.Protocols.ManageRoomResponse.Builder.class);
     }
 
     private int bitField0_;
@@ -4534,24 +4621,40 @@ public final class Protocols {
       return result == null ? protocols.Protocols.StatusCode.OK : result;
     }
 
-    public static final int KEYTOROOM_FIELD_NUMBER = 2;
-    private volatile java.lang.Object keyToRoom_;
+    public static final int SENDEDMANAGEROOMENUM_FIELD_NUMBER = 2;
+    private int sendedManageRoomEnum_;
     /**
-     * <code>optional string keyToRoom = 2;</code>
+     * <code>required .ManageRoomEnum sendedManageRoomEnum = 2;</code>
      */
-    public boolean hasKeyToRoom() {
+    public boolean hasSendedManageRoomEnum() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional string keyToRoom = 2;</code>
+     * <code>required .ManageRoomEnum sendedManageRoomEnum = 2;</code>
+     */
+    public protocols.Protocols.ManageRoomEnum getSendedManageRoomEnum() {
+      protocols.Protocols.ManageRoomEnum result = protocols.Protocols.ManageRoomEnum.valueOf(sendedManageRoomEnum_);
+      return result == null ? protocols.Protocols.ManageRoomEnum.CREATE_ROOM : result;
+    }
+
+    public static final int KEYTOROOM_FIELD_NUMBER = 3;
+    private volatile java.lang.Object keyToRoom_;
+    /**
+     * <code>optional string keyToRoom = 3;</code>
+     */
+    public boolean hasKeyToRoom() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string keyToRoom = 3;</code>
      */
     public java.lang.String getKeyToRoom() {
       java.lang.Object ref = keyToRoom_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           keyToRoom_ = s;
@@ -4560,15 +4663,15 @@ public final class Protocols {
       }
     }
     /**
-     * <code>optional string keyToRoom = 2;</code>
+     * <code>optional string keyToRoom = 3;</code>
      */
     public com.google.protobuf.ByteString
-        getKeyToRoomBytes() {
+    getKeyToRoomBytes() {
       java.lang.Object ref = keyToRoom_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         keyToRoom_ = b;
         return b;
       } else {
@@ -4586,17 +4689,24 @@ public final class Protocols {
         memoizedIsInitialized = 0;
         return false;
       }
+      if (!hasSendedManageRoomEnum()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeEnum(1, status_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, keyToRoom_);
+        output.writeEnum(2, sendedManageRoomEnum_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, keyToRoom_);
       }
       unknownFields.writeTo(output);
     }
@@ -4608,10 +4718,14 @@ public final class Protocols {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, status_);
+                .computeEnumSize(1, status_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, keyToRoom_);
+        size += com.google.protobuf.CodedOutputStream
+                .computeEnumSize(2, sendedManageRoomEnum_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, keyToRoom_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -4622,7 +4736,7 @@ public final class Protocols {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof protocols.Protocols.ManageRoomResponse)) {
         return super.equals(obj);
@@ -4634,10 +4748,14 @@ public final class Protocols {
       if (hasStatus()) {
         result = result && status_ == other.status_;
       }
+      result = result && (hasSendedManageRoomEnum() == other.hasSendedManageRoomEnum());
+      if (hasSendedManageRoomEnum()) {
+        result = result && sendedManageRoomEnum_ == other.sendedManageRoomEnum_;
+      }
       result = result && (hasKeyToRoom() == other.hasKeyToRoom());
       if (hasKeyToRoom()) {
         result = result && getKeyToRoom()
-            .equals(other.getKeyToRoom());
+                .equals(other.getKeyToRoom());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -4654,6 +4772,10 @@ public final class Protocols {
         hash = (37 * hash) + STATUS_FIELD_NUMBER;
         hash = (53 * hash) + status_;
       }
+      if (hasSendedManageRoomEnum()) {
+        hash = (37 * hash) + SENDEDMANAGEROOMENUM_FIELD_NUMBER;
+        hash = (53 * hash) + sendedManageRoomEnum_;
+      }
       if (hasKeyToRoom()) {
         hash = (37 * hash) + KEYTOROOM_FIELD_NUMBER;
         hash = (53 * hash) + getKeyToRoom().hashCode();
@@ -4664,62 +4786,73 @@ public final class Protocols {
     }
 
     public static protocols.Protocols.ManageRoomResponse parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static protocols.Protocols.ManageRoomResponse parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.ManageRoomResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.ManageRoomResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static protocols.Protocols.ManageRoomResponse parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static protocols.Protocols.ManageRoomResponse parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static protocols.Protocols.ManageRoomResponse parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static protocols.Protocols.ManageRoomResponse parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static protocols.Protocols.ManageRoomResponse parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static protocols.Protocols.ManageRoomResponse parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static protocols.Protocols.ManageRoomResponse parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static protocols.Protocols.ManageRoomResponse parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -4731,12 +4864,12 @@ public final class Protocols {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -4748,19 +4881,19 @@ public final class Protocols {
      * Protobuf type {@code ManageRoomResponse}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:ManageRoomResponse)
-        protocols.Protocols.ManageRoomResponseOrBuilder {
+            com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:ManageRoomResponse)
+            protocols.Protocols.ManageRoomResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return protocols.Protocols.internal_static_ManageRoomResponse_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return protocols.Protocols.internal_static_ManageRoomResponse_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                protocols.Protocols.ManageRoomResponse.class, protocols.Protocols.ManageRoomResponse.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        protocols.Protocols.ManageRoomResponse.class, protocols.Protocols.ManageRoomResponse.Builder.class);
       }
 
       // Construct using protocols.Protocols.ManageRoomResponse.newBuilder()
@@ -4769,7 +4902,7 @@ public final class Protocols {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -4782,13 +4915,15 @@ public final class Protocols {
         super.clear();
         status_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        keyToRoom_ = "";
+        sendedManageRoomEnum_ = 1;
         bitField0_ = (bitField0_ & ~0x00000002);
+        keyToRoom_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return protocols.Protocols.internal_static_ManageRoomResponse_descriptor;
       }
 
@@ -4815,6 +4950,10 @@ public final class Protocols {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
+        result.sendedManageRoomEnum_ = sendedManageRoomEnum_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
         result.keyToRoom_ = keyToRoom_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -4825,26 +4964,26 @@ public final class Protocols {
         return (Builder) super.clone();
       }
       public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
+              com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
       public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+              com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
       public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              int index, Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -4861,8 +5000,11 @@ public final class Protocols {
         if (other.hasStatus()) {
           setStatus(other.getStatus());
         }
+        if (other.hasSendedManageRoomEnum()) {
+          setSendedManageRoomEnum(other.getSendedManageRoomEnum());
+        }
         if (other.hasKeyToRoom()) {
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000004;
           keyToRoom_ = other.keyToRoom_;
           onChanged();
         }
@@ -4875,13 +5017,16 @@ public final class Protocols {
         if (!hasStatus()) {
           return false;
         }
+        if (!hasSendedManageRoomEnum()) {
+          return false;
+        }
         return true;
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         protocols.Protocols.ManageRoomResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -4933,21 +5078,57 @@ public final class Protocols {
         return this;
       }
 
-      private java.lang.Object keyToRoom_ = "";
+      private int sendedManageRoomEnum_ = 1;
       /**
-       * <code>optional string keyToRoom = 2;</code>
+       * <code>required .ManageRoomEnum sendedManageRoomEnum = 2;</code>
        */
-      public boolean hasKeyToRoom() {
+      public boolean hasSendedManageRoomEnum() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional string keyToRoom = 2;</code>
+       * <code>required .ManageRoomEnum sendedManageRoomEnum = 2;</code>
+       */
+      public protocols.Protocols.ManageRoomEnum getSendedManageRoomEnum() {
+        protocols.Protocols.ManageRoomEnum result = protocols.Protocols.ManageRoomEnum.valueOf(sendedManageRoomEnum_);
+        return result == null ? protocols.Protocols.ManageRoomEnum.CREATE_ROOM : result;
+      }
+      /**
+       * <code>required .ManageRoomEnum sendedManageRoomEnum = 2;</code>
+       */
+      public Builder setSendedManageRoomEnum(protocols.Protocols.ManageRoomEnum value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        sendedManageRoomEnum_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required .ManageRoomEnum sendedManageRoomEnum = 2;</code>
+       */
+      public Builder clearSendedManageRoomEnum() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        sendedManageRoomEnum_ = 1;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object keyToRoom_ = "";
+      /**
+       * <code>optional string keyToRoom = 3;</code>
+       */
+      public boolean hasKeyToRoom() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string keyToRoom = 3;</code>
        */
       public java.lang.String getKeyToRoom() {
         java.lang.Object ref = keyToRoom_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             keyToRoom_ = s;
@@ -4958,15 +5139,15 @@ public final class Protocols {
         }
       }
       /**
-       * <code>optional string keyToRoom = 2;</code>
+       * <code>optional string keyToRoom = 3;</code>
        */
       public com.google.protobuf.ByteString
-          getKeyToRoomBytes() {
+      getKeyToRoomBytes() {
         java.lang.Object ref = keyToRoom_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           keyToRoom_ = b;
           return b;
         } else {
@@ -4974,47 +5155,47 @@ public final class Protocols {
         }
       }
       /**
-       * <code>optional string keyToRoom = 2;</code>
+       * <code>optional string keyToRoom = 3;</code>
        */
       public Builder setKeyToRoom(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
         keyToRoom_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string keyToRoom = 2;</code>
+       * <code>optional string keyToRoom = 3;</code>
        */
       public Builder clearKeyToRoom() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         keyToRoom_ = getDefaultInstance().getKeyToRoom();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string keyToRoom = 2;</code>
+       * <code>optional string keyToRoom = 3;</code>
        */
       public Builder setKeyToRoomBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
         keyToRoom_ = value;
         onChanged();
         return this;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
       }
 
@@ -5033,12 +5214,12 @@ public final class Protocols {
     }
 
     @java.lang.Deprecated public static final com.google.protobuf.Parser<ManageRoomResponse>
-        PARSER = new com.google.protobuf.AbstractParser<ManageRoomResponse>() {
+            PARSER = new com.google.protobuf.AbstractParser<ManageRoomResponse>() {
       public ManageRoomResponse parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ManageRoomResponse(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ManageRoomResponse(input, extensionRegistry);
       }
     };
 
@@ -5058,8 +5239,8 @@ public final class Protocols {
   }
 
   public interface GetRoomsRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:GetRoomsRequest)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:GetRoomsRequest)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required string nick = 1;</code>
@@ -5073,7 +5254,7 @@ public final class Protocols {
      * <code>required string nick = 1;</code>
      */
     com.google.protobuf.ByteString
-        getNickBytes();
+    getNickBytes();
   }
   /**
    * <pre>
@@ -5083,9 +5264,9 @@ public final class Protocols {
    * Protobuf type {@code GetRoomsRequest}
    */
   public  static final class GetRoomsRequest extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:GetRoomsRequest)
-      GetRoomsRequestOrBuilder {
+          com.google.protobuf.GeneratedMessageV3 implements
+          // @@protoc_insertion_point(message_implements:GetRoomsRequest)
+          GetRoomsRequestOrBuilder {
     // Use GetRoomsRequest.newBuilder() to construct.
     private GetRoomsRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -5100,13 +5281,13 @@ public final class Protocols {
       return this.unknownFields;
     }
     private GetRoomsRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -5117,7 +5298,7 @@ public final class Protocols {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -5134,22 +5315,22 @@ public final class Protocols {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return protocols.Protocols.internal_static_GetRoomsRequest_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return protocols.Protocols.internal_static_GetRoomsRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              protocols.Protocols.GetRoomsRequest.class, protocols.Protocols.GetRoomsRequest.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      protocols.Protocols.GetRoomsRequest.class, protocols.Protocols.GetRoomsRequest.Builder.class);
     }
 
     private int bitField0_;
@@ -5169,8 +5350,8 @@ public final class Protocols {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           nick_ = s;
@@ -5182,12 +5363,12 @@ public final class Protocols {
      * <code>required string nick = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getNickBytes() {
+    getNickBytes() {
       java.lang.Object ref = nick_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         nick_ = b;
         return b;
       } else {
@@ -5210,7 +5391,7 @@ public final class Protocols {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, nick_);
       }
@@ -5234,7 +5415,7 @@ public final class Protocols {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof protocols.Protocols.GetRoomsRequest)) {
         return super.equals(obj);
@@ -5245,7 +5426,7 @@ public final class Protocols {
       result = result && (hasNick() == other.hasNick());
       if (hasNick()) {
         result = result && getNick()
-            .equals(other.getNick());
+                .equals(other.getNick());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -5268,62 +5449,73 @@ public final class Protocols {
     }
 
     public static protocols.Protocols.GetRoomsRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static protocols.Protocols.GetRoomsRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.GetRoomsRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.GetRoomsRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static protocols.Protocols.GetRoomsRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static protocols.Protocols.GetRoomsRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static protocols.Protocols.GetRoomsRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static protocols.Protocols.GetRoomsRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static protocols.Protocols.GetRoomsRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static protocols.Protocols.GetRoomsRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static protocols.Protocols.GetRoomsRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static protocols.Protocols.GetRoomsRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -5335,12 +5527,12 @@ public final class Protocols {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -5352,19 +5544,19 @@ public final class Protocols {
      * Protobuf type {@code GetRoomsRequest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:GetRoomsRequest)
-        protocols.Protocols.GetRoomsRequestOrBuilder {
+            com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:GetRoomsRequest)
+            protocols.Protocols.GetRoomsRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return protocols.Protocols.internal_static_GetRoomsRequest_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return protocols.Protocols.internal_static_GetRoomsRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                protocols.Protocols.GetRoomsRequest.class, protocols.Protocols.GetRoomsRequest.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        protocols.Protocols.GetRoomsRequest.class, protocols.Protocols.GetRoomsRequest.Builder.class);
       }
 
       // Construct using protocols.Protocols.GetRoomsRequest.newBuilder()
@@ -5373,7 +5565,7 @@ public final class Protocols {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -5390,7 +5582,7 @@ public final class Protocols {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return protocols.Protocols.internal_static_GetRoomsRequest_descriptor;
       }
 
@@ -5423,26 +5615,26 @@ public final class Protocols {
         return (Builder) super.clone();
       }
       public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
+              com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
       public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+              com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
       public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              int index, Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -5474,9 +5666,9 @@ public final class Protocols {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         protocols.Protocols.GetRoomsRequest parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -5506,7 +5698,7 @@ public final class Protocols {
         java.lang.Object ref = nick_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             nick_ = s;
@@ -5520,12 +5712,12 @@ public final class Protocols {
        * <code>required string nick = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getNickBytes() {
+      getNickBytes() {
         java.lang.Object ref = nick_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           nick_ = b;
           return b;
         } else {
@@ -5536,11 +5728,11 @@ public final class Protocols {
        * <code>required string nick = 1;</code>
        */
       public Builder setNick(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
         nick_ = value;
         onChanged();
         return this;
@@ -5558,22 +5750,22 @@ public final class Protocols {
        * <code>required string nick = 1;</code>
        */
       public Builder setNickBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
         nick_ = value;
         onChanged();
         return this;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
       }
 
@@ -5592,12 +5784,12 @@ public final class Protocols {
     }
 
     @java.lang.Deprecated public static final com.google.protobuf.Parser<GetRoomsRequest>
-        PARSER = new com.google.protobuf.AbstractParser<GetRoomsRequest>() {
+            PARSER = new com.google.protobuf.AbstractParser<GetRoomsRequest>() {
       public GetRoomsRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GetRoomsRequest(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new GetRoomsRequest(input, extensionRegistry);
       }
     };
 
@@ -5617,8 +5809,8 @@ public final class Protocols {
   }
 
   public interface GetRoomsResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:GetRoomsResponse)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:GetRoomsResponse)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .StatusCode status = 1;</code>
@@ -5632,8 +5824,8 @@ public final class Protocols {
     /**
      * <code>repeated .Room rooms = 2;</code>
      */
-    java.util.List<protocols.Protocols.Room> 
-        getRoomsList();
+    java.util.List<protocols.Protocols.Room>
+    getRoomsList();
     /**
      * <code>repeated .Room rooms = 2;</code>
      */
@@ -5645,13 +5837,13 @@ public final class Protocols {
     /**
      * <code>repeated .Room rooms = 2;</code>
      */
-    java.util.List<? extends protocols.Protocols.RoomOrBuilder> 
-        getRoomsOrBuilderList();
+    java.util.List<? extends protocols.Protocols.RoomOrBuilder>
+    getRoomsOrBuilderList();
     /**
      * <code>repeated .Room rooms = 2;</code>
      */
     protocols.Protocols.RoomOrBuilder getRoomsOrBuilder(
-        int index);
+            int index);
   }
   /**
    * <pre>
@@ -5661,9 +5853,9 @@ public final class Protocols {
    * Protobuf type {@code GetRoomsResponse}
    */
   public  static final class GetRoomsResponse extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:GetRoomsResponse)
-      GetRoomsResponseOrBuilder {
+          com.google.protobuf.GeneratedMessageV3 implements
+          // @@protoc_insertion_point(message_implements:GetRoomsResponse)
+          GetRoomsResponseOrBuilder {
     // Use GetRoomsResponse.newBuilder() to construct.
     private GetRoomsResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -5679,13 +5871,13 @@ public final class Protocols {
       return this.unknownFields;
     }
     private GetRoomsResponse(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -5696,7 +5888,7 @@ public final class Protocols {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -5718,7 +5910,7 @@ public final class Protocols {
                 mutable_bitField0_ |= 0x00000002;
               }
               rooms_.add(
-                  input.readMessage(protocols.Protocols.Room.PARSER, extensionRegistry));
+                      input.readMessage(protocols.Protocols.Room.PARSER, extensionRegistry));
               break;
             }
           }
@@ -5727,7 +5919,7 @@ public final class Protocols {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           rooms_ = java.util.Collections.unmodifiableList(rooms_);
@@ -5737,15 +5929,15 @@ public final class Protocols {
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return protocols.Protocols.internal_static_GetRoomsResponse_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return protocols.Protocols.internal_static_GetRoomsResponse_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              protocols.Protocols.GetRoomsResponse.class, protocols.Protocols.GetRoomsResponse.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      protocols.Protocols.GetRoomsResponse.class, protocols.Protocols.GetRoomsResponse.Builder.class);
     }
 
     private int bitField0_;
@@ -5776,8 +5968,8 @@ public final class Protocols {
     /**
      * <code>repeated .Room rooms = 2;</code>
      */
-    public java.util.List<? extends protocols.Protocols.RoomOrBuilder> 
-        getRoomsOrBuilderList() {
+    public java.util.List<? extends protocols.Protocols.RoomOrBuilder>
+    getRoomsOrBuilderList() {
       return rooms_;
     }
     /**
@@ -5796,7 +5988,7 @@ public final class Protocols {
      * <code>repeated .Room rooms = 2;</code>
      */
     public protocols.Protocols.RoomOrBuilder getRoomsOrBuilder(
-        int index) {
+            int index) {
       return rooms_.get(index);
     }
 
@@ -5821,7 +6013,7 @@ public final class Protocols {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeEnum(1, status_);
       }
@@ -5838,11 +6030,11 @@ public final class Protocols {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, status_);
+                .computeEnumSize(1, status_);
       }
       for (int i = 0; i < rooms_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, rooms_.get(i));
+                .computeMessageSize(2, rooms_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -5853,7 +6045,7 @@ public final class Protocols {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof protocols.Protocols.GetRoomsResponse)) {
         return super.equals(obj);
@@ -5866,7 +6058,7 @@ public final class Protocols {
         result = result && status_ == other.status_;
       }
       result = result && getRoomsList()
-          .equals(other.getRoomsList());
+              .equals(other.getRoomsList());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -5892,62 +6084,73 @@ public final class Protocols {
     }
 
     public static protocols.Protocols.GetRoomsResponse parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static protocols.Protocols.GetRoomsResponse parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.GetRoomsResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.GetRoomsResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static protocols.Protocols.GetRoomsResponse parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static protocols.Protocols.GetRoomsResponse parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static protocols.Protocols.GetRoomsResponse parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static protocols.Protocols.GetRoomsResponse parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static protocols.Protocols.GetRoomsResponse parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static protocols.Protocols.GetRoomsResponse parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static protocols.Protocols.GetRoomsResponse parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static protocols.Protocols.GetRoomsResponse parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -5959,12 +6162,12 @@ public final class Protocols {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -5976,19 +6179,19 @@ public final class Protocols {
      * Protobuf type {@code GetRoomsResponse}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:GetRoomsResponse)
-        protocols.Protocols.GetRoomsResponseOrBuilder {
+            com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:GetRoomsResponse)
+            protocols.Protocols.GetRoomsResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return protocols.Protocols.internal_static_GetRoomsResponse_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return protocols.Protocols.internal_static_GetRoomsResponse_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                protocols.Protocols.GetRoomsResponse.class, protocols.Protocols.GetRoomsResponse.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        protocols.Protocols.GetRoomsResponse.class, protocols.Protocols.GetRoomsResponse.Builder.class);
       }
 
       // Construct using protocols.Protocols.GetRoomsResponse.newBuilder()
@@ -5997,7 +6200,7 @@ public final class Protocols {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -6021,7 +6224,7 @@ public final class Protocols {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return protocols.Protocols.internal_static_GetRoomsResponse_descriptor;
       }
 
@@ -6063,26 +6266,26 @@ public final class Protocols {
         return (Builder) super.clone();
       }
       public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
+              com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
       public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+              com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
       public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              int index, Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -6117,9 +6320,9 @@ public final class Protocols {
               roomsBuilder_ = null;
               rooms_ = other.rooms_;
               bitField0_ = (bitField0_ & ~0x00000002);
-              roomsBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getRoomsFieldBuilder() : null;
+              roomsBuilder_ =
+                      com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                              getRoomsFieldBuilder() : null;
             } else {
               roomsBuilder_.addAllMessages(other.rooms_);
             }
@@ -6143,9 +6346,9 @@ public final class Protocols {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         protocols.Protocols.GetRoomsResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -6198,16 +6401,16 @@ public final class Protocols {
       }
 
       private java.util.List<protocols.Protocols.Room> rooms_ =
-        java.util.Collections.emptyList();
+              java.util.Collections.emptyList();
       private void ensureRoomsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
           rooms_ = new java.util.ArrayList<protocols.Protocols.Room>(rooms_);
           bitField0_ |= 0x00000002;
-         }
+        }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          protocols.Protocols.Room, protocols.Protocols.Room.Builder, protocols.Protocols.RoomOrBuilder> roomsBuilder_;
+              protocols.Protocols.Room, protocols.Protocols.Room.Builder, protocols.Protocols.RoomOrBuilder> roomsBuilder_;
 
       /**
        * <code>repeated .Room rooms = 2;</code>
@@ -6243,7 +6446,7 @@ public final class Protocols {
        * <code>repeated .Room rooms = 2;</code>
        */
       public Builder setRooms(
-          int index, protocols.Protocols.Room value) {
+              int index, protocols.Protocols.Room value) {
         if (roomsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -6260,7 +6463,7 @@ public final class Protocols {
        * <code>repeated .Room rooms = 2;</code>
        */
       public Builder setRooms(
-          int index, protocols.Protocols.Room.Builder builderForValue) {
+              int index, protocols.Protocols.Room.Builder builderForValue) {
         if (roomsBuilder_ == null) {
           ensureRoomsIsMutable();
           rooms_.set(index, builderForValue.build());
@@ -6290,7 +6493,7 @@ public final class Protocols {
        * <code>repeated .Room rooms = 2;</code>
        */
       public Builder addRooms(
-          int index, protocols.Protocols.Room value) {
+              int index, protocols.Protocols.Room value) {
         if (roomsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -6307,7 +6510,7 @@ public final class Protocols {
        * <code>repeated .Room rooms = 2;</code>
        */
       public Builder addRooms(
-          protocols.Protocols.Room.Builder builderForValue) {
+              protocols.Protocols.Room.Builder builderForValue) {
         if (roomsBuilder_ == null) {
           ensureRoomsIsMutable();
           rooms_.add(builderForValue.build());
@@ -6321,7 +6524,7 @@ public final class Protocols {
        * <code>repeated .Room rooms = 2;</code>
        */
       public Builder addRooms(
-          int index, protocols.Protocols.Room.Builder builderForValue) {
+              int index, protocols.Protocols.Room.Builder builderForValue) {
         if (roomsBuilder_ == null) {
           ensureRoomsIsMutable();
           rooms_.add(index, builderForValue.build());
@@ -6335,11 +6538,11 @@ public final class Protocols {
        * <code>repeated .Room rooms = 2;</code>
        */
       public Builder addAllRooms(
-          java.lang.Iterable<? extends protocols.Protocols.Room> values) {
+              java.lang.Iterable<? extends protocols.Protocols.Room> values) {
         if (roomsBuilder_ == null) {
           ensureRoomsIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, rooms_);
+                  values, rooms_);
           onChanged();
         } else {
           roomsBuilder_.addAllMessages(values);
@@ -6376,14 +6579,14 @@ public final class Protocols {
        * <code>repeated .Room rooms = 2;</code>
        */
       public protocols.Protocols.Room.Builder getRoomsBuilder(
-          int index) {
+              int index) {
         return getRoomsFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .Room rooms = 2;</code>
        */
       public protocols.Protocols.RoomOrBuilder getRoomsOrBuilder(
-          int index) {
+              int index) {
         if (roomsBuilder_ == null) {
           return rooms_.get(index);  } else {
           return roomsBuilder_.getMessageOrBuilder(index);
@@ -6392,8 +6595,8 @@ public final class Protocols {
       /**
        * <code>repeated .Room rooms = 2;</code>
        */
-      public java.util.List<? extends protocols.Protocols.RoomOrBuilder> 
-           getRoomsOrBuilderList() {
+      public java.util.List<? extends protocols.Protocols.RoomOrBuilder>
+      getRoomsOrBuilderList() {
         if (roomsBuilder_ != null) {
           return roomsBuilder_.getMessageOrBuilderList();
         } else {
@@ -6405,29 +6608,29 @@ public final class Protocols {
        */
       public protocols.Protocols.Room.Builder addRoomsBuilder() {
         return getRoomsFieldBuilder().addBuilder(
-            protocols.Protocols.Room.getDefaultInstance());
+                protocols.Protocols.Room.getDefaultInstance());
       }
       /**
        * <code>repeated .Room rooms = 2;</code>
        */
       public protocols.Protocols.Room.Builder addRoomsBuilder(
-          int index) {
+              int index) {
         return getRoomsFieldBuilder().addBuilder(
-            index, protocols.Protocols.Room.getDefaultInstance());
+                index, protocols.Protocols.Room.getDefaultInstance());
       }
       /**
        * <code>repeated .Room rooms = 2;</code>
        */
-      public java.util.List<protocols.Protocols.Room.Builder> 
-           getRoomsBuilderList() {
+      public java.util.List<protocols.Protocols.Room.Builder>
+      getRoomsBuilderList() {
         return getRoomsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          protocols.Protocols.Room, protocols.Protocols.Room.Builder, protocols.Protocols.RoomOrBuilder> 
-          getRoomsFieldBuilder() {
+              protocols.Protocols.Room, protocols.Protocols.Room.Builder, protocols.Protocols.RoomOrBuilder>
+      getRoomsFieldBuilder() {
         if (roomsBuilder_ == null) {
           roomsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              protocols.Protocols.Room, protocols.Protocols.Room.Builder, protocols.Protocols.RoomOrBuilder>(
+                  protocols.Protocols.Room, protocols.Protocols.Room.Builder, protocols.Protocols.RoomOrBuilder>(
                   rooms_,
                   ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
@@ -6437,12 +6640,12 @@ public final class Protocols {
         return roomsBuilder_;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
       }
 
@@ -6461,12 +6664,12 @@ public final class Protocols {
     }
 
     @java.lang.Deprecated public static final com.google.protobuf.Parser<GetRoomsResponse>
-        PARSER = new com.google.protobuf.AbstractParser<GetRoomsResponse>() {
+            PARSER = new com.google.protobuf.AbstractParser<GetRoomsResponse>() {
       public GetRoomsResponse parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GetRoomsResponse(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new GetRoomsResponse(input, extensionRegistry);
       }
     };
 
@@ -6486,8 +6689,8 @@ public final class Protocols {
   }
 
   public interface GetUsersInRoomRequestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:GetUsersInRoomRequest)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:GetUsersInRoomRequest)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required string nick = 1;</code>
@@ -6501,7 +6704,7 @@ public final class Protocols {
      * <code>required string nick = 1;</code>
      */
     com.google.protobuf.ByteString
-        getNickBytes();
+    getNickBytes();
 
     /**
      * <code>required string roomName = 2;</code>
@@ -6515,7 +6718,7 @@ public final class Protocols {
      * <code>required string roomName = 2;</code>
      */
     com.google.protobuf.ByteString
-        getRoomNameBytes();
+    getRoomNameBytes();
   }
   /**
    * <pre>
@@ -6525,9 +6728,9 @@ public final class Protocols {
    * Protobuf type {@code GetUsersInRoomRequest}
    */
   public  static final class GetUsersInRoomRequest extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:GetUsersInRoomRequest)
-      GetUsersInRoomRequestOrBuilder {
+          com.google.protobuf.GeneratedMessageV3 implements
+          // @@protoc_insertion_point(message_implements:GetUsersInRoomRequest)
+          GetUsersInRoomRequestOrBuilder {
     // Use GetUsersInRoomRequest.newBuilder() to construct.
     private GetUsersInRoomRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -6543,13 +6746,13 @@ public final class Protocols {
       return this.unknownFields;
     }
     private GetUsersInRoomRequest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -6560,7 +6763,7 @@ public final class Protocols {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -6583,22 +6786,22 @@ public final class Protocols {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return protocols.Protocols.internal_static_GetUsersInRoomRequest_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return protocols.Protocols.internal_static_GetUsersInRoomRequest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              protocols.Protocols.GetUsersInRoomRequest.class, protocols.Protocols.GetUsersInRoomRequest.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      protocols.Protocols.GetUsersInRoomRequest.class, protocols.Protocols.GetUsersInRoomRequest.Builder.class);
     }
 
     private int bitField0_;
@@ -6618,8 +6821,8 @@ public final class Protocols {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           nick_ = s;
@@ -6631,12 +6834,12 @@ public final class Protocols {
      * <code>required string nick = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getNickBytes() {
+    getNickBytes() {
       java.lang.Object ref = nick_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         nick_ = b;
         return b;
       } else {
@@ -6660,8 +6863,8 @@ public final class Protocols {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           roomName_ = s;
@@ -6673,12 +6876,12 @@ public final class Protocols {
      * <code>required string roomName = 2;</code>
      */
     public com.google.protobuf.ByteString
-        getRoomNameBytes() {
+    getRoomNameBytes() {
       java.lang.Object ref = roomName_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         roomName_ = b;
         return b;
       } else {
@@ -6705,7 +6908,7 @@ public final class Protocols {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, nick_);
       }
@@ -6735,7 +6938,7 @@ public final class Protocols {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof protocols.Protocols.GetUsersInRoomRequest)) {
         return super.equals(obj);
@@ -6746,12 +6949,12 @@ public final class Protocols {
       result = result && (hasNick() == other.hasNick());
       if (hasNick()) {
         result = result && getNick()
-            .equals(other.getNick());
+                .equals(other.getNick());
       }
       result = result && (hasRoomName() == other.hasRoomName());
       if (hasRoomName()) {
         result = result && getRoomName()
-            .equals(other.getRoomName());
+                .equals(other.getRoomName());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -6778,62 +6981,73 @@ public final class Protocols {
     }
 
     public static protocols.Protocols.GetUsersInRoomRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static protocols.Protocols.GetUsersInRoomRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.GetUsersInRoomRequest parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.GetUsersInRoomRequest parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static protocols.Protocols.GetUsersInRoomRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static protocols.Protocols.GetUsersInRoomRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static protocols.Protocols.GetUsersInRoomRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static protocols.Protocols.GetUsersInRoomRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static protocols.Protocols.GetUsersInRoomRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static protocols.Protocols.GetUsersInRoomRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static protocols.Protocols.GetUsersInRoomRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static protocols.Protocols.GetUsersInRoomRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -6845,12 +7059,12 @@ public final class Protocols {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -6862,19 +7076,19 @@ public final class Protocols {
      * Protobuf type {@code GetUsersInRoomRequest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:GetUsersInRoomRequest)
-        protocols.Protocols.GetUsersInRoomRequestOrBuilder {
+            com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:GetUsersInRoomRequest)
+            protocols.Protocols.GetUsersInRoomRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return protocols.Protocols.internal_static_GetUsersInRoomRequest_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return protocols.Protocols.internal_static_GetUsersInRoomRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                protocols.Protocols.GetUsersInRoomRequest.class, protocols.Protocols.GetUsersInRoomRequest.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        protocols.Protocols.GetUsersInRoomRequest.class, protocols.Protocols.GetUsersInRoomRequest.Builder.class);
       }
 
       // Construct using protocols.Protocols.GetUsersInRoomRequest.newBuilder()
@@ -6883,7 +7097,7 @@ public final class Protocols {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -6902,7 +7116,7 @@ public final class Protocols {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return protocols.Protocols.internal_static_GetUsersInRoomRequest_descriptor;
       }
 
@@ -6939,26 +7153,26 @@ public final class Protocols {
         return (Builder) super.clone();
       }
       public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
+              com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
       public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+              com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
       public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              int index, Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -6998,9 +7212,9 @@ public final class Protocols {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         protocols.Protocols.GetUsersInRoomRequest parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -7030,7 +7244,7 @@ public final class Protocols {
         java.lang.Object ref = nick_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             nick_ = s;
@@ -7044,12 +7258,12 @@ public final class Protocols {
        * <code>required string nick = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getNickBytes() {
+      getNickBytes() {
         java.lang.Object ref = nick_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           nick_ = b;
           return b;
         } else {
@@ -7060,11 +7274,11 @@ public final class Protocols {
        * <code>required string nick = 1;</code>
        */
       public Builder setNick(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
         nick_ = value;
         onChanged();
         return this;
@@ -7082,11 +7296,11 @@ public final class Protocols {
        * <code>required string nick = 1;</code>
        */
       public Builder setNickBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
         nick_ = value;
         onChanged();
         return this;
@@ -7106,7 +7320,7 @@ public final class Protocols {
         java.lang.Object ref = roomName_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             roomName_ = s;
@@ -7120,12 +7334,12 @@ public final class Protocols {
        * <code>required string roomName = 2;</code>
        */
       public com.google.protobuf.ByteString
-          getRoomNameBytes() {
+      getRoomNameBytes() {
         java.lang.Object ref = roomName_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           roomName_ = b;
           return b;
         } else {
@@ -7136,11 +7350,11 @@ public final class Protocols {
        * <code>required string roomName = 2;</code>
        */
       public Builder setRoomName(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
         roomName_ = value;
         onChanged();
         return this;
@@ -7158,22 +7372,22 @@ public final class Protocols {
        * <code>required string roomName = 2;</code>
        */
       public Builder setRoomNameBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
         roomName_ = value;
         onChanged();
         return this;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
       }
 
@@ -7192,12 +7406,12 @@ public final class Protocols {
     }
 
     @java.lang.Deprecated public static final com.google.protobuf.Parser<GetUsersInRoomRequest>
-        PARSER = new com.google.protobuf.AbstractParser<GetUsersInRoomRequest>() {
+            PARSER = new com.google.protobuf.AbstractParser<GetUsersInRoomRequest>() {
       public GetUsersInRoomRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GetUsersInRoomRequest(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new GetUsersInRoomRequest(input, extensionRegistry);
       }
     };
 
@@ -7217,8 +7431,8 @@ public final class Protocols {
   }
 
   public interface GetUsersInRoomResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:GetUsersInRoomResponse)
-      com.google.protobuf.MessageOrBuilder {
+          // @@protoc_insertion_point(interface_extends:GetUsersInRoomResponse)
+          com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .StatusCode status = 1;</code>
@@ -7233,7 +7447,7 @@ public final class Protocols {
      * <code>repeated string users = 2;</code>
      */
     java.util.List<java.lang.String>
-        getUsersList();
+    getUsersList();
     /**
      * <code>repeated string users = 2;</code>
      */
@@ -7246,7 +7460,7 @@ public final class Protocols {
      * <code>repeated string users = 2;</code>
      */
     com.google.protobuf.ByteString
-        getUsersBytes(int index);
+    getUsersBytes(int index);
   }
   /**
    * <pre>
@@ -7256,9 +7470,9 @@ public final class Protocols {
    * Protobuf type {@code GetUsersInRoomResponse}
    */
   public  static final class GetUsersInRoomResponse extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:GetUsersInRoomResponse)
-      GetUsersInRoomResponseOrBuilder {
+          com.google.protobuf.GeneratedMessageV3 implements
+          // @@protoc_insertion_point(message_implements:GetUsersInRoomResponse)
+          GetUsersInRoomResponseOrBuilder {
     // Use GetUsersInRoomResponse.newBuilder() to construct.
     private GetUsersInRoomResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -7274,13 +7488,13 @@ public final class Protocols {
       return this.unknownFields;
     }
     private GetUsersInRoomResponse(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+              com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -7291,7 +7505,7 @@ public final class Protocols {
               break;
             default: {
               if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+                      extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -7322,7 +7536,7 @@ public final class Protocols {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+                e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           users_ = users_.getUnmodifiableView();
@@ -7332,15 +7546,15 @@ public final class Protocols {
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return protocols.Protocols.internal_static_GetUsersInRoomResponse_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return protocols.Protocols.internal_static_GetUsersInRoomResponse_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              protocols.Protocols.GetUsersInRoomResponse.class, protocols.Protocols.GetUsersInRoomResponse.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      protocols.Protocols.GetUsersInRoomResponse.class, protocols.Protocols.GetUsersInRoomResponse.Builder.class);
     }
 
     private int bitField0_;
@@ -7366,7 +7580,7 @@ public final class Protocols {
      * <code>repeated string users = 2;</code>
      */
     public com.google.protobuf.ProtocolStringList
-        getUsersList() {
+    getUsersList() {
       return users_;
     }
     /**
@@ -7385,7 +7599,7 @@ public final class Protocols {
      * <code>repeated string users = 2;</code>
      */
     public com.google.protobuf.ByteString
-        getUsersBytes(int index) {
+    getUsersBytes(int index) {
       return users_.getByteString(index);
     }
 
@@ -7404,7 +7618,7 @@ public final class Protocols {
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeEnum(1, status_);
       }
@@ -7421,7 +7635,7 @@ public final class Protocols {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, status_);
+                .computeEnumSize(1, status_);
       }
       {
         int dataSize = 0;
@@ -7440,7 +7654,7 @@ public final class Protocols {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof protocols.Protocols.GetUsersInRoomResponse)) {
         return super.equals(obj);
@@ -7453,7 +7667,7 @@ public final class Protocols {
         result = result && status_ == other.status_;
       }
       result = result && getUsersList()
-          .equals(other.getUsersList());
+              .equals(other.getUsersList());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -7479,62 +7693,73 @@ public final class Protocols {
     }
 
     public static protocols.Protocols.GetUsersInRoomResponse parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static protocols.Protocols.GetUsersInRoomResponse parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protocols.Protocols.GetUsersInRoomResponse parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protocols.Protocols.GetUsersInRoomResponse parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static protocols.Protocols.GetUsersInRoomResponse parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static protocols.Protocols.GetUsersInRoomResponse parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static protocols.Protocols.GetUsersInRoomResponse parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static protocols.Protocols.GetUsersInRoomResponse parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static protocols.Protocols.GetUsersInRoomResponse parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
     public static protocols.Protocols.GetUsersInRoomResponse parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static protocols.Protocols.GetUsersInRoomResponse parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static protocols.Protocols.GetUsersInRoomResponse parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public Builder newBuilderForType() { return newBuilder(); }
@@ -7546,12 +7771,12 @@ public final class Protocols {
     }
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -7563,19 +7788,19 @@ public final class Protocols {
      * Protobuf type {@code GetUsersInRoomResponse}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:GetUsersInRoomResponse)
-        protocols.Protocols.GetUsersInRoomResponseOrBuilder {
+            com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:GetUsersInRoomResponse)
+            protocols.Protocols.GetUsersInRoomResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return protocols.Protocols.internal_static_GetUsersInRoomResponse_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return protocols.Protocols.internal_static_GetUsersInRoomResponse_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                protocols.Protocols.GetUsersInRoomResponse.class, protocols.Protocols.GetUsersInRoomResponse.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        protocols.Protocols.GetUsersInRoomResponse.class, protocols.Protocols.GetUsersInRoomResponse.Builder.class);
       }
 
       // Construct using protocols.Protocols.GetUsersInRoomResponse.newBuilder()
@@ -7584,7 +7809,7 @@ public final class Protocols {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -7603,7 +7828,7 @@ public final class Protocols {
       }
 
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return protocols.Protocols.internal_static_GetUsersInRoomResponse_descriptor;
       }
 
@@ -7641,26 +7866,26 @@ public final class Protocols {
         return (Builder) super.clone();
       }
       public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
+              com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
       public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+              com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
       public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              int index, Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -7700,9 +7925,9 @@ public final class Protocols {
       }
 
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         protocols.Protocols.GetUsersInRoomResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
@@ -7759,13 +7984,13 @@ public final class Protocols {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
           users_ = new com.google.protobuf.LazyStringArrayList(users_);
           bitField0_ |= 0x00000002;
-         }
+        }
       }
       /**
        * <code>repeated string users = 2;</code>
        */
       public com.google.protobuf.ProtocolStringList
-          getUsersList() {
+      getUsersList() {
         return users_.getUnmodifiableView();
       }
       /**
@@ -7784,18 +8009,18 @@ public final class Protocols {
        * <code>repeated string users = 2;</code>
        */
       public com.google.protobuf.ByteString
-          getUsersBytes(int index) {
+      getUsersBytes(int index) {
         return users_.getByteString(index);
       }
       /**
        * <code>repeated string users = 2;</code>
        */
       public Builder setUsers(
-          int index, java.lang.String value) {
+              int index, java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureUsersIsMutable();
+          throw new NullPointerException();
+        }
+        ensureUsersIsMutable();
         users_.set(index, value);
         onChanged();
         return this;
@@ -7804,11 +8029,11 @@ public final class Protocols {
        * <code>repeated string users = 2;</code>
        */
       public Builder addUsers(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureUsersIsMutable();
+          throw new NullPointerException();
+        }
+        ensureUsersIsMutable();
         users_.add(value);
         onChanged();
         return this;
@@ -7817,10 +8042,10 @@ public final class Protocols {
        * <code>repeated string users = 2;</code>
        */
       public Builder addAllUsers(
-          java.lang.Iterable<java.lang.String> values) {
+              java.lang.Iterable<java.lang.String> values) {
         ensureUsersIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, users_);
+                values, users_);
         onChanged();
         return this;
       }
@@ -7837,22 +8062,22 @@ public final class Protocols {
        * <code>repeated string users = 2;</code>
        */
       public Builder addUsersBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureUsersIsMutable();
+          throw new NullPointerException();
+        }
+        ensureUsersIsMutable();
         users_.add(value);
         onChanged();
         return this;
       }
       public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
       }
 
@@ -7871,12 +8096,12 @@ public final class Protocols {
     }
 
     @java.lang.Deprecated public static final com.google.protobuf.Parser<GetUsersInRoomResponse>
-        PARSER = new com.google.protobuf.AbstractParser<GetUsersInRoomResponse>() {
+            PARSER = new com.google.protobuf.AbstractParser<GetUsersInRoomResponse>() {
       public GetUsersInRoomResponse parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GetUsersInRoomResponse(input, extensionRegistry);
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+        return new GetUsersInRoomResponse(input, extensionRegistry);
       }
     };
 
@@ -7896,171 +8121,173 @@ public final class Protocols {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Room_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Room_fieldAccessorTable;
+          internal_static_Room_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internal_static_Room_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_LoginToServerRequest_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_LoginToServerRequest_fieldAccessorTable;
+          internal_static_LoginToServerRequest_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internal_static_LoginToServerRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_LoginToServerResponse_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_LoginToServerResponse_fieldAccessorTable;
+          internal_static_LoginToServerResponse_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internal_static_LoginToServerResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_LeaveServerRequest_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_LeaveServerRequest_fieldAccessorTable;
+          internal_static_LeaveServerRequest_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internal_static_LeaveServerRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_LeaveServerResponse_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_LeaveServerResponse_fieldAccessorTable;
+          internal_static_LeaveServerResponse_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internal_static_LeaveServerResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_ManageRoomRequest_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_ManageRoomRequest_fieldAccessorTable;
+          internal_static_ManageRoomRequest_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internal_static_ManageRoomRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_ManageRoomResponse_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_ManageRoomResponse_fieldAccessorTable;
+          internal_static_ManageRoomResponse_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internal_static_ManageRoomResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_GetRoomsRequest_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_GetRoomsRequest_fieldAccessorTable;
+          internal_static_GetRoomsRequest_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internal_static_GetRoomsRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_GetRoomsResponse_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_GetRoomsResponse_fieldAccessorTable;
+          internal_static_GetRoomsResponse_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internal_static_GetRoomsResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_GetUsersInRoomRequest_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_GetUsersInRoomRequest_fieldAccessorTable;
+          internal_static_GetUsersInRoomRequest_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internal_static_GetUsersInRoomRequest_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_GetUsersInRoomResponse_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_GetUsersInRoomResponse_fieldAccessorTable;
+          internal_static_GetUsersInRoomResponse_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internal_static_GetUsersInRoomResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
-      getDescriptor() {
+  getDescriptor() {
     return descriptor;
   }
   private static  com.google.protobuf.Descriptors.FileDescriptor
-      descriptor;
+          descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017protocols.proto\"(\n\004Room\022\021\n\troom_name\030\001" +
-      " \002(\t\022\r\n\005owner\030\002 \002(\t\"$\n\024LoginToServerRequ" +
-      "est\022\014\n\004nick\030\001 \002(\t\"4\n\025LoginToServerRespon" +
-      "se\022\033\n\006status\030\001 \002(\0162\013.StatusCode\"\"\n\022Leave" +
-      "ServerRequest\022\014\n\004nick\030\001 \002(\t\"2\n\023LeaveServ" +
-      "erResponse\022\033\n\006status\030\001 \002(\0162\013.StatusCode\"" +
-      "\234\001\n\021ManageRoomRequest\022\'\n\016manageRoomEnum\030" +
-      "\001 \002(\0162\017.ManageRoomEnum\022\014\n\004nick\030\002 \002(\t\022\020\n\010" +
-      "roomName\030\003 \002(\t\022\020\n\010password\030\004 \001(\t\022\025\n\radmi" +
-      "nPassword\030\005 \001(\t\022\025\n\rotherUserNick\030\006 \001(\t\"D",
-      "\n\022ManageRoomResponse\022\033\n\006status\030\001 \002(\0162\013.S" +
-      "tatusCode\022\021\n\tkeyToRoom\030\002 \001(\t\"\037\n\017GetRooms" +
-      "Request\022\014\n\004nick\030\001 \002(\t\"E\n\020GetRoomsRespons" +
-      "e\022\033\n\006status\030\001 \002(\0162\013.StatusCode\022\024\n\005rooms\030" +
-      "\002 \003(\0132\005.Room\"7\n\025GetUsersInRoomRequest\022\014\n" +
-      "\004nick\030\001 \002(\t\022\020\n\010roomName\030\002 \002(\t\"D\n\026GetUser" +
-      "sInRoomResponse\022\033\n\006status\030\001 \002(\0162\013.Status" +
-      "Code\022\r\n\005users\030\002 \003(\t*;\n\nStatusCode\022\006\n\002OK\020" +
-      "\000\022\023\n\017BAD_CREDENTIALS\020\001\022\020\n\014SERVER_ERROR\020\002" +
-      "*\200\001\n\016ManageRoomEnum\022\017\n\013CREATE_ROOM\020\001\022\017\n\013",
-      "DELETE_ROOM\020\002\022\r\n\tJOIN_ROOM\020\003\022\016\n\nLEAVE_RO" +
-      "OM\020\004\022\r\n\tMUTE_USER\020\005\022\017\n\013UNMUTE_USER\020\006\022\r\n\t" +
-      "KICK_USER\020\007B\026\n\tprotocolsB\tProtocols"
+            "\n\017protocols.proto\"(\n\004Room\022\021\n\troom_name\030\001" +
+                    " \002(\t\022\r\n\005owner\030\002 \002(\t\"$\n\024LoginToServerRequ" +
+                    "est\022\014\n\004nick\030\001 \002(\t\"4\n\025LoginToServerRespon" +
+                    "se\022\033\n\006status\030\001 \002(\0162\013.StatusCode\"\"\n\022Leave" +
+                    "ServerRequest\022\014\n\004nick\030\001 \002(\t\"2\n\023LeaveServ" +
+                    "erResponse\022\033\n\006status\030\001 \002(\0162\013.StatusCode\"" +
+                    "\234\001\n\021ManageRoomRequest\022\'\n\016manageRoomEnum\030" +
+                    "\001 \002(\0162\017.ManageRoomEnum\022\014\n\004nick\030\002 \002(\t\022\020\n\010" +
+                    "roomName\030\003 \002(\t\022\020\n\010password\030\004 \001(\t\022\025\n\radmi" +
+                    "nPassword\030\005 \001(\t\022\025\n\rotherUserNick\030\006 \001(\t\"s",
+            "\n\022ManageRoomResponse\022\033\n\006status\030\001 \002(\0162\013.S" +
+                    "tatusCode\022-\n\024sendedManageRoomEnum\030\002 \002(\0162" +
+                    "\017.ManageRoomEnum\022\021\n\tkeyToRoom\030\003 \001(\t\"\037\n\017G" +
+                    "etRoomsRequest\022\014\n\004nick\030\001 \002(\t\"E\n\020GetRooms" +
+                    "Response\022\033\n\006status\030\001 \002(\0162\013.StatusCode\022\024\n" +
+                    "\005rooms\030\002 \003(\0132\005.Room\"7\n\025GetUsersInRoomReq" +
+                    "uest\022\014\n\004nick\030\001 \002(\t\022\020\n\010roomName\030\002 \002(\t\"D\n\026" +
+                    "GetUsersInRoomResponse\022\033\n\006status\030\001 \002(\0162\013" +
+                    ".StatusCode\022\r\n\005users\030\002 \003(\t*;\n\nStatusCode" +
+                    "\022\006\n\002OK\020\000\022\023\n\017BAD_CREDENTIALS\020\001\022\020\n\014SERVER_",
+            "ERROR\020\002*\200\001\n\016ManageRoomEnum\022\017\n\013CREATE_ROO" +
+                    "M\020\001\022\017\n\013DELETE_ROOM\020\002\022\r\n\tJOIN_ROOM\020\003\022\016\n\nL" +
+                    "EAVE_ROOM\020\004\022\r\n\tMUTE_USER\020\005\022\017\n\013UNMUTE_USE" +
+                    "R\020\006\022\r\n\tKICK_USER\020\007B\026\n\tprotocolsB\tProtoco" +
+                    "ls"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+            new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+              public com.google.protobuf.ExtensionRegistry assignDescriptors(
+                      com.google.protobuf.Descriptors.FileDescriptor root) {
+                descriptor = root;
+                return null;
+              }
+            };
     com.google.protobuf.Descriptors.FileDescriptor
-      .internalBuildGeneratedFileFrom(descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-        }, assigner);
+            .internalBuildGeneratedFileFrom(descriptorData,
+                    new com.google.protobuf.Descriptors.FileDescriptor[] {
+                    }, assigner);
     internal_static_Room_descriptor =
-      getDescriptor().getMessageTypes().get(0);
+            getDescriptor().getMessageTypes().get(0);
     internal_static_Room_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Room_descriptor,
-        new java.lang.String[] { "RoomName", "Owner", });
+            com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_Room_descriptor,
+            new java.lang.String[] { "RoomName", "Owner", });
     internal_static_LoginToServerRequest_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+            getDescriptor().getMessageTypes().get(1);
     internal_static_LoginToServerRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_LoginToServerRequest_descriptor,
-        new java.lang.String[] { "Nick", });
+            com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_LoginToServerRequest_descriptor,
+            new java.lang.String[] { "Nick", });
     internal_static_LoginToServerResponse_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+            getDescriptor().getMessageTypes().get(2);
     internal_static_LoginToServerResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_LoginToServerResponse_descriptor,
-        new java.lang.String[] { "Status", });
+            com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_LoginToServerResponse_descriptor,
+            new java.lang.String[] { "Status", });
     internal_static_LeaveServerRequest_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+            getDescriptor().getMessageTypes().get(3);
     internal_static_LeaveServerRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_LeaveServerRequest_descriptor,
-        new java.lang.String[] { "Nick", });
+            com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_LeaveServerRequest_descriptor,
+            new java.lang.String[] { "Nick", });
     internal_static_LeaveServerResponse_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+            getDescriptor().getMessageTypes().get(4);
     internal_static_LeaveServerResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_LeaveServerResponse_descriptor,
-        new java.lang.String[] { "Status", });
+            com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_LeaveServerResponse_descriptor,
+            new java.lang.String[] { "Status", });
     internal_static_ManageRoomRequest_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+            getDescriptor().getMessageTypes().get(5);
     internal_static_ManageRoomRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_ManageRoomRequest_descriptor,
-        new java.lang.String[] { "ManageRoomEnum", "Nick", "RoomName", "Password", "AdminPassword", "OtherUserNick", });
+            com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_ManageRoomRequest_descriptor,
+            new java.lang.String[] { "ManageRoomEnum", "Nick", "RoomName", "Password", "AdminPassword", "OtherUserNick", });
     internal_static_ManageRoomResponse_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+            getDescriptor().getMessageTypes().get(6);
     internal_static_ManageRoomResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_ManageRoomResponse_descriptor,
-        new java.lang.String[] { "Status", "KeyToRoom", });
+            com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_ManageRoomResponse_descriptor,
+            new java.lang.String[] { "Status", "SendedManageRoomEnum", "KeyToRoom", });
     internal_static_GetRoomsRequest_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+            getDescriptor().getMessageTypes().get(7);
     internal_static_GetRoomsRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_GetRoomsRequest_descriptor,
-        new java.lang.String[] { "Nick", });
+            com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_GetRoomsRequest_descriptor,
+            new java.lang.String[] { "Nick", });
     internal_static_GetRoomsResponse_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+            getDescriptor().getMessageTypes().get(8);
     internal_static_GetRoomsResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_GetRoomsResponse_descriptor,
-        new java.lang.String[] { "Status", "Rooms", });
+            com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_GetRoomsResponse_descriptor,
+            new java.lang.String[] { "Status", "Rooms", });
     internal_static_GetUsersInRoomRequest_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+            getDescriptor().getMessageTypes().get(9);
     internal_static_GetUsersInRoomRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_GetUsersInRoomRequest_descriptor,
-        new java.lang.String[] { "Nick", "RoomName", });
+            com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_GetUsersInRoomRequest_descriptor,
+            new java.lang.String[] { "Nick", "RoomName", });
     internal_static_GetUsersInRoomResponse_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+            getDescriptor().getMessageTypes().get(10);
     internal_static_GetUsersInRoomResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_GetUsersInRoomResponse_descriptor,
-        new java.lang.String[] { "Status", "Users", });
+            com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_GetUsersInRoomResponse_descriptor,
+            new java.lang.String[] { "Status", "Users", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

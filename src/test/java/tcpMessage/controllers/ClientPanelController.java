@@ -1,9 +1,6 @@
 package tcpMessage.controllers;
 
-import com.google.protobuf.ProtocolStringList;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -17,13 +14,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.util.Callback;
 import javafx.util.Pair;
-import org.apache.mina.core.session.IoSession;
 import protocols.Protocols;
-import tcpMessage.MinaClientHandler;
 import tcpMessage.TcpClient;
-import tcpMessage.TcpMessage;
+import tcpMessage.model.TempRoom;
+import tcpMessage.model.TempUser;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Mixer;
@@ -32,29 +27,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 public class ClientPanelController implements Initializable {
 
     private static String HOSTNAME;//localhost
     private static int PORT;//9123
-    private TcpClient connectionClient;
-    TcpMessage tcp = new TcpMessage();
-    private List<Protocols.Room> rooms;
-    private static ArrayList<TempUser> users;
+    private TcpRequestService tcpRequestService;
+    private ArrayList<TempUser> users;
     private String username;
     private TempRoom selectedRoom;
-    private TempUser selectedUser;
 
     //tables and cols
-    @FXML private TableView<TempRoom> room_tbl;
-    @FXML private TableColumn<TempRoom, String> name_col,owner_col;
-
-    @FXML private static TableView<TempUser> user_tbl;
-    @FXML private TableView<TempUser> user_tbl_admin;
-    @FXML private TableColumn<TempUser, String> user_tbl_username_user_col,user_tbl_action_user_col;
-    @FXML private TableColumn<TempUser, String> user_tbl_username_admin_col,user_tbl_action_admin_col;
+    @FXML
+    private TableView<TempRoom> room_tbl;
+    @FXML
+    private TableColumn<TempRoom, String> name_col, owner_col;
+    @FXML
+    private TableView<TempUser> user_tbl;
+    @FXML
+    private TableView<TempUser> user_tbl_admin;
+    @FXML
+    private TableColumn<TempUser, String> user_tbl_username_user_col, user_tbl_action_user_col;
+    @FXML
+    private TableColumn<TempUser, String> user_tbl_username_admin_col, user_tbl_action_admin_col;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -62,11 +57,12 @@ public class ClientPanelController implements Initializable {
         owner_col.setCellValueFactory(new PropertyValueFactory<>("owner"));
         user_tbl_username_user_col.setCellValueFactory(new PropertyValueFactory<>("userName"));
         user_tbl_action_user_col.setCellValueFactory(new PropertyValueFactory<>("button"));
-        //user_tbl_username_admin_col.setCellValueFactory(new PropertyValueFactory<>("userName"));
-        //user_tbl_action_admin_col.setCellValueFactory(new PropertyValueFactory<>("button"));
+        user_tbl_username_admin_col.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        user_tbl_action_admin_col.setCellValueFactory(new PropertyValueFactory<>("button"));
     }
 
-    @FXML private AnchorPane
+    @FXML
+    private AnchorPane
             start_pane,
             create_room_pane,
             rooms_pane,
@@ -74,19 +70,25 @@ public class ClientPanelController implements Initializable {
             room_with_users_pane_user,
             info_pane,
             audio_pane;
+
     @FXML
-    public void show_info(ActionEvent event){
+    public void show_info(ActionEvent event) {
         info_pane.toFront();
     }
+
     @FXML
-    public void menu_go_back(MouseEvent event){
+    public void menu_go_back(MouseEvent event) {
         info_pane.toBack();
     }
+
     @FXML
     public void leave_server(ActionEvent event) throws InterruptedException {
         start_pane.toFront();
-        leaveServer(connectionClient,username);
-        connectionClient.closeConnection();
+        tcpRequestService.sendLeaveRoomRequest(username, selectedRoom.getName());
+    }
+
+    public void handle_leave_server_response(Protocols.LeaveServerResponse response) {
+        tcpRequestService.getTcpClient().closeConnection();
     }
 
     //Start view
@@ -96,207 +98,180 @@ public class ClientPanelController implements Initializable {
     private TextField v_host;
     @FXML
     private TextField v_port;
+
     @FXML
     public void connect_login(MouseEvent event) throws InterruptedException {
         username = v_username.getText();
         HOSTNAME = v_host.getText();
         PORT = Integer.parseInt(v_port.getText());
-        connectionClient = tcp.getConnection();
 
-        loginToServer(connectionClient, username);
-
-        rooms_pane.toFront();
-        reloadRooms();
-        users = new ArrayList<>();
-        users.add(new TempUser("admin"));
+        TcpClient tcpClient = new TcpClient(HOSTNAME, PORT, this);
+        tcpRequestService = new TcpRequestService(tcpClient);
+        tcpRequestService.sendLoginToServerRequest(username);
     }
 
-    //Rooms view
+    public void handle_login_to_server_response(Protocols.LoginToServerResponse response) throws InterruptedException {
+        Platform.runLater(
+                () -> {
+                    rooms_pane.toFront();
+                    tcpRequestService.sendGetRoomsRequest(username);
+                    users = new ArrayList<>();
+                    users.add(new TempUser("admin"));
+                }
+        );
+    }
 
     @FXML
     public void room_connect(MouseEvent event) throws InterruptedException {
 
         String room_password = "";
 
-
         //Get actual clicked row in table
         selectedRoom = room_tbl.getSelectionModel().getSelectedItem();
         //Join selected room
-        if(room_tbl.getSelectionModel().isEmpty()){
+        if (room_tbl.getSelectionModel().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Brak wybranego pokoju");
             alert.setHeaderText(null);
             alert.setContentText("Aby dołączyć do pokoju, należy najpierw go wybrać z listy.");
 
             alert.showAndWait();
-        }
-        else{
+        } else {
             //Text Input dialog
             TextInputDialog dialog = new TextInputDialog();
             dialog.setTitle("Podaj hasło");
             dialog.setHeaderText("Aby wejść do pokoju, należy podać hasło zabezpieczające pokój.");
             dialog.setContentText("Podaj hasło:");
             Optional<String> password = dialog.showAndWait();
-            if(password.isPresent()){
+            if (password.isPresent()) {
                 room_password = password.get();
             }
 
-            if(username.equals(selectedRoom.owner)){
-                //Redirect to room with users view
-                if(joinRoom(connectionClient,username,selectedRoom.name,room_password).equals("BAD_CREDENTIALS")){
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Złe hasło");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Wprowadź poprawne hasło do pokoju.");
-
-                    alert.showAndWait();
-                }
-                else {
-                    room_lbl_admin.setText(selectedRoom.name);
-                    user_lbl_admin.setText(username);
-                    room_with_users_pane_admin.toFront();
-                }
-
-            }
-            else{
-                if(joinRoom(connectionClient,username,selectedRoom.name, room_password).equals("BAD_CREDENTIALS")){
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Złe hasło");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Wprowadź poprawne hasło do pokoju.");
-
-                    alert.showAndWait();
-                }
-                else {
-                    room_lbl_user.setText(selectedRoom.name);
-                    user_lbl_user.setText(username);
-                    room_with_users_pane_user.toFront();
-
-                }
-            }
+            this.tcpRequestService.sendJoinRoomRequest(username, selectedRoom.getName(), room_password);
         }
     }
+
+    public void handle_manage_room_response(Protocols.ManageRoomResponse response) throws InterruptedException {
+        switch (response.getSendedManageRoomEnum()) {
+            case CREATE_ROOM:
+                this.handle_create_room_response(response);
+                break;
+            case DELETE_ROOM:
+                this.handle_delete_room_response(response);
+                break;
+            case JOIN_ROOM:
+                this.handleJoinRoomResponse(response);
+                break;
+            case KICK_USER:
+                break;
+            case LEAVE_ROOM:
+                this.handle_leave_room_response(response);
+                break;
+            case MUTE_USER:
+                break;
+            case UNMUTE_USER:
+                break;
+        }
+    }
+
+    public void handleJoinRoomResponse(Protocols.ManageRoomResponse response) {
+        Platform.runLater(
+                () -> {
+                    if (response.getStatus() == Protocols.StatusCode.BAD_CREDENTIALS) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Złe hasło");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Wprowadź poprawne hasło do pokoju.");
+
+                        alert.showAndWait();
+                    } else {
+                        room_lbl_user.setText(selectedRoom.getName());
+                        user_lbl_user.setText(username);
+                        if (selectedRoom.getOwner().equals(username)) {
+                            room_with_users_pane_admin.toFront();
+                        } else {
+                            room_with_users_pane_user.toFront();
+                        }
+                        this.tcpRequestService.sendGetUsersInRoomRequest(username, selectedRoom.getName());
+                    }
+                }
+        );
+    }
+
     @FXML
-    public void room_create(MouseEvent event){
+    public void room_create(MouseEvent event) {
 
         create_room_pane.toFront();
     }
+
     @FXML
     public void reload_rooms(MouseEvent event) throws InterruptedException {
-        reloadRooms();
+        tcpRequestService.sendGetRoomsRequest(username);
     }
 
-    public void reloadRooms() throws InterruptedException {
-        rooms = getServerRooms(connectionClient,username);
+    public void setNewRoomList(List<Protocols.Room> rooms) {
         //Clear whole table
         room_tbl.getItems().clear();
         //Get items to refreshed table
-        for(int i=0;i<rooms.size();i++) {
+        for (int i = 0; i < rooms.size(); i++) {
             room_tbl.getItems().add(new TempRoom(rooms.get(i).getRoomName(), rooms.get(i).getOwner()));
         }
         room_tbl.refresh();
     }
 
 
-
-    //Temporary Class TempRoom for rooms properties
-    public class TempRoom{
-        private String name,owner;
-        TempRoom(String name, String owner){
-            this.name = name;
-            this.owner = owner;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getOwner() {
-            return owner;
-        }
-
-        public void setOwner(String owner) {
-            this.owner = owner;
-        }
-    }
-
-    public static class TempUser{
-        private SimpleStringProperty userName;
-        private Button button;
-
-        TempUser(String name){
-
-            this.userName=new SimpleStringProperty(name);
-            this.button = new Button("Akcja");
-        }
-
-        public String getName() {
-            return userName.get();
-        }
-
-        public void setName(String name) {
-            this.userName.set(name);
-        }
-
-        public Button getButton() {
-            return button;
-        }
-        public void setButton(Button button){
-            this.button = button;
-        }
-    }
     @FXML
-    public void choose_row(MouseEvent event){
+    public void choose_row(MouseEvent event) {
 
     }
     //Inside room view
 
     @FXML
-    private Label room_lbl_user,user_lbl_user,room_lbl_admin,user_lbl_admin;
+    private Label room_lbl_user, user_lbl_user, room_lbl_admin, user_lbl_admin;
 
 
-    public static ArrayList<TempUser> convertToTempUser(ArrayList<String> inData){
+    public static ArrayList<TempUser> convertToTempUser(ArrayList<String> inData) {
         ArrayList<TempUser> tempUserArrayList = new ArrayList<>();
-        for(String names : inData){
+        for (String names : inData) {
             tempUserArrayList.add(new TempUser(names));
         }
         return tempUserArrayList;
     }
 
-    public static void reloadTemp(ArrayList<String> handledUsers) throws InterruptedException{
-        for(int i=0;i<handledUsers.size();i++) {
-            System.out.println("dokonaj odswiezenia");
+    public void handleGetUsersInRoomResponse(Protocols.GetUsersInRoomResponse response) {
+        if (username.equals(selectedRoom.getOwner())) {
+            user_tbl_admin.getItems().clear();
+            for (String userNick : response.getUsersList()) {
+                user_tbl_admin.getItems().add(new TempUser(userNick));
+            }
+            user_tbl_admin.refresh();
+        } else {
+            user_tbl.getItems().clear();
+            for (String userNick : response.getUsersList()) {
+                user_tbl.getItems().add(new TempUser(userNick));
+            }
+            user_tbl.refresh();
         }
-        users = convertToTempUser(handledUsers);
-        reloadUsers();
-    }
-    public static void reloadUsers()throws InterruptedException{
-
-        //Clear both tables: user's and admin's
-        //user_tbl_admin.getItems().clear();
-        user_tbl.getItems().clear();
-
-        for(int i=0;i<users.size();i++){
-            user_tbl.getItems().add(new TempUser(users.get(i).getName()));
-        }
-        //for(int i=0;i<users.size();i++){
-        //    user_tbl_admin.getItems().add(new TempUser(users.get(i).getName()));
-        //}
-        //Refresh tables
-        user_tbl.refresh();
-        //user_tbl_admin.refresh();
     }
 
     @FXML
     public void leave_room(MouseEvent event) throws InterruptedException {
-        leaveRoom(connectionClient, username, selectedRoom.name);
-        reloadRooms();
-        rooms_pane.toFront();
+        this.tcpRequestService.sendLeaveRoomRequest(username, selectedRoom.getName());
     }
+
+    public void handle_leave_room_response(Protocols.ManageRoomResponse response) throws InterruptedException {
+        Platform.runLater(
+                () -> {
+                    if (response.getStatus() == Protocols.StatusCode.OK) {
+                        tcpRequestService.sendGetRoomsRequest(username);
+                        rooms_pane.toFront();
+                    } else {
+                        System.out.println("WRONG RESPONSE STATUS FROM LeaveServerResponse, status = " + response.getStatus().toString());
+                    }
+                }
+        );
+    }
+
     @FXML
     private void delete_room(MouseEvent event) throws InterruptedException {
 
@@ -324,7 +299,6 @@ public class ClientPanelController implements Initializable {
         grid.add(adminPassword, 1, 1);
 
 
-
         dialog.getDialogPane().setContent(grid);
 
         // Request focus on the username field by default.
@@ -344,21 +318,9 @@ public class ClientPanelController implements Initializable {
             System.out.println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue());
         });
 
-        if(result.isPresent()){
-            if(deleteRoom(connectionClient,username, selectedRoom.name, result.get().getKey(), result.get().getValue()).equals("BAD_CREDENTIALS")){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Złe hasła");
-                alert.setHeaderText(null);
-                alert.setContentText("Wprowadź poprawne hasła do pokoju.");
-
-                alert.showAndWait();
-            }
-            else{
-                reloadRooms();
-                rooms_pane.toFront();
-            }
-        }
-        else {
+        if (result.isPresent()) {
+            this.tcpRequestService.sendDeleteRoomRequest(username, selectedRoom.getName(), result.get().getKey(), result.get().getValue());
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Złe dane");
             alert.setHeaderText(null);
@@ -367,13 +329,33 @@ public class ClientPanelController implements Initializable {
             alert.showAndWait();
         }
     }
+
+    public void handle_delete_room_response(Protocols.ManageRoomResponse response) {
+        Platform.runLater(
+                () -> {
+                    if (response.getStatus() == Protocols.StatusCode.OK) {
+                        rooms_pane.toFront();
+                    } else if (response.getStatus() == Protocols.StatusCode.BAD_CREDENTIALS) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Złe hasła");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Wprowadź poprawne hasła do pokoju.");
+
+                        alert.showAndWait();
+                    }
+                }
+        );
+    }
+
     //Create room view
     @FXML
-    private TextField v_room_passadmin,v_room_passwd,v_room_name;
+    private TextField v_room_passadmin, v_room_passwd, v_room_name;
+
     @FXML
-    public void go_back(MouseEvent event){
+    public void go_back(MouseEvent event) {
         rooms_pane.toFront();
     }
+
     @FXML
     public void create_create_room(MouseEvent event) throws InterruptedException {
         String roomname, roompass, roompassadm;
@@ -381,17 +363,35 @@ public class ClientPanelController implements Initializable {
         roompass = v_room_passwd.getText();
         roompassadm = v_room_passadmin.getText();
 
-        createRoom(connectionClient,username,roomname,roompass,roompassadm);
-        reloadRooms();
-        rooms_pane.toFront();
+        this.tcpRequestService.sendCreateRoomRequest(username, roomname, roompass, roompassadm);
     }
+
+    public void handle_create_room_response(Protocols.ManageRoomResponse response) throws InterruptedException {
+        Platform.runLater(
+                () -> {
+                    if (response.getStatus() == Protocols.StatusCode.OK) {
+                        tcpRequestService.sendGetRoomsRequest(username);
+                        rooms_pane.toFront();
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Błąd przy tworzeniu pokoju");
+                        alert.setHeaderText(null);
+                        alert.setContentText("StatusCode: " + response.getStatus().toString());
+
+                        alert.showAndWait();
+                    }
+                }
+        );
+    }
+
     @FXML
-    public void help(MouseEvent event){
+    public void help(MouseEvent event) {
 
     }
 
     //audio pane
-    @FXML private ChoiceBox micro_type;
+    @FXML
+    private ChoiceBox micro_type;
 
     public void audio_properties(ActionEvent actionEvent) {
         Mixer.Info[] infos = AudioSystem.getMixerInfo();
@@ -418,123 +418,4 @@ public class ClientPanelController implements Initializable {
         audio_pane.toBack();
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    private static void loginToServer(TcpClient tcpClient, String nick) throws InterruptedException {
-        Protocols.LoginToServerRequest.Builder request = Protocols.LoginToServerRequest.newBuilder();
-        request.setNick(nick);
-        Object message = tcpClient.send(request.build());
-        Protocols.LoginToServerResponse response = (Protocols.LoginToServerResponse) message;
-
-        System.out.println("LoginToServerResponse = " + response.toString());
-    }
-
-    private static List<Protocols.Room> getServerRooms(TcpClient tcpClient, String nick) throws InterruptedException {
-        Protocols.GetRoomsRequest.Builder request = Protocols.GetRoomsRequest.newBuilder();
-        request.setNick(nick);
-        Protocols.GetRoomsResponse response = (Protocols.GetRoomsResponse) tcpClient.send(request.build());
-        //if(response )
-        return response.getRoomsList();
-    }
-
-    private static void createRoom(TcpClient tcpClient, String nick, String roomName, String password, String adminPassword) throws InterruptedException {
-        Protocols.ManageRoomRequest.Builder request = Protocols.ManageRoomRequest.newBuilder();
-        request.setNick(nick);
-        request.setManageRoomEnum(Protocols.ManageRoomEnum.CREATE_ROOM);
-        request.setPassword(password);
-        request.setAdminPassword(adminPassword);
-        request.setRoomName(roomName);
-
-        Object message = tcpClient.send(request.build());
-        Protocols.ManageRoomResponse response = (Protocols.ManageRoomResponse) message;
-        System.out.println(response.toString());
-    }
-
-    private static String joinRoom(TcpClient tcpClient, String nick, String roomName, String password) throws InterruptedException {
-        Protocols.ManageRoomRequest.Builder request = Protocols.ManageRoomRequest.newBuilder();
-        request.setNick(nick);
-        request.setManageRoomEnum(Protocols.ManageRoomEnum.JOIN_ROOM);
-        request.setPassword(password);
-        request.setRoomName(roomName);
-
-        Object message = tcpClient.send(request.build());
-        Protocols.ManageRoomResponse response = (Protocols.ManageRoomResponse) message;
-        System.out.println(response.toString());
-        return response.getStatus().toString();
-    }
-
-    private static void leaveRoom(TcpClient tcpClient, String nick, String roomName) throws InterruptedException {
-        Protocols.ManageRoomRequest.Builder request = Protocols.ManageRoomRequest.newBuilder();
-        request.setNick(nick);
-        request.setManageRoomEnum(Protocols.ManageRoomEnum.LEAVE_ROOM);
-        request.setRoomName(roomName);
-
-        Object message = tcpClient.send(request.build());
-        Protocols.ManageRoomResponse response = (Protocols.ManageRoomResponse) message;
-        System.out.println(response.toString());
-    }
-
-    private static String deleteRoom(TcpClient tcpClient, String nick, String roomName,String password, String adminPassword) throws InterruptedException {
-        Protocols.ManageRoomRequest.Builder request = Protocols.ManageRoomRequest.newBuilder();
-        request.setNick(nick);
-        request.setManageRoomEnum(Protocols.ManageRoomEnum.DELETE_ROOM);
-        request.setPassword(password);
-        request.setAdminPassword(adminPassword);
-        request.setRoomName(roomName);
-
-        Object message = tcpClient.send(request.build());
-        Protocols.ManageRoomResponse response = (Protocols.ManageRoomResponse) message;
-        System.out.println(response.toString());
-        return response.getStatus().toString();
-    }
-
-    private static void muteUser(TcpClient tcpClient, String nick, String roomName, String userToMute) throws InterruptedException {
-        Protocols.ManageRoomRequest.Builder request = Protocols.ManageRoomRequest.newBuilder();
-        request.setNick(nick);
-        request.setManageRoomEnum(Protocols.ManageRoomEnum.MUTE_USER);
-        request.setPassword("passwordToServer");
-        request.setRoomName(roomName);
-        request.setOtherUserNick(userToMute);
-
-        Object message = tcpClient.send(request.build());
-        Protocols.ManageRoomResponse response = (Protocols.ManageRoomResponse) message;
-        System.out.println(response.toString());
-    }
-
-    private static void unmuteUser(TcpClient tcpClient, String nick, String roomName, String userToUnmute) throws InterruptedException {
-        Protocols.ManageRoomRequest.Builder request = Protocols.ManageRoomRequest.newBuilder();
-        request.setNick(nick);
-        request.setManageRoomEnum(Protocols.ManageRoomEnum.UNMUTE_USER);
-        request.setPassword("passwordToServer");
-        request.setRoomName(roomName);
-        request.setOtherUserNick(userToUnmute);
-
-        Object message = tcpClient.send(request.build());
-        Protocols.ManageRoomResponse response = (Protocols.ManageRoomResponse) message;
-        System.out.println(response.toString());
-    }
-
-    private static void kickUser(TcpClient tcpClient, String nick, String roomName, String unwantedUserNick) throws InterruptedException {
-        Protocols.ManageRoomRequest.Builder request = Protocols.ManageRoomRequest.newBuilder();
-        request.setNick(nick);
-        request.setManageRoomEnum(Protocols.ManageRoomEnum.KICK_USER);
-        request.setPassword("passwordToServer");
-        request.setAdminPassword("adminPassword");
-        request.setRoomName(roomName);
-        request.setOtherUserNick(unwantedUserNick);
-
-        Object message = tcpClient.send(request.build());
-        Protocols.ManageRoomResponse response = (Protocols.ManageRoomResponse) message;
-        System.out.println(response.toString());
-    }
-
-    private static void leaveServer(TcpClient tcpClient, String nick) throws InterruptedException {
-        Protocols.LeaveServerRequest.Builder requestBuilder = Protocols.LeaveServerRequest.newBuilder();
-        requestBuilder.setNick(nick);
-
-        Object message = tcpClient.send(requestBuilder.build());
-        Protocols.LeaveServerResponse response = (Protocols.LeaveServerResponse) message;
-        if(response.getStatus().equals(Protocols.StatusCode.OK))
-            tcpClient.closeConnection();
-        System.out.println(response.toString());
-    }
 }

@@ -73,6 +73,17 @@ public class ServerRoom {
         usersInRoom.add(newUser);
     }
 
+    public void kickAllUsersFromRoom() {
+        Protocols.ManageRoomResponse.Builder kickResponseBuilder = Protocols.ManageRoomResponse.newBuilder();
+        kickResponseBuilder.setStatus(Protocols.StatusCode.OK);
+        kickResponseBuilder.setSendedManageRoomEnum(Protocols.ManageRoomEnum.LEAVE_ROOM);
+        Protocols.ManageRoomResponse kickResponse = kickResponseBuilder.build();
+
+        for (User userInRoom : usersInRoom) {
+            userInRoom.getSession().write(kickResponse);
+        }
+    }
+
     public boolean kickUserFromRoom(User userToKick){
         if(usersInRoom.remove(userToKick)) {
 

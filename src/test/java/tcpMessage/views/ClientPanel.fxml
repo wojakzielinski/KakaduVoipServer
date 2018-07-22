@@ -131,7 +131,7 @@
                   <Font name="Segoe Script Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="kick_user_btn_admin" layoutX="151.0" layoutY="236.0" mnemonicParsing="false" onMouseClicked="#help" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: #ba5c12;" text="Usuń użytkownika" textFill="WHITE">
+            <Button fx:id="kick_user_btn_admin" layoutX="151.0" layoutY="236.0" mnemonicParsing="false" onMouseClicked="#kick_user" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: #ba5c12;" text="Usuń użytkownika" textFill="WHITE">
                <font>
                   <Font name="Segoe Script Bold" size="12.0" />
                </font>

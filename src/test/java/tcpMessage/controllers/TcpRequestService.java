@@ -85,34 +85,34 @@ public class TcpRequestService {
         tcpClient.send(request.build());
     }
 
-    public void sendMuteUserRequest(String nick, String roomName, String userToMute) throws InterruptedException {
+    public void sendMuteUserRequest(String nick, String roomName, String userToMute, String password) throws InterruptedException {
         Protocols.ManageRoomRequest.Builder request = Protocols.ManageRoomRequest.newBuilder();
         request.setNick(nick);
         request.setManageRoomEnum(Protocols.ManageRoomEnum.MUTE_USER);
-        request.setPassword("passwordToServer");
+        request.setPassword(password);
         request.setRoomName(roomName);
         request.setOtherUserNick(userToMute);
 
         tcpClient.send(request.build());
     }
 
-    public void sendUnmuteUserRequest(String nick, String roomName, String userToUnmute) throws InterruptedException {
+    public void sendUnmuteUserRequest(String nick, String roomName, String userToUnmute, String password) throws InterruptedException {
         Protocols.ManageRoomRequest.Builder request = Protocols.ManageRoomRequest.newBuilder();
         request.setNick(nick);
         request.setManageRoomEnum(Protocols.ManageRoomEnum.UNMUTE_USER);
-        request.setPassword("passwordToServer");
+        request.setPassword(password);
         request.setRoomName(roomName);
         request.setOtherUserNick(userToUnmute);
 
         tcpClient.send(request.build());
     }
 
-    public void sendKickUserRequest(String nick, String roomName, String unwantedUserNick) throws InterruptedException {
+    public void sendKickUserRequest(String nick, String roomName, String unwantedUserNick, String password, String adminPassword) throws InterruptedException {
         Protocols.ManageRoomRequest.Builder request = Protocols.ManageRoomRequest.newBuilder();
         request.setNick(nick);
         request.setManageRoomEnum(Protocols.ManageRoomEnum.KICK_USER);
-        request.setPassword("passwordToServer");
-        request.setAdminPassword("adminPassword");
+        request.setPassword(password);
+        request.setAdminPassword(adminPassword);
         request.setRoomName(roomName);
         request.setOtherUserNick(unwantedUserNick);
 

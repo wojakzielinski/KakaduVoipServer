@@ -34,8 +34,11 @@ public class ClientPanelController implements Initializable {
     private static int PORT;//9123
     private TcpRequestService tcpRequestService;
     private ArrayList<TempUser> users;
-    private String username;
-    private TempRoom selectedRoom;
+    private static String username;
+    private static String roomPass;
+    private static TempRoom selectedRoom;
+    private static TempUser selectedUser;
+
 
     //tables and cols
     @FXML
@@ -84,7 +87,7 @@ public class ClientPanelController implements Initializable {
     @FXML
     public void leave_server(ActionEvent event) throws InterruptedException {
         start_pane.toFront();
-        tcpRequestService.sendLeaveRoomRequest(username, selectedRoom.getName());
+        this.tcpRequestService.sendLeaveRoomRequest(username, selectedRoom.getName());
     }
 
     public void handle_leave_server_response(Protocols.LeaveServerResponse response) {
@@ -116,7 +119,7 @@ public class ClientPanelController implements Initializable {
                     rooms_pane.toFront();
                     tcpRequestService.sendGetRoomsRequest(username);
                     users = new ArrayList<>();
-                    users.add(new TempUser("admin"));
+
                 }
         );
     }
@@ -145,6 +148,7 @@ public class ClientPanelController implements Initializable {
             Optional<String> password = dialog.showAndWait();
             if (password.isPresent()) {
                 room_password = password.get();
+                roomPass = room_password;
             }
 
             this.tcpRequestService.sendJoinRoomRequest(username, selectedRoom.getName(), room_password);
@@ -185,11 +189,13 @@ public class ClientPanelController implements Initializable {
 
                         alert.showAndWait();
                     } else {
-                        room_lbl_user.setText(selectedRoom.getName());
-                        user_lbl_user.setText(username);
                         if (selectedRoom.getOwner().equals(username)) {
+                            room_lbl_admin.setText(selectedRoom.getName());
+                            user_lbl_admin.setText(username);
                             room_with_users_pane_admin.toFront();
                         } else {
+                            room_lbl_user.setText(selectedRoom.getName());
+                            user_lbl_user.setText(username);
                             room_with_users_pane_user.toFront();
                         }
                         this.tcpRequestService.sendGetUsersInRoomRequest(username, selectedRoom.getName());
@@ -230,25 +236,21 @@ public class ClientPanelController implements Initializable {
     private Label room_lbl_user, user_lbl_user, room_lbl_admin, user_lbl_admin;
 
 
-    public static ArrayList<TempUser> convertToTempUser(ArrayList<String> inData) {
-        ArrayList<TempUser> tempUserArrayList = new ArrayList<>();
-        for (String names : inData) {
-            tempUserArrayList.add(new TempUser(names));
-        }
-        return tempUserArrayList;
-    }
 
     public void handleGetUsersInRoomResponse(Protocols.GetUsersInRoomResponse response) {
         if (username.equals(selectedRoom.getOwner())) {
             user_tbl_admin.getItems().clear();
             for (String userNick : response.getUsersList()) {
-                user_tbl_admin.getItems().add(new TempUser(userNick));
+                user_tbl_admin.getItems().add(new TempUser(tcpRequestService,userNick,new Button(), username, selectedRoom.getName(),roomPass));
+                user_tbl_admin.refresh();
             }
             user_tbl_admin.refresh();
         } else {
             user_tbl.getItems().clear();
             for (String userNick : response.getUsersList()) {
-                user_tbl.getItems().add(new TempUser(userNick));
+
+                user_tbl.getItems().add(new TempUser(tcpRequestService, userNick, new Button(), username, selectedRoom.getName(), roomPass));
+                user_tbl.refresh();
             }
             user_tbl.refresh();
         }
@@ -272,6 +274,78 @@ public class ClientPanelController implements Initializable {
         );
     }
 
+    @FXML
+    private void kick_user(MouseEvent event) throws InterruptedException{
+
+
+        //Get actual clicked row in table
+        selectedUser = user_tbl_admin.getSelectionModel().getSelectedItem();
+        //Kick HIM out!
+        if (user_tbl_admin.getSelectionModel().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Brak wybranego użytkownika");
+            alert.setHeaderText(null);
+            alert.setContentText("Aby usunąć użytkownika, należy najpierw wybrać go z listy.");
+
+            alert.showAndWait();
+        } else {
+            Dialog<Pair<String, String>> dialog = new Dialog<>();
+            dialog.setTitle("Weryfikacja administratora");
+            dialog.setHeaderText("Aby usunąć użytkownika, należy podać hasło dostępu do pokoju oraz hasło administracyjne.");
+
+            ButtonType submitButton = new ButtonType("Potwierdź", ButtonBar.ButtonData.OK_DONE);
+            ButtonType cancelButton = new ButtonType("Anuluj", ButtonBar.ButtonData.CANCEL_CLOSE);
+            dialog.getDialogPane().getButtonTypes().addAll(submitButton, cancelButton);
+
+            GridPane grid = new GridPane();
+            grid.setHgap(10);
+            grid.setVgap(10);
+            grid.setPadding(new Insets(20, 150, 10, 10));
+
+            TextField password = new PasswordField();
+            password.setPromptText("Hasło dostępu");
+            PasswordField adminPassword = new PasswordField();
+            adminPassword.setPromptText("Hasło administracyjne");
+
+            grid.add(new Label("Podaj hasło dostępu:"), 0, 0);
+            grid.add(password, 1, 0);
+            grid.add(new Label("Podaj hasło administracyjne:"), 0, 1);
+            grid.add(adminPassword, 1, 1);
+
+
+            dialog.getDialogPane().setContent(grid);
+
+            // Request focus on the username field by default.
+            Platform.runLater(() -> password.requestFocus());
+
+            // Convert the result to a username-password-pair when the login button is clicked.
+            dialog.setResultConverter(dialogButton -> {
+                if (dialogButton == submitButton) {
+                    return new Pair<>(password.getText(), adminPassword.getText());
+                }
+                return null;
+            });
+
+            Optional<Pair<String, String>> result = dialog.showAndWait();
+
+            result.ifPresent(usernamePassword -> {
+                System.out.println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue());
+            });
+
+            if (result.isPresent()) {
+                this.tcpRequestService.sendKickUserRequest(username,selectedRoom.getName(),selectedUser.getUserName(),result.get().getKey(), result.get().getValue());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Złe dane");
+                alert.setHeaderText(null);
+                alert.setContentText("Wprowadź hasło zabezpieczające pokój oraz hasło administracyjne.");
+
+                alert.showAndWait();
+            }
+
+        }
+
+    }
     @FXML
     private void delete_room(MouseEvent event) throws InterruptedException {
 
@@ -417,5 +491,7 @@ public class ClientPanelController implements Initializable {
     public void go_back_audio(MouseEvent event) {
         audio_pane.toBack();
     }
+
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

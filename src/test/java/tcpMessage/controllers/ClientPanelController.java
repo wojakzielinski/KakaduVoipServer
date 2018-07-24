@@ -32,12 +32,13 @@ public class ClientPanelController implements Initializable {
 
     private static String HOSTNAME;//localhost
     private static int PORT;//9123
-    private TcpRequestService tcpRequestService;
+    public static TcpRequestService tcpRequestService;
     private ArrayList<TempUser> users;
-    private static String username;
+    public static String username;
     private static String roomPass;
     private static TempRoom selectedRoom;
     private static TempUser selectedUser;
+    public static TcpClient tcpClient;
 
 
     //tables and cols
@@ -87,7 +88,8 @@ public class ClientPanelController implements Initializable {
     @FXML
     public void leave_server(ActionEvent event) throws InterruptedException {
         start_pane.toFront();
-        this.tcpRequestService.sendLeaveRoomRequest(username, selectedRoom.getName());
+        this.tcpRequestService.sendLeaveServerRequest(username);
+        tcpClient.closeConnection();
     }
 
     public void handle_leave_server_response(Protocols.LeaveServerResponse response) {
@@ -104,13 +106,22 @@ public class ClientPanelController implements Initializable {
 
     @FXML
     public void connect_login(MouseEvent event) throws InterruptedException {
-        username = v_username.getText();
-        HOSTNAME = v_host.getText();
-        PORT = Integer.parseInt(v_port.getText());
+        if(v_username.getText().equals("") || v_host.getText().equals("") || v_port.getText().equals("")){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Brak danych");
+            alert.setHeaderText(null);
+            alert.setContentText("Aby połączyć się z serwerem KakaduVoip, należy najpierw podać nazwę użytkownika, adres serwera oraz jego port.");
 
-        TcpClient tcpClient = new TcpClient(HOSTNAME, PORT, this);
-        tcpRequestService = new TcpRequestService(tcpClient);
-        tcpRequestService.sendLoginToServerRequest(username);
+            alert.showAndWait();
+        }
+        else {
+            username = v_username.getText();
+            HOSTNAME = v_host.getText();
+            PORT = Integer.parseInt(v_port.getText());
+            tcpClient= new TcpClient(HOSTNAME, PORT, this);
+            tcpRequestService = new TcpRequestService(tcpClient);
+            tcpRequestService.sendLoginToServerRequest(username);
+        }
     }
 
     public void handle_login_to_server_response(Protocols.LoginToServerResponse response) throws InterruptedException {

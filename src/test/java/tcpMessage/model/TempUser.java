@@ -32,23 +32,28 @@ public class TempUser {
         this.requestService = tcpRequestService;
         this.type = 0;
 
+        if(name.equals(appOwner)){
+            System.out.println("IM APP OWNER");
+            this.button.setText("To ja");
+        }else {
+            this.button.setText("Wycisz");
+            this.button.setOnAction(ActionEvent -> {
+                if(this.button.getText()=="Mute"){
+                    type = 0;
+                    System.out.println("Mute user: "+this.getUserName());
+                    this.eventHandler = new EventHandler(tcpRequestService,roomName,appOwner,roomPassword,name,type);
+                    this.button.setText("Przywróć");
+                }
+                else {
+                    type = 1;
+                    System.out.println("Unmute user: "+this.getUserName());
+                    this.eventHandler = new EventHandler(tcpRequestService,roomName,appOwner,roomPassword,name,type);
+                    this.button.setText("Wycisz");
+                }
+                this.eventHandler.handle(ActionEvent);
+            });
+        }
 
-        this.button.setText("Mute");
-        this.button.setOnAction(ActionEvent -> {
-            if(this.button.getText()=="Mute"){
-                type = 0;
-                System.out.println("Mute user: "+this.getUserName());
-                this.eventHandler = new EventHandler(tcpRequestService,roomName,appOwner,roomPassword,name,type);
-                this.button.setText("Unmute");
-            }
-            else {
-                type = 1;
-                System.out.println("Unmute user: "+this.getUserName());
-                this.eventHandler = new EventHandler(tcpRequestService,roomName,appOwner,roomPassword,name,type);
-                this.button.setText("Mute");
-            }
-            this.eventHandler.handle(ActionEvent);
-        });
     }
 
     public String getUserName() {

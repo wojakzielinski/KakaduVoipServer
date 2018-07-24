@@ -66,8 +66,8 @@ public class ServerRoom {
 
         //send to users actual list of users in room
         for(User userInRoom: usersInRoom) {
-            System.out.println("Sending to: "+userInRoom.getNick()+", iosession="+userInRoom.getSession().toString());
-            userInRoom.getSession().write(response);
+            System.out.println("Sending to: "+userInRoom.getNick()+", iosession="+userInRoom.getTcpSession().toString());
+            userInRoom.getTcpSession().write(response);
         }
         //add new user to room
         usersInRoom.add(newUser);
@@ -80,7 +80,7 @@ public class ServerRoom {
         Protocols.ManageRoomResponse kickResponse = kickResponseBuilder.build();
 
         for (User userInRoom : usersInRoom) {
-            userInRoom.getSession().write(kickResponse);
+            userInRoom.getTcpSession().write(kickResponse);
         }
     }
 
@@ -96,8 +96,8 @@ public class ServerRoom {
 
             //send to users actual list of users in room
             for (User userInRoom : usersInRoom) {
-                System.out.println("Sending to: " + userInRoom.getNick() + ", iosession=" + userInRoom.getSession().toString());
-                userInRoom.getSession().write(response);
+                System.out.println("Sending to: " + userInRoom.getNick() + ", iosession=" + userInRoom.getTcpSession().toString());
+                userInRoom.getTcpSession().write(response);
             }
             //add new user to room
             return true;
@@ -122,8 +122,8 @@ public class ServerRoom {
 
         //send to users actual list of users in room
         for(User userInRoom: usersInRoom) {
-            System.out.println("Sending to: "+userInRoom.getNick()+", iosession="+userInRoom.getSession().toString());
-            userInRoom.getSession().write(response);
+            System.out.println("Sending to: "+userInRoom.getNick()+", iosession="+userInRoom.getTcpSession().toString());
+            userInRoom.getTcpSession().write(response);
         }
     }
 

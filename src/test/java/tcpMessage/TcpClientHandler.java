@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * @author behindjava.com
  */
-public class MinaClientHandler extends IoHandlerAdapter {
+public class TcpClientHandler extends IoHandlerAdapter {
     private final Logger logger = (Logger) LoggerFactory.getLogger(getClass());
     private ClientPanelController clientPanelController;
 
@@ -22,13 +22,13 @@ public class MinaClientHandler extends IoHandlerAdapter {
 
     @Override
     public void sessionOpened(IoSession session) {
-        System.out.println("MinaClientHandler.sessionOpened");
+        System.out.println("TcpClientHandler.sessionOpened");
     }
 
     @Override
     public void messageReceived(IoSession session, Object message) throws InterruptedException {
 
-        System.out.println("MinaClientHandler.messageReceived, class=" + message.getClass());
+        System.out.println("TcpClientHandler.messageReceived, class=" + message.getClass());
         if (message instanceof Protocols.GetUsersInRoomResponse) {
             this.clientPanelController.handleGetUsersInRoomResponse((Protocols.GetUsersInRoomResponse) message);
         } else if (message instanceof Protocols.GetRoomsResponse) {
@@ -48,7 +48,7 @@ public class MinaClientHandler extends IoHandlerAdapter {
 
     @Override
     public void exceptionCaught(IoSession session, Throwable cause) {
-        System.out.println("MinaClientHandler.exceptionCaught");
+        System.out.println("TcpClientHandler.exceptionCaught");
         cause.printStackTrace();
         session.close();
     }

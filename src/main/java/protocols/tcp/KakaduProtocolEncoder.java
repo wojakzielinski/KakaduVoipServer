@@ -1,9 +1,10 @@
-package protocols;
+package protocols.tcp;
 
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolEncoder;
 import org.apache.mina.filter.codec.ProtocolEncoderOutput;
+import protocols.Protocols;
 
 
 public class KakaduProtocolEncoder implements ProtocolEncoder {

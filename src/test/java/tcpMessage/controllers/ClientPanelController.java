@@ -17,6 +17,8 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 import protocols.Protocols;
 import tcpMessage.TcpClient;
+import tcpMessage.UdpClient;
+import tcpMessage.model.AudioSendingThread;
 import tcpMessage.model.TempRoom;
 import tcpMessage.model.TempUser;
 
@@ -33,6 +35,9 @@ public class ClientPanelController implements Initializable {
     private static String HOSTNAME;//localhost
     private static int PORT;//9123
     public static TcpRequestService tcpRequestService;
+    private UdpClient udpClient;
+    private Thread soundSendingThread;
+    private AudioSendingThread audioSendingThread;
     private ArrayList<TempUser> users;
     public static String username;
     private static String roomPass;
@@ -121,6 +126,7 @@ public class ClientPanelController implements Initializable {
             tcpClient= new TcpClient(HOSTNAME, PORT, this);
             tcpRequestService = new TcpRequestService(tcpClient);
             tcpRequestService.sendLoginToServerRequest(username);
+            udpClient = new UdpClient(HOSTNAME, PORT+1);
         }
     }
 
@@ -131,6 +137,10 @@ public class ClientPanelController implements Initializable {
                     tcpRequestService.sendGetRoomsRequest(username);
                     users = new ArrayList<>();
 
+                    //tell server, that we are connected to udp
+                    Protocols.RegisterUdpSession.Builder registerUdpSession =  Protocols.RegisterUdpSession.newBuilder();
+                    registerUdpSession.setUsername(this.username);
+                    udpClient.send(registerUdpSession.build());
                 }
         );
     }
@@ -210,6 +220,10 @@ public class ClientPanelController implements Initializable {
                             room_with_users_pane_user.toFront();
                         }
                         this.tcpRequestService.sendGetUsersInRoomRequest(username, selectedRoom.getName());
+                        //start sending audio to users in room
+                        audioSendingThread = new AudioSendingThread(this.udpClient, this.username, this.selectedRoom.getName());
+                        soundSendingThread = new Thread(audioSendingThread);
+                        soundSendingThread.start();
                     }
                 }
         );
@@ -277,6 +291,14 @@ public class ClientPanelController implements Initializable {
                 () -> {
                     if (response.getStatus() == Protocols.StatusCode.OK) {
                         tcpRequestService.sendGetRoomsRequest(username);
+                        //stop sending audio
+                        try {
+                            audioSendingThread.terminate();
+                            soundSendingThread.join();
+                        } catch (InterruptedException e){
+                            System.out.println("Cannot stop sending audio:");
+                            e.printStackTrace();
+                        }
                         rooms_pane.toFront();
                     } else {
                         System.out.println("WRONG RESPONSE STATUS FROM LeaveServerResponse, status = " + response.getStatus().toString());

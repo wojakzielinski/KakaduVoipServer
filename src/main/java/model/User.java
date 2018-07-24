@@ -7,7 +7,8 @@ import java.util.List;
 
 public class User {
     private String nick;
-    private IoSession session;
+    private IoSession tcpSession;
+    private IoSession udpSession;
     private List<String> mutedUserNicks = new ArrayList<>();
 
     public String getNick() {
@@ -18,20 +19,24 @@ public class User {
         this.nick = nick;
     }
 
-    public IoSession getSession() {
-        return session;
+    public IoSession getTcpSession() {
+        return tcpSession;
     }
 
-    public void setSession(IoSession session) {
-        this.session = session;
+    public void setTcpSession(IoSession tcpSession) {
+        this.tcpSession = tcpSession;
+    }
+
+    public IoSession getUdpSession() {
+        return udpSession;
+    }
+
+    public void setUdpSession(IoSession udpSession) {
+        this.udpSession = udpSession;
     }
 
     public List<String> getMutedUserNicks() {
         return mutedUserNicks;
-    }
-
-    public void setMutedUserNicks(List<String> mutedUserNicks) {
-        this.mutedUserNicks = mutedUserNicks;
     }
 
     @Override

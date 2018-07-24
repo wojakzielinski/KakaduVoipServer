@@ -1,34 +1,31 @@
 package tcpMessage;
 
 import org.apache.mina.core.future.ConnectFuture;
-import org.apache.mina.core.service.IoConnector;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.logging.LoggingFilter;
-import org.apache.mina.transport.socket.nio.NioSocketConnector;
-import protocols.tcp.KakaduCodecFactory;
-import tcpMessage.controllers.ClientPanelController;
+import org.apache.mina.transport.socket.nio.NioDatagramConnector;
+import protocols.udp.KakaduVoiceCodecFactory;
 
 import java.net.InetSocketAddress;
 
-public class TcpClient {
+/**
+ * Created by Szymon on 22.07.2018.
+ */
+public class UdpClient {
     private String ip;
     private int port;
 
     private static IoSession session;
-    private IoConnector connector;
+    private NioDatagramConnector connector;
 
-    public TcpClient(String ip, int port, ClientPanelController clientPanelController) {
+    public UdpClient(String ip, int port) {
         this.ip = ip;
         this.port = port;
-        connector = new NioSocketConnector();
-        connector.getSessionConfig().setReadBufferSize(2048);
-
+        connector = new NioDatagramConnector();
         connector.getFilterChain().addLast("logger", new LoggingFilter());
-        connector.getFilterChain().addLast("codec", new ProtocolCodecFilter(new KakaduCodecFactory()));
-        TcpClientHandler handler = new TcpClientHandler();
-        handler.setClientPanelController(clientPanelController);
-        connector.setHandler(handler);
+        connector.getFilterChain().addLast("codec", new ProtocolCodecFilter(new KakaduVoiceCodecFactory()));
+        connector.setHandler(new UdpClientHandler());
         ConnectFuture future = connector.connect(new InetSocketAddress(ip, port));
         future.awaitUninterruptibly();
 
@@ -39,7 +36,7 @@ public class TcpClient {
         session.getConfig().setUseReadOperation(true);
     }
 
-    public void send(Object message){
+    public void send(Object message) {
         session.write(message);
     }
 

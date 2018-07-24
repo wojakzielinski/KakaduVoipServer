@@ -10,10 +10,6 @@ import protocols.Protocols;
 import java.util.*;
 
 public class TcpServerHandler extends IoHandlerAdapter {
-    //key is room name
-    private Map<String, ServerRoom> serverRoomMap = new TreeMap<>();
-    private List<User> loggedUsers = new ArrayList<>();
-
     @Override
     public void exceptionCaught(IoSession session, Throwable cause) throws Exception {
         cause.printStackTrace();
@@ -44,17 +40,17 @@ public class TcpServerHandler extends IoHandlerAdapter {
             response = message;
         }
 
-        System.out.println("Handling message end, serverRoomMap.size = "+serverRoomMap.size());
-        System.out.println("ServerRoomMap.size = "+serverRoomMap.size());
-        System.out.println("LoggedUsers.size = "+loggedUsers.size());
+        System.out.println("Handling message end, serverRoomMap.size = "+ServerData.INSTANCE.serverRoomMap.size());
+        System.out.println("ServerRoomMap.size = "+ServerData.INSTANCE.serverRoomMap.size());
+        System.out.println("LoggedUsers.size = "+ServerData.INSTANCE.loggedUsers.size());
 
         System.out.println("Logged users: ");
-        for(User user: loggedUsers){
+        for(User user: ServerData.INSTANCE.loggedUsers){
             System.out.println(user.toString());
             user.printMutedUsers();
         }
         System.out.println("Rooms: ");
-        for (Map.Entry<String, ServerRoom> serverRoomEntry : serverRoomMap.entrySet())
+        for (Map.Entry<String, ServerRoom> serverRoomEntry : ServerData.INSTANCE.serverRoomMap.entrySet())
             System.out.println(serverRoomEntry.getValue().toString());
         session.write(response);
     }
@@ -68,21 +64,21 @@ public class TcpServerHandler extends IoHandlerAdapter {
         System.out.println(request.toString());
         User user = new User();
         user.setNick(request.getNick());
-        user.setSession(ioSession);
-        loggedUsers.add(user);
+        user.setTcpSession(ioSession);
+        ServerData.INSTANCE.loggedUsers.add(user);
 
         Protocols.LoginToServerResponse.Builder responseBuilder = Protocols.LoginToServerResponse.newBuilder();
         responseBuilder.setStatus(Protocols.StatusCode.OK);
-        System.out.println("LoginToServerResponse end, loggedUsers.size = "+loggedUsers.size());
+        System.out.println("LoginToServerResponse end, loggedUsers.size = "+ServerData.INSTANCE.loggedUsers.size());
 
         return responseBuilder.build();
     }
 
     private Protocols.LeaveServerResponse handleLeaveServerRequest(Protocols.LeaveServerRequest request) {
         Protocols.LeaveServerResponse.Builder response = Protocols.LeaveServerResponse.newBuilder();
-        loggedUsers.removeIf(user -> user.getNick().equals(request.getNick()));
+        ServerData.INSTANCE.loggedUsers.removeIf(user -> user.getNick().equals(request.getNick()));
         response.setStatus(Protocols.StatusCode.OK);
-        System.out.println("LeaveServerRequestHandling end, loggedUsers.size = "+loggedUsers.size());
+        System.out.println("LeaveServerRequestHandling end, loggedUsers.size = "+ServerData.INSTANCE.loggedUsers.size());
 
         return response.build();
     }
@@ -131,7 +127,7 @@ public class TcpServerHandler extends IoHandlerAdapter {
         serverRoom.setPassword(request.getPassword());
         serverRoom.setAdminPassword(request.getAdminPassword());
 
-        serverRoomMap.put(request.getRoomName(), serverRoom);
+        ServerData.INSTANCE.serverRoomMap.put(request.getRoomName(), serverRoom);
 
         this.sendNewRoomListToLoggerUsers(request.getNick());
 
@@ -145,8 +141,8 @@ public class TcpServerHandler extends IoHandlerAdapter {
         Protocols.ManageRoomResponse.Builder responseBuilder = Protocols.ManageRoomResponse.newBuilder();
         responseBuilder.setSendedManageRoomEnum(Protocols.ManageRoomEnum.JOIN_ROOM);
 
-        ServerRoom serverRoom = serverRoomMap.get(request.getRoomName());
-        User user = findUserFromNick(request.getNick());
+        ServerRoom serverRoom = ServerData.INSTANCE.serverRoomMap.get(request.getRoomName());
+        User user = ServerData.INSTANCE.findUserFromNick(request.getNick());
         if (serverRoom != null && user != null && serverRoom.getPassword().equals(request.getPassword())) {
             serverRoom.joinUserToRoom(user);
             responseBuilder.setStatus(Protocols.StatusCode.OK);
@@ -159,10 +155,10 @@ public class TcpServerHandler extends IoHandlerAdapter {
     private Protocols.ManageRoomResponse handleLeaveRoom(Protocols.ManageRoomRequest request) {
         Protocols.ManageRoomResponse.Builder response = Protocols.ManageRoomResponse.newBuilder();
         response.setSendedManageRoomEnum(Protocols.ManageRoomEnum.LEAVE_ROOM);
-        User user = findUserFromNick(request.getNick());
+        User user = ServerData.INSTANCE.findUserFromNick(request.getNick());
         if (user != null ){
             //&& serverRoomMap.get(request.getRoomName()).getUsersInRoom().remove(user))
-            serverRoomMap.get(request.getRoomName()).leaveRoom(user);
+            ServerData.INSTANCE.serverRoomMap.get(request.getRoomName()).leaveRoom(user);
             response.setStatus(Protocols.StatusCode.OK);
         }else
             response.setStatus(Protocols.StatusCode.BAD_CREDENTIALS);
@@ -173,15 +169,15 @@ public class TcpServerHandler extends IoHandlerAdapter {
     private Protocols.ManageRoomResponse handlekickUserFromRoom(Protocols.ManageRoomRequest request) {
         Protocols.ManageRoomResponse.Builder response = Protocols.ManageRoomResponse.newBuilder();
         response.setSendedManageRoomEnum(Protocols.ManageRoomEnum.KICK_USER);
-        ServerRoom serverRoom = serverRoomMap.get(request.getRoomName());
-        User userToKick = findUserFromNick(request.getOtherUserNick());
+        ServerRoom serverRoom = ServerData.INSTANCE.serverRoomMap.get(request.getRoomName());
+        User userToKick = ServerData.INSTANCE.findUserFromNick(request.getOtherUserNick());
 
         if (userToKick != null && serverRoom.getAdminPassword().equals(request.getAdminPassword())
                 && serverRoom.kickUserFromRoom(userToKick)) {
             Protocols.ManageRoomResponse.Builder kickResponse = Protocols.ManageRoomResponse.newBuilder();
             kickResponse.setStatus(Protocols.StatusCode.OK);
             kickResponse.setSendedManageRoomEnum(Protocols.ManageRoomEnum.LEAVE_ROOM);
-            userToKick.getSession().write(kickResponse.build());
+            userToKick.getTcpSession().write(kickResponse.build());
 
             response.setStatus(Protocols.StatusCode.OK);
         } else
@@ -192,11 +188,11 @@ public class TcpServerHandler extends IoHandlerAdapter {
     private Protocols.ManageRoomResponse handleDeleteRoom(Protocols.ManageRoomRequest request) {
         Protocols.ManageRoomResponse.Builder response = Protocols.ManageRoomResponse.newBuilder();
         response.setSendedManageRoomEnum(Protocols.ManageRoomEnum.DELETE_ROOM);
-        ServerRoom serverRoom = serverRoomMap.get(request.getRoomName());
+        ServerRoom serverRoom = ServerData.INSTANCE.serverRoomMap.get(request.getRoomName());
         if (serverRoom.getAdminPassword().equals(request.getAdminPassword())) {
             System.out.println("Romoving room from map");
             serverRoom.kickAllUsersFromRoom();
-            serverRoomMap.remove(request.getRoomName());
+            ServerData.INSTANCE.serverRoomMap.remove(request.getRoomName());
             response.setStatus(Protocols.StatusCode.OK);
             this.sendNewRoomListToLoggerUsers(request.getNick());
         } else
@@ -208,8 +204,8 @@ public class TcpServerHandler extends IoHandlerAdapter {
     private Protocols.ManageRoomResponse  handleMuteUser(Protocols.ManageRoomRequest request){
         Protocols.ManageRoomResponse.Builder response = Protocols.ManageRoomResponse.newBuilder();
         response.setSendedManageRoomEnum(Protocols.ManageRoomEnum.MUTE_USER);
-        User user= findUserFromNick(request.getNick());
-        User userToMute = findUserFromNick(request.getOtherUserNick());
+        User user= ServerData.INSTANCE.findUserFromNick(request.getNick());
+        User userToMute = ServerData.INSTANCE.findUserFromNick(request.getOtherUserNick());
         if(user!= null && userToMute != null) {
             user.getMutedUserNicks().add(userToMute.getNick());
             response.setStatus(Protocols.StatusCode.OK);
@@ -222,8 +218,8 @@ public class TcpServerHandler extends IoHandlerAdapter {
         Protocols.ManageRoomResponse.Builder response = Protocols.ManageRoomResponse.newBuilder();
         response.setSendedManageRoomEnum(Protocols.ManageRoomEnum.UNMUTE_USER);
 
-        User user= findUserFromNick(request.getNick());
-        User userToUnmute = findUserFromNick(request.getOtherUserNick());
+        User user= ServerData.INSTANCE.findUserFromNick(request.getNick());
+        User userToUnmute = ServerData.INSTANCE.findUserFromNick(request.getOtherUserNick());
         if(user != null && userToUnmute != null) {
             user.getMutedUserNicks().remove(userToUnmute.getNick());
             response.setStatus(Protocols.StatusCode.OK);
@@ -234,8 +230,8 @@ public class TcpServerHandler extends IoHandlerAdapter {
 
     private Protocols.GetRoomsResponse handleGetRoomsRequest(Protocols.GetRoomsRequest request){
         Protocols.GetRoomsResponse.Builder response = Protocols.GetRoomsResponse.newBuilder();
-        if(findUserFromNick(request.getNick()) != null) {
-            for (Map.Entry<String, ServerRoom> serverRoomEntry : serverRoomMap.entrySet()) {
+        if(ServerData.INSTANCE.findUserFromNick(request.getNick()) != null) {
+            for (Map.Entry<String, ServerRoom> serverRoomEntry : ServerData.INSTANCE.serverRoomMap.entrySet()) {
                 Protocols.Room.Builder roomBuilder = Protocols.Room.newBuilder();
                 roomBuilder.setOwner(serverRoomEntry.getValue().getOwner().getNick());
                 roomBuilder.setRoomName(serverRoomEntry.getKey());
@@ -249,8 +245,8 @@ public class TcpServerHandler extends IoHandlerAdapter {
 
     private Protocols.GetUsersInRoomResponse handleGetUsersInRoomRequest(Protocols.GetUsersInRoomRequest request){
         Protocols.GetUsersInRoomResponse.Builder response = Protocols.GetUsersInRoomResponse.newBuilder();
-        ServerRoom serverRoom = serverRoomMap.get(request.getRoomName());
-        User user = findUserFromNick(request.getNick());
+        ServerRoom serverRoom = ServerData.INSTANCE.serverRoomMap.get(request.getRoomName());
+        User user = ServerData.INSTANCE.findUserFromNick(request.getNick());
         if(serverRoom != null && user != null && serverRoom.getUsersInRoom().contains(user)){
             for(User userInRoom: serverRoom.getUsersInRoom()){
                 response.addUsers(userInRoom.getNick());
@@ -264,7 +260,7 @@ public class TcpServerHandler extends IoHandlerAdapter {
 
     private void sendNewRoomListToLoggerUsers(String creatorNick){
         Protocols.GetRoomsResponse.Builder responseBuilder = Protocols.GetRoomsResponse.newBuilder();
-        for(Map.Entry<String, ServerRoom> serverRoomEntry: this.serverRoomMap.entrySet()){
+        for(Map.Entry<String, ServerRoom> serverRoomEntry: ServerData.INSTANCE.serverRoomMap.entrySet()){
             Protocols.Room.Builder room = Protocols.Room.newBuilder();
             room.setRoomName(serverRoomEntry.getValue().getName());
             room.setOwner(serverRoomEntry.getValue().getOwner().getNick());
@@ -272,19 +268,10 @@ public class TcpServerHandler extends IoHandlerAdapter {
         }
         responseBuilder.setStatus(Protocols.StatusCode.OK);
         Protocols.GetRoomsResponse response = responseBuilder.build();
-        for(User user: this.loggedUsers){
+        for(User user: ServerData.INSTANCE.loggedUsers){
             if(!user.getNick().equals(creatorNick)){
-                user.getSession().write(response);
+                user.getTcpSession().write(response);
             }
         }
     }
-
-    private User findUserFromNick(String nick) {
-        for (User user : loggedUsers) {
-            if (user.getNick().equals(nick))
-                return user;
-        }
-        return null;
-    }
-
 }

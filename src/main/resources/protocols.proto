@@ -84,3 +84,15 @@ message GetUsersInRoomResponse{
     required StatusCode status = 1;
     repeated string users = 2;
 }
+
+//UDP voice protocols
+message UdpPacket{
+    required string username = 1;
+    required string roomName = 2;
+    required bytes voiceBytes = 3;
+}
+
+//register user session when logged to server
+message RegisterUdpSession{
+    required string username = 1;
+}

@@ -50,7 +50,10 @@ public class UdpServerHandler extends IoHandlerAdapter {
         String senderNick = udpPacket.getUsername();
         for (User user : serverRoom.getUsersInRoom()) {
             if (!user.getNick().equals(senderNick) && !user.getMutedUserNicks().contains(senderNick)) {
+                System.out.println("Packet from: " + senderNick +" goes to: "+user.getNick() + ", session = "+ user.getUdpSession().toString());
                 user.getUdpSession().write(udpPacket);
+            } else {
+                System.out.println("!!!Packet from: " + senderNick +" not goes to: "+user.getNick()+ ", session = "+ user.getUdpSession().toString());
             }
         }
     }

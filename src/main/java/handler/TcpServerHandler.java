@@ -11,48 +11,28 @@ import java.util.*;
 
 public class TcpServerHandler extends IoHandlerAdapter {
     @Override
-    public void exceptionCaught(IoSession session, Throwable cause) throws Exception {
-        cause.printStackTrace();
-    }
-
-    @Override
     public void messageReceived(IoSession session, Object message) throws Exception {
         Object response;
 
         if (message instanceof Protocols.LoginToServerRequest) {
-            System.out.println("arrived LoginToServerRequest");
             response = handleLoginRequestMessage((Protocols.LoginToServerRequest) message, session);
         } else if (message instanceof Protocols.LeaveServerRequest) {
-            System.out.println("arrived LeaveServerRequest");
             response = handleLeaveServerRequest((Protocols.LeaveServerRequest) message);
         } else if (message instanceof Protocols.ManageRoomRequest) {
-            System.out.println("arrived ManageRoomRequest");
             response = handleManageRoomRequest((Protocols.ManageRoomRequest) message);
         } else if (message instanceof Protocols.GetRoomsRequest) {
-            System.out.println("arrived GetRoomsRequest");
             response = handleGetRoomsRequest((Protocols.GetRoomsRequest) message);
         } else if (message instanceof Protocols.GetUsersInRoomRequest) {
-            System.out.println("arrived GetUsersInRoomRequest");
             response = handleGetUsersInRoomRequest((Protocols.GetUsersInRoomRequest) message);
         } else {
-            System.out.println("Unknown message: " + message.getClass());
-            System.out.println(message.toString());
             response = message;
         }
-
-        System.out.println("Handling message end, serverRoomMap.size = "+ServerData.INSTANCE.serverRoomMap.size());
-        System.out.println("ServerRoomMap.size = "+ServerData.INSTANCE.serverRoomMap.size());
-        System.out.println("LoggedUsers.size = "+ServerData.INSTANCE.loggedUsers.size());
-
-        System.out.println("Logged users: ");
-        for(User user: ServerData.INSTANCE.loggedUsers){
-            System.out.println(user.toString());
-            user.printMutedUsers();
-        }
-        System.out.println("Rooms: ");
-        for (Map.Entry<String, ServerRoom> serverRoomEntry : ServerData.INSTANCE.serverRoomMap.entrySet())
-            System.out.println(serverRoomEntry.getValue().toString());
         session.write(response);
+    }
+
+    @Override
+    public void exceptionCaught(IoSession session, Throwable cause) throws Exception {
+        cause.printStackTrace();
     }
 
     @Override

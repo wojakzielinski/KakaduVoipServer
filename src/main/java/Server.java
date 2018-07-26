@@ -22,19 +22,16 @@ public class Server {
 
     private static void createTcpServer(ResourceBundle serverProperties) throws Exception {
         IoAcceptor acceptor = new NioSocketAcceptor();
-
         acceptor.getFilterChain().addLast("logger", new LoggingFilter());
         acceptor.getFilterChain().addLast("codec", new ProtocolCodecFilter(new KakaduCodecFactory()));
 
         acceptor.setHandler(new TcpServerHandler());
-
         acceptor.getSessionConfig().setReadBufferSize(2048);
         acceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, 10);
 
+
         int tcpPort = Integer.parseInt(serverProperties.getString("server.tcp.port"));
         acceptor.bind(new InetSocketAddress(tcpPort));
-        System.out.println("Tcp server created");
-
     }
 
     private static void createUdpServer(ResourceBundle serverProperties) throws Exception {
@@ -43,11 +40,11 @@ public class Server {
 
         acceptor.getFilterChain().addLast("logger", new LoggingFilter());
         acceptor.getFilterChain().addLast("codec", new ProtocolCodecFilter(new KakaduVoiceCodecFactory()));
+        acceptor.getSessionConfig().setReadBufferSize(4096);
 
         DatagramSessionConfig dcfg = acceptor.getSessionConfig();
         int udpPort =  Integer.parseInt(serverProperties.getString("server.udp.port"));
         dcfg.setReuseAddress(true);
         acceptor.bind(new InetSocketAddress(udpPort));
     }
-
 }

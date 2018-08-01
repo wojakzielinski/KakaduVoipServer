@@ -38,7 +38,7 @@ public class TempUser {
         }else {
             this.button.setText("Wycisz");
             this.button.setOnAction(ActionEvent -> {
-                if(this.button.getText()=="Mute"){
+                if(this.button.getText()=="Wycisz"){
                     type = 0;
                     System.out.println("Mute user: "+this.getUserName());
                     this.eventHandler = new EventHandler(tcpRequestService,roomName,appOwner,roomPassword,name,type);

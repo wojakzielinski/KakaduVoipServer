@@ -19,7 +19,7 @@ public class AudioSendingThread implements Runnable {
     private Protocols.UdpPacket.Builder udpPacketBuilder;
     private AudioFormat audioFormat;
     private TargetDataLine targetDataLine;
-    private volatile boolean running = true;
+    private static volatile boolean running = true;
 
     public AudioSendingThread(UdpClient udpClient, String username, String roomName) {
         this.udpClient = udpClient;
@@ -46,13 +46,11 @@ public class AudioSendingThread implements Runnable {
                 int cnt = targetDataLine.read(tempBuffer, 0, tempBuffer.length);
                 if (cnt > 0) {
                     ByteString voiceBytes = ByteString.copyFrom(tempBuffer);
+
                     udpPacketBuilder.setVoiceBytes(voiceBytes);
                     this.udpClient.send(udpPacketBuilder.build());
                     System.out.println("UdpClient packet send time = " + System.currentTimeMillis());
-                    //DatagramPacket outPacket = new DatagramPacket(tempBuffer, tempBuffer.length, this.ip, this.port);
-                    //this.socket.send(outPacket);
                 }
-                //Thread.sleep(1000);
             }
         } catch (Exception e) {
             System.out.println("Niespodziewany błąd podczas przechwytywania dźwięku: ");
@@ -60,7 +58,8 @@ public class AudioSendingThread implements Runnable {
         }
     }
 
-    public void terminate() {
+
+    public static void terminate(){
         running = false;
     }
 

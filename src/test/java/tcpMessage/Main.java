@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import tcpMessage.controllers.ClientPanelController;
+import tcpMessage.model.AudioSendingThread;
 
 /**
  * Created by Szymon & Oskar on 24.07.2018.
@@ -40,6 +41,8 @@ public class Main extends Application {
             ClientPanelController.tcpRequestService.sendLeaveServerRequest(ClientPanelController.username);
             ClientPanelController.tcpRequestService.getTcpClient().closeConnection();
             ClientPanelController.tcpClient.closeConnection();
+            ClientPanelController.udpClient.closeConnection();
+            AudioSendingThread.terminate();
         }
 
     }

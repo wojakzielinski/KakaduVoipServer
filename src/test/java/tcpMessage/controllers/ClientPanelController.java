@@ -35,7 +35,7 @@ public class ClientPanelController implements Initializable {
     private static String HOSTNAME;//localhost
     private static int PORT;//9123
     public static TcpRequestService tcpRequestService;
-    private UdpClient udpClient;
+    public static UdpClient udpClient;
     private Thread soundSendingThread;
     private AudioSendingThread audioSendingThread;
     private ArrayList<TempUser> users;

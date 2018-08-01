@@ -23,6 +23,7 @@ public class UdpClient {
         this.ip = ip;
         this.port = port;
         connector = new NioDatagramConnector();
+        connector.getSessionConfig().setReadBufferSize(4096);
         connector.getFilterChain().addLast("logger", new LoggingFilter());
         connector.getFilterChain().addLast("codec", new ProtocolCodecFilter(new KakaduVoiceCodecFactory()));
         connector.setHandler(new UdpClientHandler());

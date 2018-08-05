@@ -51,7 +51,7 @@ public class AudioSendingThread implements Runnable {
             audioFormat = getAudioFormat();
             DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class, audioFormat);
             targetDataLine = (TargetDataLine)
-                    mixer.getLine(dataLineInfo);
+                    AudioSystem.getLine(dataLineInfo);
             targetDataLine.open(audioFormat);
             targetDataLine.start();
             while (running) {
@@ -77,16 +77,11 @@ public class AudioSendingThread implements Runnable {
     }
 
     private AudioFormat getAudioFormat() {
-        float sampleRate = 8000.0F;
-        //8000,11025,16000,22050,44100
-        int sampleSizeInBits = 16;
-        //8,16
+        float sampleRate = 16000.0F;
+        int sampleInbits = 16;
         int channels = 1;
-        //1,2
         boolean signed = true;
-        //true,false
         boolean bigEndian = false;
-        //true,false
-        return new AudioFormat(sampleRate, sampleSizeInBits, channels, signed, bigEndian);
+        return new AudioFormat(sampleRate, sampleInbits, channels, signed, bigEndian);
     }
 }

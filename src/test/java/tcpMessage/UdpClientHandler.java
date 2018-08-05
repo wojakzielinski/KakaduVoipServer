@@ -66,7 +66,7 @@ public class UdpClientHandler extends IoHandlerAdapter {
 
     class PlayThread extends Thread {
 
-        byte tempBuffer[] = new byte[10000];
+        byte tempBuffer[] = new byte[4000];
 
         public void run() {
             try {

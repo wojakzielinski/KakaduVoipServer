@@ -4,10 +4,7 @@ import com.google.protobuf.ByteString;
 import protocols.Protocols;
 import tcpMessage.UdpClient;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.TargetDataLine;
+import javax.sound.sampled.*;
 
 /**
  * Created by Szymon on 23.07.2018.
@@ -34,11 +31,27 @@ public class AudioSendingThread implements Runnable {
     @Override
     public void run() {
         try {
+            Mixer.Info[] mixerInfo = AudioSystem.getMixerInfo();    //get available mixers
+            System.out.println("Available mixers:");
+            Mixer mixer = null;
+            for (int cnt = 0; cnt < mixerInfo.length; cnt++) {
+                System.out.println(cnt + " " + mixerInfo[cnt].getName());
+                mixer = AudioSystem.getMixer(mixerInfo[cnt]);
+
+                Line.Info[] lineInfos = mixer.getTargetLineInfo();
+                if (lineInfos.length >= 1 && lineInfos[0].getLineClass().equals(TargetDataLine.class)) {
+                    System.out.println(cnt + " Mic is supported!");
+                    break;
+                }
+            }
+
+            mixer = AudioSystem.getMixer(mixerInfo[2]);
+
             //Get everything set up for capture
             audioFormat = getAudioFormat();
             DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class, audioFormat);
             targetDataLine = (TargetDataLine)
-                    AudioSystem.getLine(dataLineInfo);
+                    mixer.getLine(dataLineInfo);
             targetDataLine.open(audioFormat);
             targetDataLine.start();
             while (running) {

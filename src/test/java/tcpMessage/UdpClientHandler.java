@@ -8,47 +8,29 @@ import protocols.Protocols;
 
 import javax.sound.sampled.*;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 /**
  * Created by Szymon on 22.07.2018.
  */
 public class UdpClientHandler extends IoHandlerAdapter {
-    private static volatile boolean running = true;
-    private AudioFormat audioFormat;
-    private byte[] tempBuffer = new byte[4000];
-    private AudioInputStream audioInputStream;
-    SourceDataLine sourceDataLine;
+
+    boolean stopaudioCapture = false;
+    ByteArrayOutputStream byteOutputStream;
+    AudioFormat adFormat;
+    TargetDataLine targetDataLine;
+    AudioInputStream InputStream;
+    SourceDataLine sourceLine;
 
     @Override
     public void messageReceived(IoSession session, Object message) throws Exception {
         if(message instanceof Protocols.UdpPacket){
             System.out.println("UdpClient packet arrived time = "+System.currentTimeMillis());
             System.out.println(message);
-            while(running){
-                ByteString audioData = ((Protocols.UdpPacket) message).getVoiceBytes();
+            ByteString voiceBytes = ((Protocols.UdpPacket) message).getVoiceBytes();
 
-                InputStream byteArrayInputStream = new ByteArrayInputStream(audioData.toByteArray());
-                AudioFormat audioFormat = getAudioFormat();
-                audioInputStream  = new AudioInputStream(byteArrayInputStream, audioFormat,audioData.size());
-                DataLine.Info dataLineInfo = new DataLine.Info(SourceDataLine.class, audioFormat);
-                sourceDataLine = (SourceDataLine) AudioSystem.getLine((dataLineInfo));
-                sourceDataLine.open(audioFormat);
-                sourceDataLine.start();
-
-                try{
-                    int cnt;
-                    while((cnt = audioInputStream.read(tempBuffer, 0 ,tempBuffer.length)) != -1){
-                        if(cnt>0){
-                            sourceDataLine.write(tempBuffer, 0 ,cnt);
-                        }
-                    }
-                    sourceDataLine.drain();
-                    sourceDataLine.close();
-                }catch(Exception e){
-                    e.getMessage();
-                }
-            }
+            playAudio(voiceBytes);
         }
     }
     @Override
@@ -56,17 +38,50 @@ public class UdpClientHandler extends IoHandlerAdapter {
         System.out.println("UDP.sessionOpened");
     }
 
+    public void playAudio(ByteString voiceBytes){
+        try {
+            byte audioData[] = voiceBytes.toByteArray();
+            InputStream byteInputStream = new ByteArrayInputStream(audioData);
+            AudioFormat adFormat = getAudioFormat();
+            InputStream = new AudioInputStream(byteInputStream, adFormat, audioData.length / adFormat.getFrameSize());
+            DataLine.Info dataLineInfo = new DataLine.Info(SourceDataLine.class, adFormat);
+            sourceLine = (SourceDataLine) AudioSystem.getLine(dataLineInfo);
+            sourceLine.open(adFormat);
+            sourceLine.start();
+            Thread playThread = new Thread(new PlayThread());
+            playThread.start();
+        } catch (Exception e) {
+            System.out.println(e);
+            System.exit(0);
+        }
+    }
     private AudioFormat getAudioFormat() {
-        float sampleRate = 8000.0F;
-        //8000,11025,16000,22050,44100
-        int sampleSizeInBits = 16;
-        //8,16
+        float sampleRate = 16000.0F;
+        int sampleInbits = 16;
         int channels = 1;
-        //1,2
         boolean signed = true;
-        //true,false
         boolean bigEndian = false;
-        //true,false
-        return new AudioFormat(sampleRate, sampleSizeInBits, channels, signed, bigEndian);
+        return new AudioFormat(sampleRate, sampleInbits, channels, signed, bigEndian);
+    }
+
+    class PlayThread extends Thread {
+
+        byte tempBuffer[] = new byte[10000];
+
+        public void run() {
+            try {
+                int cnt;
+                while ((cnt = InputStream.read(tempBuffer, 0, tempBuffer.length)) != -1) {
+                    if (cnt > 0) {
+                        sourceLine.write(tempBuffer, 0, cnt);
+                    }
+                }
+                //                sourceLine.drain();
+                //             sourceLine.close();
+            } catch (Exception e) {
+                System.out.println(e);
+                System.exit(0);
+            }
+        }
     }
 }

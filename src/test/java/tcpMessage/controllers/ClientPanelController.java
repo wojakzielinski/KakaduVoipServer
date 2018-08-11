@@ -23,7 +23,10 @@ import tcpMessage.model.TempRoom;
 import tcpMessage.model.TempUser;
 
 import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Line;
 import javax.sound.sampled.Mixer;
+import javax.sound.sampled.TargetDataLine;
+import javax.tools.Tool;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +71,27 @@ public class ClientPanelController implements Initializable {
         user_tbl_action_user_col.setCellValueFactory(new PropertyValueFactory<>("button"));
         user_tbl_username_admin_col.setCellValueFactory(new PropertyValueFactory<>("userName"));
         user_tbl_action_admin_col.setCellValueFactory(new PropertyValueFactory<>("button"));
+
+
+        final Tooltip logUsernameTip = new Tooltip();
+        logUsernameTip.setText("Podaj nazwę użytkownika, będącą Twoim identyfikatorem w systemie.");
+        v_username.setTooltip(logUsernameTip);
+        final Tooltip logServeraddrTip = new Tooltip();
+        logServeraddrTip.setText("Podaj adres serwera, do którego chcesz dołączyć. Adres ma postać X.X.X.X, gdzie X to liczba z przedziału od 0 do 255.");
+        v_host.setTooltip(logServeraddrTip);
+        final Tooltip logPortTip = new Tooltip();
+        logPortTip.setText("Podaj port serwera, w postaci liczby od 1024 do 65535. ");
+        v_port.setTooltip(logPortTip);
+
+        final Tooltip createRoomnameTip = new Tooltip();
+        createRoomnameTip.setText("Podaj nazwę, pod którą Twój nowy pokój będzie rozpoznawany.");
+        v_room_name.setTooltip(createRoomnameTip);
+        final Tooltip createPasswordTip = new Tooltip();
+        createPasswordTip.setText("Podaj hasło zabezpieczające Twój pokój przed dostępem osób postronnych.");
+        v_room_passwd.setTooltip(createPasswordTip);
+        final Tooltip createPassadminTip = new Tooltip();
+        createPassadminTip.setText("Podaj hasło administracyjne, upoważniające do usunięcia użytkowników z pokoju oraz usunięcia pokoju.");
+        v_room_passadmin.setTooltip(createPassadminTip);
     }
 
     @FXML
@@ -120,13 +144,24 @@ public class ClientPanelController implements Initializable {
             alert.showAndWait();
         }
         else {
-            username = v_username.getText();
-            HOSTNAME = v_host.getText();
-            PORT = Integer.parseInt(v_port.getText());
-            tcpClient= new TcpClient(HOSTNAME, PORT, this);
-            tcpRequestService = new TcpRequestService(tcpClient);
-            tcpRequestService.sendLoginToServerRequest(username);
-            udpClient = new UdpClient(HOSTNAME, PORT+1);
+            try{
+                username = v_username.getText();
+                HOSTNAME = v_host.getText();
+                PORT = Integer.parseInt(v_port.getText());
+                tcpClient= new TcpClient(HOSTNAME, PORT, this);
+                tcpRequestService = new TcpRequestService(tcpClient);
+                tcpRequestService.sendLoginToServerRequest(username);
+                udpClient = new UdpClient(HOSTNAME, PORT+1);
+            }catch (Exception ex){
+                ex.getMessage();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Złe dane");
+                alert.setHeaderText(null);
+                alert.setContentText("Wprowadzono dane, które nie pasują do żadnego z działających serwerów.");
+
+                alert.showAndWait();
+            }
+
         }
     }
 
@@ -161,16 +196,48 @@ public class ClientPanelController implements Initializable {
 
             alert.showAndWait();
         } else {
-            //Text Input dialog
-            TextInputDialog dialog = new TextInputDialog();
-            dialog.setTitle("Podaj hasło");
+            // Create the custom dialog.
+            Dialog<String> dialog = new Dialog<>();
+            dialog.setTitle("Podaj hasło do pokoju");
             dialog.setHeaderText("Aby wejść do pokoju, należy podać hasło zabezpieczające pokój.");
-            dialog.setContentText("Podaj hasło:");
-            Optional<String> password = dialog.showAndWait();
-            if (password.isPresent()) {
-                room_password = password.get();
+
+
+            // Set the button types.
+            ButtonType loginButtonType = new ButtonType("Wejdź", ButtonBar.ButtonData.OK_DONE);
+            ButtonType cancelButtonType = new ButtonType("Anuluj", ButtonBar.ButtonData.CANCEL_CLOSE);
+            dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, cancelButtonType);
+
+            // Create the username and password labels and fields.
+            GridPane grid = new GridPane();
+            grid.setHgap(10);
+            grid.setVgap(10);
+            grid.setPadding(new Insets(20, 150, 10, 10));
+
+            PasswordField password = new PasswordField();
+            password.setPromptText("Hasło");
+
+            grid.add(new Label("Hasło:"), 0, 1);
+            grid.add(password, 1, 1);
+
+
+            dialog.getDialogPane().setContent(grid);
+
+
+            // Convert the result to a username-password-pair when the login button is clicked.
+            dialog.setResultConverter(dialogButton -> {
+                if (dialogButton == loginButtonType) {
+                    return new String(password.getText());
+                }
+                return null;
+            });
+
+            Optional<String> result = dialog.showAndWait();
+
+            if(result.isPresent()){
+                room_password = result.get();
                 roomPass = room_password;
             }
+
 
             this.tcpRequestService.sendJoinRoomRequest(username, selectedRoom.getName(), room_password);
         }
@@ -456,7 +523,9 @@ public class ClientPanelController implements Initializable {
 
     //Create room view
     @FXML
-    private TextField v_room_passadmin, v_room_passwd, v_room_name;
+    private TextField v_room_name;
+    @FXML
+    private PasswordField v_room_passadmin, v_room_passwd;
 
     @FXML
     public void go_back(MouseEvent event) {
@@ -465,13 +534,41 @@ public class ClientPanelController implements Initializable {
 
     @FXML
     public void create_create_room(MouseEvent event) throws InterruptedException {
-        String roomname, roompass, roompassadm;
-        roomname = v_room_name.getText();
-        roompass = v_room_passwd.getText();
-        roompassadm = v_room_passadmin.getText();
+        if(v_room_name.getText().equals("") || v_room_name.getText().length()<3){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Zbyt krótka nazwa pokoju");
+            alert.setHeaderText(null);
+            alert.setContentText("Aby stworzyć pokój, należy stworzyć jego nazwę nie krótszą niż 3 znaki.");
 
-        this.tcpRequestService.sendCreateRoomRequest(username, roomname, roompass, roompassadm);
-    }
+            alert.showAndWait();
+        } else
+        if(v_room_passwd.getText().equals("") || v_room_passwd.getText().length()<8){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Zbyt krótkie hasło do pokoju");
+            alert.setHeaderText(null);
+            alert.setContentText("Aby stworzyć pokój, należy stworzyć hasło nie krótsze niż 8 znaków.");
+
+            alert.showAndWait();
+        } else
+        if(v_room_passadmin.getText().equals("") || v_room_passadmin.getText().length()<8){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Zbyt krótkie hasło do pokoju");
+            alert.setHeaderText(null);
+            alert.setContentText("Aby stworzyć pokój, należy stworzyć hasło administracyjne nie krótsze niż 8 znaków.");
+
+            alert.showAndWait();
+        } else
+        {
+            String roomname, roompass, roompassadm;
+            roomname = v_room_name.getText();
+            roompass = v_room_passwd.getText();
+            roompassadm = v_room_passadmin.getText();
+
+            this.tcpRequestService.sendCreateRoomRequest(username, roomname, roompass, roompassadm);
+
+        }
+
+        }
 
     public void handle_create_room_response(Protocols.ManageRoomResponse response) throws InterruptedException {
         Platform.runLater(
@@ -500,7 +597,30 @@ public class ClientPanelController implements Initializable {
     @FXML
     private ChoiceBox micro_type;
 
+
+
+    @FXML  private static Slider speaker_power, micro_power;
     public void audio_properties(ActionEvent actionEvent) {
+
+
+        //Sliders
+
+        Mixer.Info[] mixerInfo = AudioSystem.getMixerInfo();    //get available mixers
+        System.out.println("Available mixers:");
+        Mixer mixer = null;
+        for (int cnt = 0; cnt < mixerInfo.length; cnt++) {
+            System.out.println(cnt + " " + mixerInfo[cnt].getName());
+            mixer = AudioSystem.getMixer(mixerInfo[cnt]);
+
+            Line.Info[] lineInfos = mixer.getTargetLineInfo();
+            if (lineInfos.length >= 1 && lineInfos[0].getLineClass().equals(TargetDataLine.class)) {
+                System.out.println(cnt + " Mic is supported!");
+                break;
+            }
+        }
+
+        mixer = AudioSystem.getMixer(mixerInfo[2]);
+
         Mixer.Info[] infos = AudioSystem.getMixerInfo();
         System.out.println("" + infos.length + " mixers detected");
 

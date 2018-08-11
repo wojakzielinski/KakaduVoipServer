@@ -15,7 +15,7 @@ public class AudioSendingThread implements Runnable {
     private byte[] tempBuffer;
     private Protocols.UdpPacket.Builder udpPacketBuilder;
     private AudioFormat audioFormat;
-    private TargetDataLine targetDataLine;
+    public static TargetDataLine targetDataLine;
     private static volatile boolean running = true;
 
     public AudioSendingThread(UdpClient udpClient, String username, String roomName) {

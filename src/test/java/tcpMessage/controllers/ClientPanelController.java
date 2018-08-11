@@ -18,14 +18,12 @@ import javafx.util.Pair;
 import protocols.Protocols;
 import tcpMessage.TcpClient;
 import tcpMessage.UdpClient;
+import tcpMessage.UdpClientHandler;
 import tcpMessage.model.AudioSendingThread;
 import tcpMessage.model.TempRoom;
 import tcpMessage.model.TempUser;
 
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Line;
-import javax.sound.sampled.Mixer;
-import javax.sound.sampled.TargetDataLine;
+import javax.sound.sampled.*;
 import javax.tools.Tool;
 import java.net.URL;
 import java.util.ArrayList;
@@ -63,8 +61,12 @@ public class ClientPanelController implements Initializable {
     @FXML
     private TableColumn<TempUser, String> user_tbl_username_admin_col, user_tbl_action_admin_col;
 
+    private final static double sliderInitValue = 50;
+    public ObservableList mixers = FXCollections.observableArrayList();
+    public ObservableList speakers = FXCollections.observableArrayList();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //tables init
         name_col.setCellValueFactory(new PropertyValueFactory<>("name"));
         owner_col.setCellValueFactory(new PropertyValueFactory<>("owner"));
         user_tbl_username_user_col.setCellValueFactory(new PropertyValueFactory<>("userName"));
@@ -72,7 +74,7 @@ public class ClientPanelController implements Initializable {
         user_tbl_username_admin_col.setCellValueFactory(new PropertyValueFactory<>("userName"));
         user_tbl_action_admin_col.setCellValueFactory(new PropertyValueFactory<>("button"));
 
-
+        //tips init
         final Tooltip logUsernameTip = new Tooltip();
         logUsernameTip.setText("Podaj nazwę użytkownika, będącą Twoim identyfikatorem w systemie.");
         v_username.setTooltip(logUsernameTip);
@@ -92,6 +94,107 @@ public class ClientPanelController implements Initializable {
         final Tooltip createPassadminTip = new Tooltip();
         createPassadminTip.setText("Podaj hasło administracyjne, upoważniające do usunięcia użytkowników z pokoju oraz usunięcia pokoju.");
         v_room_passadmin.setTooltip(createPassadminTip);
+
+        //sliders init
+        speaker_power.setMax(100);
+        speaker_power.setMin(0);
+        speaker_power.setValue(sliderInitValue);
+
+        speaker_power.setShowTickLabels(true);
+        speaker_power.setShowTickMarks(true);
+
+        speaker_power.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+
+                //setVolume(UdpClientHandler.sourceLine,newValue.intValue());
+                //DODAĆ ZMIANĘ GŁOŚNOŚCI GŁOŚNIKÓW
+                System.out.println("Speaker power: "+newValue.intValue());
+            }
+        });
+        micro_power.setMax(100);
+        micro_power.setMin(0);
+        micro_power.setValue(sliderInitValue);
+
+        micro_power.setShowTickLabels(true);
+        micro_power.setShowTickMarks(true);
+
+        micro_power.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                System.out.println("Micro power: "+newValue.intValue());
+                //DODAĆ ZMIENĘ GŁOŚNOŚCI MIKROFONU
+            }
+        });
+        //choiceboxes init
+        Mixer.Info[] mixerInfo = AudioSystem.getMixerInfo();    //get available mixers
+        System.out.println("Available mixers:");
+        Mixer mixer = null;
+        for (int cnt = 0; cnt < mixerInfo.length; cnt++) {
+            System.out.println(cnt + " " + mixerInfo[cnt].getName());
+            mixers.add(mixerInfo[cnt].getName());
+            mixer = AudioSystem.getMixer(mixerInfo[cnt]);
+
+            Line.Info[] lineInfos = mixer.getTargetLineInfo();
+            if (lineInfos.length >= 1 && lineInfos[0].getLineClass().equals(TargetDataLine.class)) {
+                System.out.println(cnt + " Mic is supported!");
+                micro_type.setValue(mixerInfo[cnt].getName());
+                break;
+            }
+
+        }
+        for (int cnt = 0; cnt < mixerInfo.length; cnt++) {
+            System.out.println(cnt + " " + mixerInfo[cnt].getName());
+            speakers.add(mixerInfo[cnt].getName());
+            mixer = AudioSystem.getMixer(mixerInfo[cnt]);
+
+            Line.Info[] linesources = mixer.getSourceLineInfo();
+            if(linesources.length>-1 && linesources[0].getLineClass().equals(SourceDataLine.class)){
+                System.out.println(cnt + " Speaker is supported!");
+                speaker_type.setValue(mixerInfo[cnt].getName());
+                break;
+            }
+
+        }
+        micro_type.setItems(mixers);
+        micro_type.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                //DODAC ZMIANE USTAWIEN MIKROFONU
+                System.out.println(newValue);
+            }
+        });
+        speaker_type.setItems(speakers);
+        speaker_type.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                System.out.println(newValue);
+                //DODAC ZMIANE USTAWIEN GŁOŚNIKA
+            }
+        });
+        //radio button init
+        click_speak.setUserData("Click");
+        cons_speak.setUserData("Cons");
+        press_key.setText("k");
+        press_key.setDisable(true);
+        speakGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+
+                if(speakGroup.getSelectedToggle().getUserData() == "Cons"){
+                    System.out.println(1);
+                    press_key.setDisable(true);
+                }
+                if(speakGroup.getSelectedToggle().getUserData() == "Click"){
+                    System.out.println(2);
+                    press_key.setDisable(false);
+
+
+                }
+            }
+        });
+
+
     }
 
     @FXML
@@ -595,54 +698,51 @@ public class ClientPanelController implements Initializable {
 
     //audio pane
     @FXML
-    private ChoiceBox micro_type;
+    private ChoiceBox micro_type, speaker_type;
+    @FXML
+    private ToggleGroup speakGroup;
+    @FXML
+    private TextField press_key;
 
+    private void setVolume(SourceDataLine source, int volume){
+        try {
+            FloatControl gainControl=(FloatControl)source.getControl(FloatControl.Type.MASTER_GAIN);
+            BooleanControl muteControl=(BooleanControl)source.getControl(BooleanControl.Type.MUTE);
+            if (volume == 0) {
+                muteControl.setValue(true);
+            }
+            else {
+                muteControl.setValue(false);
+                gainControl.setValue((float)(Math.log(volume / 100d) / Math.log(10.0) * 20.0));
+            }
+        }
+        catch (  Exception e) {
+            System.out.println("unable to set the volume to the provided source");
+        }
+    }
 
-
-    @FXML  private static Slider speaker_power, micro_power;
+    @FXML  private Slider speaker_power, micro_power;
+    @FXML private RadioButton cons_speak,click_speak;
     public void audio_properties(ActionEvent actionEvent) {
-
-
-        //Sliders
-
-        Mixer.Info[] mixerInfo = AudioSystem.getMixerInfo();    //get available mixers
-        System.out.println("Available mixers:");
-        Mixer mixer = null;
-        for (int cnt = 0; cnt < mixerInfo.length; cnt++) {
-            System.out.println(cnt + " " + mixerInfo[cnt].getName());
-            mixer = AudioSystem.getMixer(mixerInfo[cnt]);
-
-            Line.Info[] lineInfos = mixer.getTargetLineInfo();
-            if (lineInfos.length >= 1 && lineInfos[0].getLineClass().equals(TargetDataLine.class)) {
-                System.out.println(cnt + " Mic is supported!");
-                break;
-            }
-        }
-
-        mixer = AudioSystem.getMixer(mixerInfo[2]);
-
-        Mixer.Info[] infos = AudioSystem.getMixerInfo();
-        System.out.println("" + infos.length + " mixers detected");
-
-        ObservableList mixers = FXCollections.observableArrayList();
-
-        for (Mixer.Info inf : infos) {
-            mixers.add(inf);
-        }
-
-        micro_type.setItems(mixers);
-        micro_type.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                //DODAC ZMIANE USTAWIEN MIKROFONU
-                System.out.println(newValue);
-            }
-        });
         audio_pane.toFront();
     }
 
     public void go_back_audio(MouseEvent event) {
-        audio_pane.toBack();
+        if(press_key.getText().length()>1){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Zbyt długi znak");
+            alert.setHeaderText(null);
+            alert.setContentText("Podaj wartość znaku o długości nie większej niż 1.");
+
+            alert.showAndWait();
+        }
+        else {
+            char key[] = press_key.getText().toCharArray();
+            System.out.println(key[0]);
+            //dodać mówienie po naciśnięciu
+            audio_pane.toBack();
+        }
+
     }
 
 

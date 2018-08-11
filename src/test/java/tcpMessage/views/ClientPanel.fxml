@@ -74,7 +74,7 @@
             <ChoiceBox fx:id="speaker_type" layoutX="57.0" layoutY="211.0" prefWidth="150.0" />
             <Slider fx:id="micro_power" layoutX="405.0" layoutY="129.0" />
             <Slider fx:id="speaker_power" layoutX="405.0" layoutY="217.0" />
-            <TextField layoutX="225.0" layoutY="304.0" prefHeight="25.0" prefWidth="42.0" />
+            <TextField fx:id="press_key" layoutX="225.0" layoutY="304.0" prefHeight="25.0" prefWidth="42.0" />
             <Button fx:id="back_btn_audio" layoutX="584.0" layoutY="294.0" mnemonicParsing="false" onMouseClicked="#go_back_audio" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: #ba5c12;" text="Wróć" textFill="WHITE">
                <font>
                   <Font name="Segoe Script Bold" size="17.0" />

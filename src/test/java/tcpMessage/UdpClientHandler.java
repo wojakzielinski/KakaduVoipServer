@@ -21,7 +21,7 @@ public class UdpClientHandler extends IoHandlerAdapter {
     AudioFormat adFormat;
     TargetDataLine targetDataLine;
     AudioInputStream InputStream;
-    SourceDataLine sourceLine;
+    public static SourceDataLine sourceLine;
 
     @Override
     public void messageReceived(IoSession session, Object message) throws Exception {
@@ -47,6 +47,8 @@ public class UdpClientHandler extends IoHandlerAdapter {
             DataLine.Info dataLineInfo = new DataLine.Info(SourceDataLine.class, adFormat);
             sourceLine = (SourceDataLine) AudioSystem.getLine(dataLineInfo);
             sourceLine.open(adFormat);
+            FloatControl gainControl=(FloatControl)sourceLine.getControl(FloatControl.Type.VOLUME);
+            System.out.println(gainControl);
             sourceLine.start();
             Thread playThread = new Thread(new PlayThread());
             playThread.start();

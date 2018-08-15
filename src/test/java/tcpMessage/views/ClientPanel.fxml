@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TableColumn?>
@@ -19,7 +20,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.PasswordField?>
 <AnchorPane fx:id="pane_main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="364.0" prefWidth="736.0" style="-fx-background-color: ba5c12;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tcpMessage.controllers.ClientPanelController">
    <children>
       <AnchorPane fx:id="audio_pane" prefHeight="200.0" prefWidth="200.0">
@@ -72,8 +72,8 @@
                </font></RadioButton>
             <ChoiceBox fx:id="micro_type" layoutX="57.0" layoutY="123.0" prefWidth="150.0" />
             <ChoiceBox fx:id="speaker_type" layoutX="57.0" layoutY="211.0" prefWidth="150.0" />
-            <Slider fx:id="micro_power" layoutX="405.0" layoutY="129.0" />
-            <Slider fx:id="speaker_power" layoutX="405.0" layoutY="217.0" />
+            <Slider fx:id="micro_power" layoutX="405.0" layoutY="129.0" max="1.0" />
+            <Slider fx:id="speaker_power" layoutX="405.0" layoutY="217.0" max="1.0" />
             <TextField fx:id="press_key" layoutX="225.0" layoutY="304.0" prefHeight="25.0" prefWidth="42.0" />
             <Button fx:id="back_btn_audio" layoutX="584.0" layoutY="294.0" mnemonicParsing="false" onMouseClicked="#go_back_audio" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: #ba5c12;" text="Wróć" textFill="WHITE">
                <font>
@@ -262,7 +262,7 @@
                <menus>
                    <Menu mnemonicParsing="false" text="Ustawienia">
                        <items>
-                           <MenuItem mnemonicParsing="false" onAction="#audio_properties" text="Ustawienia audio" />
+
                            <MenuItem mnemonicParsing="false" onAction="#leave_server" text="Opuść serwer" />
                        </items>
                    </Menu>
@@ -314,7 +314,7 @@
               <menus>
                   <Menu mnemonicParsing="false" text="Ustawienia">
                       <items>
-                          <MenuItem mnemonicParsing="false" onAction="#audio_properties" text="Ustawienia audio" />
+
                           <MenuItem mnemonicParsing="false" onAction="#leave_server" text="Opuść serwer" />
                       </items>
                   </Menu>

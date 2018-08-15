@@ -21,13 +21,19 @@ public class UdpClientHandler extends IoHandlerAdapter {
     AudioFormat adFormat;
     TargetDataLine targetDataLine;
     AudioInputStream InputStream;
-    public static SourceDataLine sourceLine;
+    public static volatile SourceDataLine sourceLine;
+    private static volatile Mixer receivingMixer = null;
+    private static float gain = 1.0f;
+
+    public static void setReceivingMixer(Mixer mixer){
+        receivingMixer = mixer;
+    }
 
     @Override
     public void messageReceived(IoSession session, Object message) throws Exception {
         if(message instanceof Protocols.UdpPacket){
             System.out.println("UdpClient packet arrived time = "+System.currentTimeMillis());
-            System.out.println(message);
+            //System.out.println(message);
             ByteString voiceBytes = ((Protocols.UdpPacket) message).getVoiceBytes();
 
             playAudio(voiceBytes);
@@ -38,6 +44,28 @@ public class UdpClientHandler extends IoHandlerAdapter {
         System.out.println("UDP.sessionOpened");
     }
 
+    public float getGainValue() {
+        return gain;
+    }
+    public static void setGain(float fGain) {
+
+         if (sourceLine != null)
+         System.out.println(((FloatControl)
+         sourceLine.getControl(FloatControl.Type.MASTER_GAIN)).getValue());
+
+        // Set the value
+        gain = fGain;
+
+        // Better type
+        if (sourceLine != null && sourceLine.isControlSupported(FloatControl.Type.MASTER_GAIN))
+            ( (FloatControl) sourceLine.getControl(FloatControl.Type.MASTER_GAIN) ).setValue((float) ( 40*  Math.log10(fGain <= 0.0 ? 0.0000 : fGain) ));
+
+        // OR (Math.log(fGain == 0.0 ? 0.0000 : fGain) / Math.log(10.0))
+
+         if (sourceLine != null)
+         System.out.println(((FloatControl)
+         sourceLine.getControl(FloatControl.Type.MASTER_GAIN)).getValue());
+    }
     public void playAudio(ByteString voiceBytes){
         try {
             byte audioData[] = voiceBytes.toByteArray();
@@ -45,11 +73,15 @@ public class UdpClientHandler extends IoHandlerAdapter {
             AudioFormat adFormat = getAudioFormat();
             InputStream = new AudioInputStream(byteInputStream, adFormat, audioData.length / adFormat.getFrameSize());
             DataLine.Info dataLineInfo = new DataLine.Info(SourceDataLine.class, adFormat);
-            sourceLine = (SourceDataLine) AudioSystem.getLine(dataLineInfo);
+            sourceLine = (SourceDataLine) receivingMixer.getLine(dataLineInfo);
+
             sourceLine.open(adFormat);
-            FloatControl gainControl=(FloatControl)sourceLine.getControl(FloatControl.Type.VOLUME);
-            System.out.println(gainControl);
+
             sourceLine.start();
+            for(int i=0; i<sourceLine.getControls().length;i++){
+                System.out.println(sourceLine.getControls()[i].getType());
+            }
+
             Thread playThread = new Thread(new PlayThread());
             playThread.start();
         } catch (Exception e) {
@@ -76,6 +108,8 @@ public class UdpClientHandler extends IoHandlerAdapter {
                 while ((cnt = InputStream.read(tempBuffer, 0, tempBuffer.length)) != -1) {
                     if (cnt > 0) {
                         sourceLine.write(tempBuffer, 0, cnt);
+
+                        System.out.println(receivingMixer.getMixerInfo().getName());
                     }
                 }
                 //                sourceLine.drain();

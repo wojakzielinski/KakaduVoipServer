@@ -96,9 +96,12 @@ public class ClientPanelController implements Initializable {
         v_room_passadmin.setTooltip(createPassadminTip);
 
         //sliders init
-        speaker_power.setMax(100);
-        speaker_power.setMin(0);
-        speaker_power.setValue(sliderInitValue);
+
+
+
+        speaker_power.setMax(1.0f);
+        speaker_power.setMin(0.0f);
+        speaker_power.setValue(0.5f);
 
         speaker_power.setShowTickLabels(true);
         speaker_power.setShowTickMarks(true);
@@ -107,12 +110,12 @@ public class ClientPanelController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 
-                //setVolume(UdpClientHandler.sourceLine,newValue.intValue());
+                UdpClientHandler.setGain(newValue.floatValue());
                 //DODAĆ ZMIANĘ GŁOŚNOŚCI GŁOŚNIKÓW
-                System.out.println("Speaker power: "+newValue.intValue());
+
             }
         });
-        micro_power.setMax(100);
+        micro_power.setMax(1);
         micro_power.setMin(0);
         micro_power.setValue(sliderInitValue);
 
@@ -132,26 +135,26 @@ public class ClientPanelController implements Initializable {
         Mixer mixer = null;
         for (int cnt = 0; cnt < mixerInfo.length; cnt++) {
             System.out.println(cnt + " " + mixerInfo[cnt].getName());
-            mixers.add(mixerInfo[cnt].getName());
+            speakers.add(mixerInfo[cnt].getName());
             mixer = AudioSystem.getMixer(mixerInfo[cnt]);
 
             Line.Info[] lineInfos = mixer.getTargetLineInfo();
             if (lineInfos.length >= 1 && lineInfos[0].getLineClass().equals(TargetDataLine.class)) {
-                System.out.println(cnt + " Mic is supported!");
-                micro_type.setValue(mixerInfo[cnt].getName());
+                System.out.println(cnt + " Speaker is supported!");
+                speaker_type.setValue(mixerInfo[cnt].getName());
                 break;
             }
 
         }
         for (int cnt = 0; cnt < mixerInfo.length; cnt++) {
             System.out.println(cnt + " " + mixerInfo[cnt].getName());
-            speakers.add(mixerInfo[cnt].getName());
+            mixers.add(mixerInfo[cnt].getName());
             mixer = AudioSystem.getMixer(mixerInfo[cnt]);
 
             Line.Info[] linesources = mixer.getSourceLineInfo();
             if(linesources.length>-1 && linesources[0].getLineClass().equals(SourceDataLine.class)){
-                System.out.println(cnt + " Speaker is supported!");
-                speaker_type.setValue(mixerInfo[cnt].getName());
+                System.out.println(cnt + "Mic is supported! ");
+                micro_type.setValue(mixerInfo[cnt].getName());
                 break;
             }
 
@@ -162,6 +165,7 @@ public class ClientPanelController implements Initializable {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 //DODAC ZMIANE USTAWIEN MIKROFONU
                 System.out.println(newValue);
+                audioSendingThread.setSendingMixer(AudioSystem.getMixer(mixerInfo[newValue.intValue()]));
             }
         });
         speaker_type.setItems(speakers);
@@ -169,6 +173,7 @@ public class ClientPanelController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 System.out.println(newValue);
+                UdpClientHandler.setReceivingMixer(AudioSystem.getMixer(mixerInfo[newValue.intValue()]));
                 //DODAC ZMIANE USTAWIEN GŁOŚNIKA
             }
         });
@@ -226,6 +231,9 @@ public class ClientPanelController implements Initializable {
 
     public void handle_leave_server_response(Protocols.LeaveServerResponse response) {
         tcpRequestService.getTcpClient().closeConnection();
+        audioSendingThread.targetDataLine.stop();
+        audioSendingThread.targetDataLine.close();
+        audioSendingThread.terminate();
     }
 
     //Start view
@@ -391,9 +399,46 @@ public class ClientPanelController implements Initializable {
                         }
                         this.tcpRequestService.sendGetUsersInRoomRequest(username, selectedRoom.getName());
                         //start sending audio to users in room
+
+                        audioSendingThread.start();
                         audioSendingThread = new AudioSendingThread(this.udpClient, this.username, this.selectedRoom.getName());
+
+                        Mixer.Info[] mixerInfo = AudioSystem.getMixerInfo();    //get available mixers
+                        System.out.println("Available mixers:");
+                        Mixer mixer = null;
+                        for (int cnt = 0; cnt < mixerInfo.length; cnt++) {
+                            System.out.println(cnt + " " + mixerInfo[cnt].getName());
+
+                            mixer = AudioSystem.getMixer(mixerInfo[cnt]);
+
+                            Line.Info[] lineInfos = mixer.getTargetLineInfo();
+                            if (lineInfos.length >= 1 && lineInfos[0].getLineClass().equals(TargetDataLine.class)) {
+                                System.out.println(cnt + " Mic is supported!");
+                                audioSendingThread.setSendingMixer(AudioSystem.getMixer(mixerInfo[cnt]));
+                                speaker_type.setValue(mixerInfo[cnt].getName());
+                                break;
+                            }
+
+                        }
+                        for (int cnt = 0; cnt < mixerInfo.length; cnt++) {
+                            System.out.println(cnt + " " + mixerInfo[cnt].getName());
+
+                            mixer = AudioSystem.getMixer(mixerInfo[cnt]);
+
+                            Line.Info[] linesources = mixer.getSourceLineInfo();
+                            if(linesources.length>-1 && linesources[0].getLineClass().equals(SourceDataLine.class)){
+                                System.out.println(cnt + " Speaker is supported!");
+                                UdpClientHandler.setReceivingMixer(AudioSystem.getMixer(mixerInfo[cnt]));
+                                micro_type.setValue(mixerInfo[cnt].getName());
+                                break;
+                            }
+
+                        }
+
+
                         soundSendingThread = new Thread(audioSendingThread);
                         soundSendingThread.start();
+                        UdpClientHandler.setGain(0.5f);
                     }
                 }
         );
@@ -463,6 +508,8 @@ public class ClientPanelController implements Initializable {
                         tcpRequestService.sendGetRoomsRequest(username);
                         //stop sending audio
                         try {
+                            audioSendingThread.targetDataLine.stop();
+                            audioSendingThread.targetDataLine.close();
                             audioSendingThread.terminate();
                             soundSendingThread.join();
                         } catch (InterruptedException e){
@@ -703,23 +750,6 @@ public class ClientPanelController implements Initializable {
     private ToggleGroup speakGroup;
     @FXML
     private TextField press_key;
-
-    private void setVolume(SourceDataLine source, int volume){
-        try {
-            FloatControl gainControl=(FloatControl)source.getControl(FloatControl.Type.MASTER_GAIN);
-            BooleanControl muteControl=(BooleanControl)source.getControl(BooleanControl.Type.MUTE);
-            if (volume == 0) {
-                muteControl.setValue(true);
-            }
-            else {
-                muteControl.setValue(false);
-                gainControl.setValue((float)(Math.log(volume / 100d) / Math.log(10.0) * 20.0));
-            }
-        }
-        catch (  Exception e) {
-            System.out.println("unable to set the volume to the provided source");
-        }
-    }
 
     @FXML  private Slider speaker_power, micro_power;
     @FXML private RadioButton cons_speak,click_speak;

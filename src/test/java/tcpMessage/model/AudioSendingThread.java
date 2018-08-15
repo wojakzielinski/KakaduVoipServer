@@ -17,6 +17,11 @@ public class AudioSendingThread implements Runnable {
     private AudioFormat audioFormat;
     public static TargetDataLine targetDataLine;
     private static volatile boolean running = true;
+    private volatile Mixer sendingMixer = null;
+
+    public void setSendingMixer(Mixer mixer){
+        sendingMixer = mixer;
+    }
 
     public AudioSendingThread(UdpClient udpClient, String username, String roomName) {
         this.udpClient = udpClient;
@@ -31,27 +36,14 @@ public class AudioSendingThread implements Runnable {
     @Override
     public void run() {
         try {
-            Mixer.Info[] mixerInfo = AudioSystem.getMixerInfo();    //get available mixers
-            System.out.println("Available mixers:");
-            Mixer mixer = null;
-            for (int cnt = 0; cnt < mixerInfo.length; cnt++) {
-                System.out.println(cnt + " " + mixerInfo[cnt].getName());
-                mixer = AudioSystem.getMixer(mixerInfo[cnt]);
 
-                Line.Info[] lineInfos = mixer.getTargetLineInfo();
-                if (lineInfos.length >= 1 && lineInfos[0].getLineClass().equals(TargetDataLine.class)) {
-                    System.out.println(cnt + " Mic is supported!");
-                    break;
-                }
-            }
-
-            mixer = AudioSystem.getMixer(mixerInfo[2]);
 
             //Get everything set up for capture
             audioFormat = getAudioFormat();
             DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class, audioFormat);
             targetDataLine = (TargetDataLine)
-                    AudioSystem.getLine(dataLineInfo);
+                    sendingMixer.getLine(dataLineInfo);
+
             targetDataLine.open(audioFormat);
             targetDataLine.start();
             while (running) {
@@ -63,8 +55,11 @@ public class AudioSendingThread implements Runnable {
                     udpPacketBuilder.setVoiceBytes(voiceBytes);
                     this.udpClient.send(udpPacketBuilder.build());
                     System.out.println("UdpClient packet send time = " + System.currentTimeMillis());
+                    System.out.println(sendingMixer.getMixerInfo().getName());
                 }
             }
+            //targetDataLine.stop();
+            //targetDataLine.close();
         } catch (Exception e) {
             System.out.println("Niespodziewany błąd podczas przechwytywania dźwięku: ");
             e.printStackTrace();
@@ -75,6 +70,7 @@ public class AudioSendingThread implements Runnable {
     public static void terminate(){
         running = false;
     }
+    public static void start(){running = true;}
 
     private AudioFormat getAudioFormat() {
         float sampleRate = 16000.0F;

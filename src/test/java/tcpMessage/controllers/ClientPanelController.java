@@ -37,15 +37,15 @@ public class ClientPanelController implements Initializable {
     private static int PORT;//9123
     public static TcpRequestService tcpRequestService;
     public static UdpClient udpClient;
-    private Thread soundSendingThread;
-    private AudioSendingThread audioSendingThread;
-    private ArrayList<TempUser> users;
+    private static Thread soundSendingThread;
+    private static AudioSendingThread audioSendingThread;
     public static String username;
     private static String roomPass;
     private static TempRoom selectedRoom;
     private static TempUser selectedUser;
     public static TcpClient tcpClient;
 
+    public static volatile boolean isVoiceOnClick = false;
 
     //tables and cols
     @FXML
@@ -180,7 +180,7 @@ public class ClientPanelController implements Initializable {
         //radio button init
         click_speak.setUserData("Click");
         cons_speak.setUserData("Cons");
-        press_key.setText("k");
+        press_key.setText("K");
         press_key.setDisable(true);
         speakGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
@@ -188,11 +188,20 @@ public class ClientPanelController implements Initializable {
 
                 if(speakGroup.getSelectedToggle().getUserData() == "Cons"){
                     System.out.println(1);
+                    isVoiceOnClick = false;
+                    startSending();
                     press_key.setDisable(true);
                 }
                 if(speakGroup.getSelectedToggle().getUserData() == "Click"){
                     System.out.println(2);
-                    press_key.setDisable(false);
+                    isVoiceOnClick = true;
+                    try{
+                        stopSending();
+                    }catch (InterruptedException ex){
+                        ex.printStackTrace();
+                    }
+
+                    press_key.setDisable(true);
 
 
                 }
@@ -200,6 +209,19 @@ public class ClientPanelController implements Initializable {
         });
 
 
+    }
+
+    public static void startSending(){
+        audioSendingThread.start();
+        soundSendingThread = new Thread(audioSendingThread);
+        soundSendingThread.start();
+
+    }
+    public static void stopSending() throws InterruptedException{
+        audioSendingThread.targetDataLine.stop();
+        audioSendingThread.targetDataLine.close();
+        audioSendingThread.terminate();
+        soundSendingThread.join();
     }
 
     @FXML
@@ -281,7 +303,6 @@ public class ClientPanelController implements Initializable {
                 () -> {
                     rooms_pane.toFront();
                     tcpRequestService.sendGetRoomsRequest(username);
-                    users = new ArrayList<>();
 
                     //tell server, that we are connected to udp
                     Protocols.RegisterUdpSession.Builder registerUdpSession =  Protocols.RegisterUdpSession.newBuilder();

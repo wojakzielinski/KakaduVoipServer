@@ -9,6 +9,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import sun.tools.jar.CommandLine;
 import tcpMessage.controllers.ClientPanelController;
 import tcpMessage.model.AudioSendingThread;
 
@@ -71,6 +72,9 @@ public class Main extends Application {
     @Override
     public void stop() throws Exception{
         if(ClientPanelController.tcpRequestService != null || ClientPanelController.tcpClient != null){
+            if(ClientPanelController.isUserInRoom){
+                ClientPanelController.tcpRequestService.sendLeaveRoomRequest(ClientPanelController.username,ClientPanelController.selectedRoom.getName());
+            }
             ClientPanelController.tcpRequestService.sendLeaveServerRequest(ClientPanelController.username);
             ClientPanelController.tcpRequestService.getTcpClient().closeConnection();
             ClientPanelController.tcpClient.closeConnection();

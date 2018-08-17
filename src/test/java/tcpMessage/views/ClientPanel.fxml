@@ -34,47 +34,41 @@
                   <Font name="Segoe Script Bold" size="39.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="56.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Urządzenie do nagrywania:">
+            <Text fill="WHITE" layoutX="425.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Urządzenie do nagrywania:">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="53.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rodzaj przechwytywania:">
+            <Text fill="WHITE" layoutX="288.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rodzaj przechwytywania:">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="401.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Głośność nagrywania:">
+            <Text fill="WHITE" layoutX="122.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Urządzenie do odtwarzania:">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="57.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Urządzenie do odtwarzania:">
+            <Text fill="WHITE" layoutX="297.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Głośność odtwarzania:">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="405.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Głośność odtwarzania:">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Text>
-            <RadioButton fx:id="click_speak" layoutX="54.0" layoutY="303.0" mnemonicParsing="false" text="Naciśnij i mów" textFill="WHITE">
+            <RadioButton fx:id="click_speak" layoutX="122.0" layoutY="117.0" mnemonicParsing="false" text="Naciśnij i mów" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
                <toggleGroup>
                   <ToggleGroup fx:id="speakGroup" />
                </toggleGroup></RadioButton>
-            <RadioButton fx:id="cons_speak" layoutX="362.0" layoutY="303.0" mnemonicParsing="false" selected="true" text="Mówienie ciągłe" textFill="WHITE" toggleGroup="$speakGroup">
+            <RadioButton fx:id="cons_speak" layoutX="430.0" layoutY="117.0" mnemonicParsing="false" selected="true" text="Mówienie ciągłe" textFill="WHITE" toggleGroup="$speakGroup">
                <font>
                   <Font size="18.0" />
                </font></RadioButton>
-            <ChoiceBox fx:id="micro_type" layoutX="57.0" layoutY="123.0" prefWidth="150.0" />
-            <ChoiceBox fx:id="speaker_type" layoutX="57.0" layoutY="211.0" prefWidth="150.0" />
-            <Slider fx:id="micro_power" layoutX="405.0" layoutY="129.0" max="1.0" />
-            <Slider fx:id="speaker_power" layoutX="405.0" layoutY="217.0" max="1.0" />
-            <TextField fx:id="press_key" layoutX="225.0" layoutY="304.0" prefHeight="25.0" prefWidth="42.0" />
+            <ChoiceBox fx:id="micro_type" layoutX="425.0" layoutY="232.0" prefHeight="25.0" prefWidth="190.0" />
+            <ChoiceBox fx:id="speaker_type" layoutX="122.0" layoutY="232.0" prefHeight="25.0" prefWidth="195.0" />
+            <Slider fx:id="speaker_power" layoutX="297.0" layoutY="325.0" max="1.0" prefHeight="14.0" prefWidth="158.0" />
+            <TextField fx:id="press_key" layoutX="293.0" layoutY="118.0" prefHeight="25.0" prefWidth="42.0" />
             <Button fx:id="back_btn_audio" layoutX="584.0" layoutY="294.0" mnemonicParsing="false" onMouseClicked="#go_back_audio" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: #ba5c12;" text="Wróć" textFill="WHITE">
                <font>
                   <Font name="Segoe Script Bold" size="17.0" />
@@ -172,7 +166,7 @@
                   <Image url="@icon.png" />
                </image>
             </ImageView>
-            <Text fill="WHITE" layoutX="168.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="v0.1">
+            <Text fill="WHITE" layoutX="168.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="v1.0">
                <font>
                   <Font size="16.0" />
                </font>
@@ -291,11 +285,7 @@
                    <Font name="Segoe Script" size="20.0" />
                </font>
            </Text>
-         <Button fx:id="reload_btn" layoutX="82.0" layoutY="320.0" mnemonicParsing="false" onMouseClicked="#reload_rooms" prefHeight="30.0" prefWidth="82.0" style="-fx-background-color: #ba5c12;" text="Odśwież" textFill="WHITE">
-            <font>
-               <Font name="Segoe Script Bold" size="12.0" />
-            </font>
-         </Button>
+
          <TableView fx:id="room_tbl" layoutX="82.0" layoutY="82.0" onMouseClicked="#choose_row" prefHeight="223.0" prefWidth="207.0">
            <columns>
              <TableColumn fx:id="name_col" prefWidth="130.0" text="Nazwa" />
@@ -360,11 +350,7 @@
                   <Font name="Segoe Script" size="16.0" />
               </font>
           </Text>
-          <Button fx:id="help_btn" layoutX="574.0" layoutY="41.0" mnemonicParsing="false" onMouseClicked="#help" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: #ba5c12;" text="Pomoc" textFill="WHITE">
-              <font>
-                  <Font name="Segoe Script Bold" size="17.0" />
-              </font>
-          </Button>
+
 
       </AnchorPane>
       <AnchorPane fx:id="start_pane" prefHeight="364.0" prefWidth="736.0">

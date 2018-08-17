@@ -41,11 +41,12 @@ public class ClientPanelController implements Initializable {
     private static AudioSendingThread audioSendingThread;
     public static String username;
     private static String roomPass;
-    private static TempRoom selectedRoom;
+    public static TempRoom selectedRoom;
     private static TempUser selectedUser;
     public static TcpClient tcpClient;
 
     public static volatile boolean isVoiceOnClick = false;
+    public static boolean isUserInRoom = false;
 
     //tables and cols
     @FXML
@@ -97,14 +98,13 @@ public class ClientPanelController implements Initializable {
 
         //sliders init
 
-
-
         speaker_power.setMax(1.0f);
         speaker_power.setMin(0.0f);
         speaker_power.setValue(0.5f);
 
         speaker_power.setShowTickLabels(true);
         speaker_power.setShowTickMarks(true);
+        speaker_power.setMajorTickUnit(0.2f);
 
         speaker_power.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -115,20 +115,7 @@ public class ClientPanelController implements Initializable {
 
             }
         });
-        micro_power.setMax(1);
-        micro_power.setMin(0);
-        micro_power.setValue(sliderInitValue);
 
-        micro_power.setShowTickLabels(true);
-        micro_power.setShowTickMarks(true);
-
-        micro_power.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                System.out.println("Micro power: "+newValue.intValue());
-                //DODAĆ ZMIENĘ GŁOŚNOŚCI MIKROFONU
-            }
-        });
         //choiceboxes init
         Mixer.Info[] mixerInfo = AudioSystem.getMixerInfo();    //get available mixers
         System.out.println("Available mixers:");
@@ -460,6 +447,7 @@ public class ClientPanelController implements Initializable {
                         soundSendingThread = new Thread(audioSendingThread);
                         soundSendingThread.start();
                         UdpClientHandler.setGain(0.5f);
+                        isUserInRoom = true;
                     }
                 }
         );
@@ -520,6 +508,7 @@ public class ClientPanelController implements Initializable {
     @FXML
     public void leave_room(MouseEvent event) throws InterruptedException {
         this.tcpRequestService.sendLeaveRoomRequest(username, selectedRoom.getName());
+
     }
 
     public void handle_leave_room_response(Protocols.ManageRoomResponse response) throws InterruptedException {
@@ -533,6 +522,7 @@ public class ClientPanelController implements Initializable {
                             audioSendingThread.targetDataLine.close();
                             audioSendingThread.terminate();
                             soundSendingThread.join();
+                            isUserInRoom = false;
                         } catch (InterruptedException e){
                             System.out.println("Cannot stop sending audio:");
                             e.printStackTrace();
@@ -605,6 +595,7 @@ public class ClientPanelController implements Initializable {
 
             if (result.isPresent()) {
                 this.tcpRequestService.sendKickUserRequest(username,selectedRoom.getName(),selectedUser.getUserName(),result.get().getKey(), result.get().getValue());
+                isUserInRoom = false;
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Złe dane");
@@ -680,6 +671,7 @@ public class ClientPanelController implements Initializable {
                 () -> {
                     if (response.getStatus() == Protocols.StatusCode.OK) {
                         rooms_pane.toFront();
+                        isUserInRoom = false;
                     } else if (response.getStatus() == Protocols.StatusCode.BAD_CREDENTIALS) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Złe hasła");
@@ -759,10 +751,6 @@ public class ClientPanelController implements Initializable {
         );
     }
 
-    @FXML
-    public void help(MouseEvent event) {
-
-    }
 
     //audio pane
     @FXML
@@ -772,7 +760,7 @@ public class ClientPanelController implements Initializable {
     @FXML
     private TextField press_key;
 
-    @FXML  private Slider speaker_power, micro_power;
+    @FXML  private Slider speaker_power;
     @FXML private RadioButton cons_speak,click_speak;
     public void audio_properties(ActionEvent actionEvent) {
         audio_pane.toFront();

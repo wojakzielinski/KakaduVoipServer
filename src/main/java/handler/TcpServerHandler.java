@@ -41,17 +41,24 @@ public class TcpServerHandler extends IoHandlerAdapter {
     }
 
     private Protocols.LoginToServerResponse handleLoginRequestMessage(Protocols.LoginToServerRequest request,IoSession ioSession) {
-        System.out.println(request.toString());
-        User user = new User();
-        user.setNick(request.getNick());
-        user.setTcpSession(ioSession);
-        ServerData.INSTANCE.loggedUsers.add(user);
-
         Protocols.LoginToServerResponse.Builder responseBuilder = Protocols.LoginToServerResponse.newBuilder();
-        responseBuilder.setStatus(Protocols.StatusCode.OK);
-        System.out.println("LoginToServerResponse end, loggedUsers.size = "+ServerData.INSTANCE.loggedUsers.size());
+        System.out.println(request.toString());
 
-        return responseBuilder.build();
+        User user = ServerData.INSTANCE.findUserFromNick(request.getNick());
+        if(user != null){
+            responseBuilder.setStatus(Protocols.StatusCode.BAD_CREDENTIALS);
+            return responseBuilder.build();
+        } else {
+            User newUser = new User();
+            newUser.setNick(request.getNick());
+            newUser.setTcpSession(ioSession);
+            ServerData.INSTANCE.loggedUsers.add(newUser);
+
+            responseBuilder.setStatus(Protocols.StatusCode.OK);
+            System.out.println("LoginToServerResponse end, loggedUsers.size = " + ServerData.INSTANCE.loggedUsers.size());
+
+            return responseBuilder.build();
+        }
     }
 
     private Protocols.LeaveServerResponse handleLeaveServerRequest(Protocols.LeaveServerRequest request) {

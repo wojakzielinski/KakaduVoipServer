@@ -1,9 +1,11 @@
 import handler.TcpServerHandler;
 import handler.UdpServerHandler;
+import org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder;
 import org.apache.mina.core.service.IoAcceptor;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.logging.LoggingFilter;
+import org.apache.mina.filter.ssl.SslFilter;
 import org.apache.mina.transport.socket.DatagramSessionConfig;
 import org.apache.mina.transport.socket.nio.NioDatagramAcceptor;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
@@ -22,8 +24,10 @@ public class Server {
 
     private static void createTcpServer(ResourceBundle serverProperties) throws Exception {
         IoAcceptor acceptor = new NioSocketAcceptor();
-        acceptor.getFilterChain().addLast("logger", new LoggingFilter());
-        acceptor.getFilterChain().addLast("codec", new ProtocolCodecFilter(new KakaduCodecFactory()));
+        DefaultIoFilterChainBuilder chain = acceptor.getFilterChain();
+        addSSLSupport(chain);
+        chain.addLast("logger", new LoggingFilter());
+        chain.addLast("codec", new ProtocolCodecFilter(new KakaduCodecFactory()));
 
         acceptor.setHandler(new TcpServerHandler());
         acceptor.getSessionConfig().setReadBufferSize(2048);
@@ -43,8 +47,14 @@ public class Server {
         acceptor.getSessionConfig().setReadBufferSize(4096);
 
         DatagramSessionConfig dcfg = acceptor.getSessionConfig();
-        int udpPort =  Integer.parseInt(serverProperties.getString("server.udp.port"));
+        int udpPort = Integer.parseInt(serverProperties.getString("server.udp.port"));
         dcfg.setReuseAddress(true);
         acceptor.bind(new InetSocketAddress(udpPort));
+    }
+
+    private static void addSSLSupport(DefaultIoFilterChainBuilder chain) throws Exception {
+        SslFilter sslFilter = new SslFilter(new SslServerContextGenerator().getSslContext());
+        chain.addLast("sslFilter", sslFilter);
+        System.out.println("SSL support is added..");
     }
 }

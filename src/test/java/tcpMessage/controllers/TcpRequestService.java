@@ -9,7 +9,7 @@ import tcpMessage.TcpClient;
 public class TcpRequestService {
     private TcpClient tcpClient;
 
-    public TcpRequestService(TcpClient tcpClient) {
+    public TcpRequestService(TcpClient tcpClient) throws Exception {
         this.tcpClient = tcpClient;
     }
 

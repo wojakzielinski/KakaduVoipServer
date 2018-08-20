@@ -288,13 +288,17 @@ public class ClientPanelController implements Initializable {
     public void handle_login_to_server_response(Protocols.LoginToServerResponse response) throws InterruptedException {
         Platform.runLater(
                 () -> {
-                    rooms_pane.toFront();
-                    tcpRequestService.sendGetRoomsRequest(username);
+                    if(response.getStatus() == Protocols.StatusCode.OK) {
+                        rooms_pane.toFront();
+                        tcpRequestService.sendGetRoomsRequest(username);
 
-                    //tell server, that we are connected to udp
-                    Protocols.RegisterUdpSession.Builder registerUdpSession =  Protocols.RegisterUdpSession.newBuilder();
-                    registerUdpSession.setUsername(this.username);
-                    udpClient.send(registerUdpSession.build());
+                        //tell server, that we are connected to udp
+                        Protocols.RegisterUdpSession.Builder registerUdpSession = Protocols.RegisterUdpSession.newBuilder();
+                        registerUdpSession.setUsername(this.username);
+                        udpClient.send(registerUdpSession.build());
+                    } else {
+                        System.out.println("nick się powtarza");
+                    }
                 }
         );
     }

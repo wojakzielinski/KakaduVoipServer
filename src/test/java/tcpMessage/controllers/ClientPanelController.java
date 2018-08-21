@@ -298,6 +298,12 @@ public class ClientPanelController implements Initializable {
                         udpClient.send(registerUdpSession.build());
                     } else {
                         System.out.println("nick się powtarza");
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Wybrana nazwa już istnieje");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Proszę podać inną nazwę użytkownika.");
+
+                        alert.showAndWait();
                     }
                 }
         );

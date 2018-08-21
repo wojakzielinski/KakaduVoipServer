@@ -23,7 +23,7 @@ public class UdpClientHandler extends IoHandlerAdapter {
     AudioInputStream InputStream;
     public static volatile SourceDataLine sourceLine;
     private static volatile Mixer receivingMixer = null;
-    private static float gain = 1.0f;
+    private static volatile float gain = 1.0f;
 
     public static void setReceivingMixer(Mixer mixer){
         receivingMixer = mixer;
@@ -58,7 +58,7 @@ public class UdpClientHandler extends IoHandlerAdapter {
 
         // Better type
         if (sourceLine != null && sourceLine.isControlSupported(FloatControl.Type.MASTER_GAIN))
-            ( (FloatControl) sourceLine.getControl(FloatControl.Type.MASTER_GAIN) ).setValue((float) ( 40*  Math.log10(fGain <= 0.0 ? 0.0000 : fGain) ));
+            ( (FloatControl) sourceLine.getControl(FloatControl.Type.MASTER_GAIN) ).setValue((float) ( 30*  Math.log10(fGain <= 0.0 ? 0.0000 : fGain) ));
 
         // OR (Math.log(fGain == 0.0 ? 0.0000 : fGain) / Math.log(10.0))
 
@@ -74,14 +74,8 @@ public class UdpClientHandler extends IoHandlerAdapter {
             InputStream = new AudioInputStream(byteInputStream, adFormat, audioData.length / adFormat.getFrameSize());
             DataLine.Info dataLineInfo = new DataLine.Info(SourceDataLine.class, adFormat);
             sourceLine = (SourceDataLine) receivingMixer.getLine(dataLineInfo);
-
             sourceLine.open(adFormat);
-
             sourceLine.start();
-            for(int i=0; i<sourceLine.getControls().length;i++){
-                System.out.println(sourceLine.getControls()[i].getType());
-            }
-
             Thread playThread = new Thread(new PlayThread());
             playThread.start();
         } catch (Exception e) {
@@ -108,8 +102,6 @@ public class UdpClientHandler extends IoHandlerAdapter {
                 while ((cnt = InputStream.read(tempBuffer, 0, tempBuffer.length)) != -1) {
                     if (cnt > 0) {
                         sourceLine.write(tempBuffer, 0, cnt);
-
-                        System.out.println(receivingMixer.getMixerInfo().getName());
                     }
                 }
                 //                sourceLine.drain();

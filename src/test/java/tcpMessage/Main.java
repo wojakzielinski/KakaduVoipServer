@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -58,7 +59,8 @@ public class Main extends Application {
         });
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
-
+        Image icon = new Image(getClass().getResourceAsStream("views/icon.png"));
+        primaryStage.getIcons().add(icon);
         primaryStage.setTitle("KakaduVoIP - komunikator głosowy");
         primaryStage.show();
 

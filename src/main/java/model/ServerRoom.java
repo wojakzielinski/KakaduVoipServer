@@ -3,6 +3,7 @@ package model;
 import protocols.Protocols;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ServerRoom {
@@ -11,6 +12,7 @@ public class ServerRoom {
     private User owner;
     private String password;
     private String adminPassword;
+    private Date lastUpdateTime = new Date();
 
     public String getName() {
         return name;
@@ -52,6 +54,15 @@ public class ServerRoom {
         this.adminPassword = adminPassword;
     }
 
+
+    public Date getLastUpdateTime() {
+        return lastUpdateTime;
+    }
+
+    public void setLastUpdateTime(Date lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
+    }
+
     public void joinUserToRoom(User newUser){
         System.out.println("Handling joining room");
         //create protocols with user nicks
@@ -71,6 +82,7 @@ public class ServerRoom {
         }
         //add new user to room
         usersInRoom.add(newUser);
+        this.lastUpdateTime = new Date();
     }
 
     public void kickAllUsersFromRoom() {
@@ -85,6 +97,7 @@ public class ServerRoom {
     }
 
     public boolean kickUserFromRoom(User userToKick){
+        this.lastUpdateTime = new Date();
         if(usersInRoom.remove(userToKick)) {
 
             Protocols.GetUsersInRoomResponse.Builder responseBuilder = Protocols.GetUsersInRoomResponse.newBuilder();
@@ -107,6 +120,7 @@ public class ServerRoom {
     }
 
     public void leaveRoom(User userToLeave){
+        this.lastUpdateTime = new Date();
         System.out.println("Handling leaving room, users in room" + usersInRoom.size());
         usersInRoom.remove(userToLeave);
         System.out.println("Handling leaving room after remove, users in room" + usersInRoom.size());
@@ -125,13 +139,6 @@ public class ServerRoom {
             System.out.println("Sending to: "+userInRoom.getNick()+", iosession="+userInRoom.getTcpSession().toString());
             userInRoom.getTcpSession().write(response);
         }
-    }
-
-    public Protocols.Room toProtocol(){
-        Protocols.Room.Builder roomBuilder = Protocols.Room.newBuilder();
-        roomBuilder.setRoomName(this.name);
-        roomBuilder.setOwner(this.owner.getNick());
-        return  roomBuilder.build();
     }
 
     @Override

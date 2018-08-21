@@ -9,6 +9,8 @@ import org.apache.mina.filter.ssl.SslFilter;
 import org.apache.mina.transport.socket.DatagramSessionConfig;
 import org.apache.mina.transport.socket.nio.NioDatagramAcceptor;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
+import org.quartz.*;
+import org.quartz.impl.StdSchedulerFactory;
 import protocols.tcp.KakaduCodecFactory;
 import protocols.udp.KakaduVoiceCodecFactory;
 
@@ -20,6 +22,7 @@ public class Server {
         ResourceBundle serverProperties = ResourceBundle.getBundle("server");
         createTcpServer(serverProperties);
         createUdpServer(serverProperties);
+        runDeleteRoomTrigger();
     }
 
     private static void createTcpServer(ResourceBundle serverProperties) throws Exception {
@@ -56,5 +59,19 @@ public class Server {
         SslFilter sslFilter = new SslFilter(new SslServerContextGenerator().getSslContext());
         chain.addLast("sslFilter", sslFilter);
         System.out.println("SSL support is added..");
+    }
+
+    private static void runDeleteRoomTrigger() throws SchedulerException {
+        JobDetail job = JobBuilder.newJob(InactiveRoomDeleteJob.class).withIdentity("dummyJobName", "group1").build();
+        Trigger trigger = TriggerBuilder.newTrigger()
+                .withIdentity("Delete inactive rooms", "Managing")
+                .withSchedule(
+                        SimpleScheduleBuilder.simpleSchedule()
+                                .withIntervalInSeconds(300).repeatForever())
+                .build();
+
+        Scheduler scheduler = new StdSchedulerFactory().getScheduler();
+        scheduler.start();
+        scheduler.scheduleJob(job, trigger);
     }
 }

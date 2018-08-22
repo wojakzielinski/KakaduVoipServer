@@ -25,12 +25,7 @@ public class InactiveRoomDeleteJob implements Job {
         //if no users inside and two days without update, delete room
         boolean anythingRemoved = ServerData.INSTANCE.serverRoomMap.entrySet().removeIf(entry -> entry.getValue().getUsersInRoom().size() == 0 && entry.getValue().getLastUpdateTime().getTime() < twoDaysAgoTime);
         if (anythingRemoved) {
-            System.out.println("REMOVED SOMETHINF");
             sendNewRoomListToLoggerUsers();
-        }
-
-        for(Map.Entry<String, ServerRoom> serverRoomEntry : ServerData.INSTANCE.serverRoomMap.entrySet()){
-            serverRoomEntry.getValue().setLastUpdateTime(twoDaysAgo.getTime());
         }
     }
 
